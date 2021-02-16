@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Layer Controls</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
+
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		#map {
+			xwidth: 600px;
+            width: 100%;
+			height: 400px;
+		}
+	</style>
+
+	
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+        
+        <!-- a more complicated navbar may be found here:
+        https://mdbootstrap.com/docs/standard/navigation/navbar/
+        -->
+        
+        <a class="navbar-brand" href="#">Westwood Walks</a>   
+        
+        <ul class="navbar-nav">
+            <li class="nav-item xactive">
+                <a class="nav-link" href="index.html">Map Demo</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="mobile.html">My Location</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="layers.html">Layers</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link xdisabled" href="#">Help</a>
+            </li>
+        </ul>
+      </nav>
+      
+<div id='map'></div>
+<br />
+<div class="container">
+    <div class="row">
+        <h2>Layers Demo</h2>
+    </div>
+    <div class="row">   
+        <p>This map has layers you can turn on/off. The controller is in the upper right of the screen.</p>
+        <ul>
+            <li>You set the map background to grayscale, color, or satellite view.</li>
+            <li>You can turn the building markers on and off.</li>
+            <li>The custom symbols were drawn in Photoshop.</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+	var buildings = L.layerGroup();
+    var pauley_pavilion = [34.070258, -118.446704];
+    var engineering_vi = [34.069381,-118.444394];
+    var student_store = [34.070744, -118.444513];  
+    var parking_8 = [34.068164, -118.446626];
+    var bus_stop_ackerman = [34.069298, -118.444859];
+    var kerckhoff_coffee = [34.070579, -118.443445];
+    var ackerman_food_court = [34.070543, -118.444229];
+    var franz_hall = [34.069663, -118.441447];
+    
+
+    
+    var bus_icon = L.icon({
+        iconUrl: 'bus-stop-100px.png',
+        shadowUrl: 'icon_shadow.png',
+        //iconSize:     [72,101], // size of the icon
+        iconSize:     [36, 50], // size of the icon
+        shadowSize:   [50, 50], // size of the shadow
+        iconAnchor:   [18, 50], // point of the icon which will correspond to marker's location
+        shadowAnchor: [18, 50],  // the same for the shadow
+        popupAnchor:  [-3, -51] // point from which the popup should open relative to the iconAnchor
+    });
+
+    var groceries_icon = L.icon({
+        iconUrl: 'groceries.png',
+        shadowUrl: 'icon_shadow.png',
+        iconSize:     [36, 50], // size of the icon
+        shadowSize:   [50, 50], // size of the shadow
+        iconAnchor:   [18, 50], // point of the icon which will correspond to marker's location
+        shadowAnchor: [18, 50],  // the same for the shadow
+        popupAnchor:  [-3, -51] // point from which the popup should open relative to the iconAnchor
+    });
+
+    var police_icon = L.icon({
+        iconUrl: 'police.png',
+        shadowUrl: 'icon_shadow.png',
+        iconSize:     [36, 50], // size of the icon
+        shadowSize:   [50, 50], // size of the shadow
+        iconAnchor:   [18, 50], // point of the icon which will correspond to marker's location
+        shadowAnchor: [18, 50],  // the same for the shadow
+        popupAnchor:  [-3, -51] // point from which the popup should open relative to the iconAnchor
+    });
+
+    var restaurant_icon = L.icon({
+        iconUrl: 'restaurant.png',
+        shadowUrl: 'icon_shadow.png',
+        iconSize:     [36, 50], // size of the icon
+        shadowSize:   [50, 50], // size of the shadow
+        iconAnchor:   [18, 50], // point of the icon which will correspond to marker's location
+        shadowAnchor: [18, 50],  // the same for the shadow
+        popupAnchor:  [-3, -51] // point from which the popup should open relative to the iconAnchor
+    });
+
+    var university_icon = L.icon({
+        iconUrl: 'university.png',
+        shadowUrl: 'icon_shadow.png',
+        iconSize:     [36, 50], // size of the icon
+        shadowSize:   [50, 50], // size of the shadow
+        iconAnchor:   [18, 50], // point of the icon which will correspond to marker's location
+        shadowAnchor: [18, 50],  // the same for the shadow
+        popupAnchor:  [-3, -51] // point from which the popup should open relative to the iconAnchor
+    });
+
+
+    var coffee_icon = L.icon({
+        iconUrl: 'coffee.png',
+        shadowUrl: 'icon_shadow.png',
+        iconSize:     [36, 50], // size of the icon
+        shadowSize:   [50, 50], // size of the shadow
+        iconAnchor:   [18, 50], // point of the icon which will correspond to marker's location
+        shadowAnchor: [18, 50],  // the same for the shadow
+        popupAnchor:  [-3, -51] // point from which the popup should open relative to the iconAnchor
+    });
+
+    L.marker(pauley_pavilion, {icon: university_icon}).bindPopup("<b>Pauley Pavilion</b><br />Sports Facility").addTo(buildings);
+    L.marker(engineering_vi, {icon: university_icon}).bindPopup("<b>Engineering VI</b><br />Offices and Classes").addTo(buildings);
+    L.marker(student_store, {icon: restaurant_icon}).bindPopup("<b>Ackerman</b><br />Food Court and Bookstore").addTo(buildings);
+    L.marker(kerckhoff_coffee, {icon: coffee_icon}).bindPopup("<b>Kerckhoff Coffee</b><br />Coffee, snacks, music").addTo(buildings);
+    L.marker(franz_hall, {icon: university_icon}).bindPopup("<b>Franz Hall</b><br />Lecture Hall").addTo(buildings);
+    L.marker(bus_stop_ackerman, {icon: bus_icon}).bindPopup("<b>Bus Stop</b><br />Big Blue Bus").addTo(buildings);
+
+    //L.marker(parking_8).bindPopup("<b>Lot 8</b><br />Campus Parking").addTo(buildings);
+
+
+	var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
+	var mbUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+
+	var grayscale   = L.tileLayer(mbUrl, {id: 'mapbox/light-v9', tileSize: 512, zoomOffset: -1, attribution: mbAttr});
+    var satellite  = L.tileLayer(mbUrl, {id: 'mapbox/satellite-v9', tileSize: 512, zoomOffset: -1, attribution: mbAttr});
+    var streets  = L.tileLayer(mbUrl, {id: 'mapbox/streets-v11', tileSize: 512, zoomOffset: -1, attribution: mbAttr});
+
+	var map = L.map('map', {
+        center: engineering_vi,
+		zoom: 16,
+		layers: [satellite, grayscale, streets, buildings]
+	});
+
+	var baseLayers = {
+        "Satellite": satellite,
+		"Grayscale": grayscale,
+		"Color": streets
+	};
+
+	var overlays = {
+		"University Buildings": buildings
+	};
+
+	L.control.layers(baseLayers, overlays).addTo(map);
+</script>
+
+
+
+</body>
+</html>
