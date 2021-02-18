@@ -5,6 +5,7 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import {TouchableOpacity} from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import Buttons from '../styles/Buttons.js'
 
 
 const HomeScreen = ({ navigation }) => {
@@ -18,12 +19,12 @@ const HomeScreen = ({ navigation }) => {
       <TouchableOpacity
         onPress={() => navigation.navigate('Login')}
       >
-      <Text style={styles.login}>Login</Text>
+      <Text style={Buttons.brownbutton}>Login</Text>
       </TouchableOpacity>
       <TouchableOpacity
          onPress={() => navigation.navigate('Signup')}
        >
-        <Text style={styles.signup}>Sign Up</Text>
+        <Text style={Buttons.brownbutton}>Sign Up</Text>
       </TouchableOpacity>
       <TouchableOpacity>
         <Text style={styles.anonymous}>Continue Anonymously</Text>
@@ -42,35 +43,13 @@ const styles = StyleSheet.create({
   logo :{
     width: 225,
     height: 225,
-    marginTop: '5%'
+    marginTop: '3%'
   },
   title :{
     fontFamily: "AppleSDGothicNeo-SemiBold",
     fontSize: 25,
     color: '#675A5A',
     marginTop: '-12%'
-  },
-  login: {
-    backgroundColor: 'white',
-    color: 'black',
-    marginTop: '20%',
-    width: 110,
-    borderRadius: 12,
-    overflow: 'hidden',
-    textAlign: 'center',
-    fontSize: 20,
-    padding: '2%'
-  },
- signup: {
-    backgroundColor: 'white',
-    color: 'black',
-    marginTop: '8%',
-    width: 110,
-    borderRadius: 12,
-    overflow: 'hidden',
-    textAlign: 'center',
-    fontSize: 20,
-    padding: '2%'
   },
   anonymous: {
     backgroundColor: '#F4ECC6',

@@ -6,6 +6,7 @@ import {TouchableOpacity} from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TextInput } from 'react-native';
+import Buttons from '../styles/Buttons.js'
 
 const LoginScreen = ({ navigation }) => {
   return (
@@ -18,17 +19,14 @@ const LoginScreen = ({ navigation }) => {
         style={styles.input}
         placeholder="Username or Email"
         keyboardType={'email-address'}
-        onSubmitEditing={()=> this.password.focus()}
-        returnKeyType="next"
       />
       <TextInput
         style={styles.input}
         placeholder="Password"
         secureTextEntry
-        ref={(input)=>this.password = input}
       />
       <TouchableOpacity>
-        <Text style={styles.login}>Login</Text>
+        <Text style={Buttons.brownbutton}>Login</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
   );
@@ -52,18 +50,10 @@ const styles = StyleSheet.create({
     height: 50,
     marginVertical: 10,
     padding: 10,
-    justifyContent: "center"
-  },
-  login: {
-    backgroundColor: 'white',
-    color: 'black',
-    marginTop: '10%',
-    width: 110,
-    borderRadius: 12,
-    overflow: 'hidden',
-    textAlign: 'center',
-    fontSize: 20,
-    padding: '2%'
+    justifyContent: "center",
+    backgroundColor: '#D7EBF4',
+    borderColor: '#675a5a',
+    borderBottomWidth: 3 
   }
 })
 

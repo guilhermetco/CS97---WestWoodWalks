@@ -5,6 +5,7 @@ import { StyleSheet, Text, View, Image, KeyboardAvoidingView, TextInput} from 'r
 import {TouchableOpacity} from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import Buttons from '../styles/Buttons.js'
 
 
 const SignupScreen = ({ navigation }) => {
@@ -22,12 +23,10 @@ const SignupScreen = ({ navigation }) => {
         <TextInput
           style={styles.input}
           placeholder="Username"
-          keyboardType={'email-address'}
         />
         <TextInput
           style={styles.input}
           placeholder="Password"
-          keyboardType={'email-address'}
           secureTextEntry
         />
         <TextInput
@@ -36,7 +35,7 @@ const SignupScreen = ({ navigation }) => {
           secureTextEntry
         />
         <TouchableOpacity>
-        <Text style={styles.login}>Sign Up</Text>
+        <Text style={Buttons.brownbutton}>Sign Up</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     );
@@ -60,18 +59,10 @@ const styles = StyleSheet.create({
       height: 50,
       marginVertical: 10,
       padding: 10,
-      justifyContent: "center"
-    },
-    login: {
-      backgroundColor: 'white',
-      color: 'black',
-      marginTop: '10%',
-      width: 110,
-      borderRadius: 12,
-      overflow: 'hidden',
-      textAlign: 'center',
-      fontSize: 20,
-      padding: '2%'
+      justifyContent: "center",
+      backgroundColor: '#D7EBF4',
+      borderColor: '#675a5a',
+      borderBottomWidth: 3  
     }
   })
   
