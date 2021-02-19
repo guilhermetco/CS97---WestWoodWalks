@@ -13,6 +13,23 @@ const Buttons = StyleSheet.create({
         padding: '2%',
         borderWidth: 1,
         borderColor: '#675a5a'
+    },
+    profilebutton: {
+        backgroundColor: '#D7EBF4',
+        justifyContent: 'center',
+        color: '#675a5a',
+        marginTop: '4%',
+        marginHorizontal: '2%',
+        width: 160,
+        height: 290,
+        borderRadius: 19,
+        overflow: 'hidden',
+        textAlign: 'center',
+        alignItems: 'center',
+        fontSize: 15,
+        padding: '2%',
+        borderWidth: 1,
+        borderColor: '#675a5a'
     }
 })
 

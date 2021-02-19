@@ -35,7 +35,7 @@ const SignupScreen = ({ navigation }) => {
           secureTextEntry
         />
         <TouchableOpacity>
-        <Text style={Buttons.brownbutton}>Sign Up</Text>
+          <Text style={Buttons.brownbutton}>Sign Up</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     );
