@@ -10,42 +10,51 @@ import Buttons from '../styles/Buttons.js'
 
 import InfoComponents from '../styles/InfoComponents.js';
 
-const favorites = [
+const favoritewalks = [
     {
       id: '1',
       title: 'Walk 1',
+      creator: 'username',
     },
     {
       id: '2',
       title: 'Walk 2',
+      creator: 'username',
     },
     {
       id: '3',
       title: 'Walk 3',
+      creator: 'username',
     },
     {
       id: '4',
       title: 'Walk 4',
+      creator: 'username',
     },
     {
       id: '5',
       title: 'Walk 5',
+      creator: 'username',
     },
     {
       id: '6',
       title: 'Walk 6',
+      creator: 'username',
     },
     {
       id: '7',
       title: 'Walk 7',
+      creator: 'username',
     },
     {
       id: '8',
       title: 'Walk 8',
+      creator: 'username',
     },
     {
       id: '9',
       title: 'Walk 9',
+      creator: 'username',
     },
   ];
   
@@ -54,10 +63,11 @@ const FavoriteWalksScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={favorites}
+        data={favoritewalks}
         renderItem={({item}) => (
           <TouchableOpacity style={InfoComponents.item} >
-              <Text style={styles.title}>{item.title}</Text>
+              <Text style={InfoComponents.title}>{item.title}</Text>
+              <Text style={InfoComponents.details}>Made by: {item.creator}</Text>
           </TouchableOpacity>   
           )}
         keyExtractor={item => item.id}
@@ -73,9 +83,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  title: {
-    fontSize: 32,
-  }
 })
 
 export default FavoriteWalksScreen;

@@ -64,8 +64,8 @@ const MyWalksScreen = ({ navigation }) => {
         data={walks}
         renderItem={({item}) => (
         <TouchableOpacity style={InfoComponents.item} >
-            <Text style={styles.title}>{item.title}</Text>
-            <Text style={styles.details}>Distance: {item.distance}</Text>
+            <Text style={InfoComponents.title}>{item.title}</Text>
+            <Text style={InfoComponents.details}>Distance: {item.distance}</Text>
         </TouchableOpacity>   
         )}
         keyExtractor={item => item.id}
@@ -80,14 +80,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#C6E2E8',
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: "bold",
-    alignSelf: 'flex-start'
-  },
-  details: {
-     fontSize: 15, 
   }
 })
 

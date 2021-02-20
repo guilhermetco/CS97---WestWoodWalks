@@ -10,42 +10,51 @@ import Buttons from '../styles/Buttons.js'
 
 import InfoComponents from '../styles/InfoComponents.js';
 
-const favorites = [
+const favoriteplaces = [
     {
       id: '1',
       title: 'Place 1',
+      address: '123 street ave, Los Angeles'
     },
     {
       id: '2',
       title: 'Place 2',
+      address: '123 street ave, Los Angeles'
     },
     {
       id: '3',
       title: 'Place 3',
+      address: '123 street ave, Los Angeles'
     },
     {
       id: '4',
       title: 'Place 4',
+      address: '123 street ave, Los Angeles'
     },
     {
       id: '5',
       title: 'Place 5',
+      address: '123 street ave, Los Angeles'
     },
     {
       id: '6',
       title: 'Place 6',
+      address: '123 street ave, Los Angeles'
     },
     {
       id: '7',
       title: 'Place 7',
+      address: '123 street ave, Los Angeles'
     },
     {
       id: '8',
       title: 'Place 8',
+      address: '123 street ave, Los Angeles'
     },
     {
       id: '9',
       title: 'Place 9',
+      address: '123 street ave, Los Angeles'
     },
   ];
   
@@ -54,10 +63,11 @@ const FavoritePlacesScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={favorites}
+        data={favoriteplaces}
         renderItem={({item}) => (
           <TouchableOpacity style={InfoComponents.item} >
-              <Text style={styles.title}>{item.title}</Text>
+              <Text style={InfoComponents.title}>{item.title}</Text>
+              <Text style={InfoComponents.details}>{item.address}</Text>
           </TouchableOpacity>   
         )}
         keyExtractor={item => item.id}
@@ -72,9 +82,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#C6E2E8',
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  title: {
-    fontSize: 32,
   }
 })
 

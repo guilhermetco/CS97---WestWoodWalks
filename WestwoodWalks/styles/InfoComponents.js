@@ -8,6 +8,20 @@ const InfoComponents = StyleSheet.create({
         marginVertical: 8,
         backgroundColor: '#D7EBF4',
         justifyContent: 'flex-start'
+    },
+    title: {
+        fontSize: 30,
+        fontWeight: '600',
+        alignSelf: 'flex-start'
+    },
+    detailsOne: {
+        fontSize: 15
+    },
+    detailsTwo: {
+        fontSize: 15,
+        fontStyle: 'italic',
+        marginTop: 5,
+        marginBottom: 15
     }
 })
 
