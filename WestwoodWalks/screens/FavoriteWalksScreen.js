@@ -7,67 +7,59 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TextInput } from 'react-native';
 import Buttons from '../styles/Buttons.js'
+
 import InfoComponents from '../styles/InfoComponents.js';
 
-const walks = [
+const favorites = [
     {
       id: '1',
       title: 'Walk 1',
-      distance: '3 miles'
     },
     {
       id: '2',
       title: 'Walk 2',
-      distance: '4 miles'
     },
     {
       id: '3',
       title: 'Walk 3',
-      distance: '2 miles'
     },
     {
       id: '4',
       title: 'Walk 4',
-      distance: '5 miles'
     },
     {
       id: '5',
       title: 'Walk 5',
-      distance: '0.5 miles'
     },
     {
       id: '6',
       title: 'Walk 6',
-      distance: '8 miles'
     },
     {
       id: '7',
       title: 'Walk 7',
-      distance: '7 miles'
     },
     {
       id: '8',
       title: 'Walk 8',
-      distance: '3 miles'
     },
     {
       id: '9',
       title: 'Walk 9',
-      distance: '2 miles'
     },
   ];
+  
 
-const MyWalksScreen = ({ navigation }) => {
+const FavoriteWalksScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={walks}
+        data={favorites}
         renderItem={({item}) => (
-        <TouchableOpacity style={InfoComponents.item} >
-            <Text style={styles.title}>{item.title}</Text>
-            <Text style={styles.details}>Distance: {item.distance}</Text>
-        </TouchableOpacity>   
-        )}
+          <TouchableOpacity style={InfoComponents.item} >
+              <Text style={styles.title}>{item.title}</Text>
+          </TouchableOpacity>   
+          )}
         keyExtractor={item => item.id}
       />
     </SafeAreaView>
@@ -83,12 +75,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
-    fontWeight: "bold",
-    alignSelf: 'flex-start'
-  },
-  details: {
-     fontSize: 15, 
   }
 })
 
-export default MyWalksScreen;
+export default FavoriteWalksScreen;

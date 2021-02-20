@@ -5,16 +5,28 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import {TouchableOpacity} from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from "./screens/HomeScreen.js"
 import LoginScreen from "./screens/LoginScreen.js"
 import SignupScreen from "./screens/SignupScreen.js"
 import ProfileScreen from "./screens/ProfileScreen.js"
 import MyReviewsScreen from "./screens/MyReviewsScreen.js"
 import MyWalksScreen from "./screens/MyWalksScreen.js"
-import FavoritesScreen from "./screens/FavoritesScreen.js"
+import FavoriteWalksScreen from "./screens/FavoriteWalksScreen.js"
+import FavoritePlacesScreen from "./screens/FavoritePlacesScreen.js"
 import AccountInfoScreen from "./screens/AccountInfoScreen.js"
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+function Favorites() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Walks" component={FavoriteWalksScreen} />
+      <Tab.Screen name="Places" component={FavoritePlacesScreen} />
+    </Tab.Navigator>
+  )
+}
 
 function App() {
   return (
@@ -26,7 +38,7 @@ function App() {
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="My Reviews" component={MyReviewsScreen} />
         <Stack.Screen name="My Walks" component={MyWalksScreen} />
-        <Stack.Screen name="Favorites" component={FavoritesScreen} />
+        <Stack.Screen name="Favorites" component={Favorites} />
         <Stack.Screen name="Account Information" component={AccountInfoScreen} />
       </Stack.Navigator>
     </NavigationContainer>

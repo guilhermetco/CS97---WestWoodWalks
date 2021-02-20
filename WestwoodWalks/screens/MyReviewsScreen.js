@@ -10,60 +10,75 @@ import Buttons from '../styles/Buttons.js'
 
 import InfoComponents from '../styles/InfoComponents.js';
 
-const walks = [
+const reviews = [
     {
       id: '1',
       title: 'Review 1',
+      date: '01/03/2021',
+      rating: 5
     },
     {
       id: '2',
       title: 'Review 2',
+      date: '01/06/2021',
+      rating: 3
     },
     {
       id: '3',
       title: 'Review 3',
+      date: '01/09/2021',
+      rating: 1
     },
     {
       id: '4',
       title: 'Review 4',
+      date: '01/27/2021',
+      rating: 2
     },
     {
       id: '5',
       title: 'Review 5',
+      date: '02/03/2021',
+      rating: 4
     },
     {
       id: '6',
       title: 'Review 6',
+      date: '02/04/2021',
+      rating: 5
     },
     {
       id: '7',
       title: 'Review 7',
+      date: '02/06/2021',
+      rating: 2
     },
     {
       id: '8',
       title: 'Review 8',
+      date: '01/08/2021',
+      rating: 4
     },
     {
       id: '9',
       title: 'Review 9',
+      date: '02/10/2021',
+      rating: 4
     },
   ];
   
-  const Item = ({ title }) => (
-    <TouchableOpacity style={InfoComponents.item} >
-        <Text>{title}</Text>
-    </TouchableOpacity>
-  );
 
 const MyReviewsScreen = ({ navigation }) => {
-    const renderItem = ({ item }) => (
-        <Item title={item.title} />
-      );
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={walks}
-        renderItem={renderItem}
+        data={reviews}
+        renderItem={({item}) => (
+            <TouchableOpacity style={InfoComponents.item} >
+                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.details}>Date: {item.date}</Text>
+            </TouchableOpacity>   
+        )}
         keyExtractor={item => item.id}
       />
     </SafeAreaView>
@@ -79,6 +94,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
+    fontWeight: "bold",
+    alignSelf: 'flex-start'
+  },
+  details: {
+     fontSize: 15, 
   }
 })
 

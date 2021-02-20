@@ -10,60 +10,56 @@ import Buttons from '../styles/Buttons.js'
 
 import InfoComponents from '../styles/InfoComponents.js';
 
-const walks = [
+const favorites = [
     {
       id: '1',
-      title: 'Like 1',
+      title: 'Place 1',
     },
     {
       id: '2',
-      title: 'Like 2',
+      title: 'Place 2',
     },
     {
       id: '3',
-      title: 'Like 3',
+      title: 'Place 3',
     },
     {
       id: '4',
-      title: 'Like 4',
+      title: 'Place 4',
     },
     {
       id: '5',
-      title: 'Like 5',
+      title: 'Place 5',
     },
     {
       id: '6',
-      title: 'Like 6',
+      title: 'Place 6',
     },
     {
       id: '7',
-      title: 'Like 7',
+      title: 'Place 7',
     },
     {
       id: '8',
-      title: 'Like 8',
+      title: 'Place 8',
     },
     {
       id: '9',
-      title: 'Like 9',
+      title: 'Place 9',
     },
   ];
   
-  const Item = ({ title }) => (
-    <TouchableOpacity style={InfoComponents.item} >
-        <Text>{title}</Text>
-    </TouchableOpacity>
-  );
 
-const FavoritesScreen = ({ navigation }) => {
-    const renderItem = ({ item }) => (
-        <Item title={item.title} />
-      );
+const FavoritePlacesScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={walks}
-        renderItem={renderItem}
+        data={favorites}
+        renderItem={({item}) => (
+          <TouchableOpacity style={InfoComponents.item} >
+              <Text style={styles.title}>{item.title}</Text>
+          </TouchableOpacity>   
+        )}
         keyExtractor={item => item.id}
       />
     </SafeAreaView>
@@ -82,4 +78,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default FavoritesScreen;
+export default FavoritePlacesScreen;
