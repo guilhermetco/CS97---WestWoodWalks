@@ -14,7 +14,7 @@ import MyReviewsScreen from "./screens/MyReviewsScreen.js"
 import MyWalksScreen from "./screens/MyWalksScreen.js"
 import FavoriteWalksScreen from "./screens/FavoriteWalksScreen.js"
 import FavoritePlacesScreen from "./screens/FavoritePlacesScreen.js"
-import AccountInfoScreen from "./screens/AccountInfoScreen.js"
+import AccountInfoScreen, {EditAccountInfo} from "./screens/AccountInfoScreen.js"
 import PlaceDetailsScreen from "./screens/PlaceDetailsScreen.js"
 
 const Stack = createStackNavigator();
@@ -41,6 +41,7 @@ function App() {
         <Stack.Screen name="My Walks" component={MyWalksScreen} />
         <Stack.Screen name="Favorites" component={Favorites} />
         <Stack.Screen name="Account Information" component={AccountInfoScreen} />
+        <Stack.Screen name="Edit Account" component={EditAccountInfo} />
         <Stack.Screen name="Place Details" component={PlaceDetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>

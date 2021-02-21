@@ -7,15 +7,48 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TextInput } from 'react-native';
 import Buttons from '../styles/Buttons.js'
+import { MaterialIcons } from '@expo/vector-icons';
+
+export const EditAccountInfo = ({ navigation }) => {
+  return (
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
+      <MaterialIcons name="account-circle" size={150} color="#675a5a" style={{marginTop: '-30%', marginBottom: '5%'}} />
+      <Text style={styles.label}>Username</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Username"
+          defaultValue="myusername"
+        />
+        <Text style={styles.label}>Email</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          defaultValue="myemail"
+          keyboardType={'email-address'}
+        />
+      <TouchableOpacity onPress={() => navigation.navigate("Account Information")}>
+        <Text style={Buttons.brownbutton}>Save</Text>
+      </TouchableOpacity>
+    </KeyboardAvoidingView>
+  );
+}
 
 const AccountInfoScreen = ({ navigation }) => {
   return (
-    <KeyboardAvoidingView behavior="padding" style={styles.container}>
-      <Image
-        style={styles.logo}
-        source={require("../assets/logo.png")}
-      />
-    </KeyboardAvoidingView>
+    <View style={styles.container}>
+      <MaterialIcons name="account-circle" size={150} color="#675a5a" style={{marginTop: '-30%', marginBottom: '5%'}} />
+      <Text style={styles.label}>Username</Text>
+      <View style={styles.input}>
+        <Text>myusername</Text>
+      </View>
+      <Text style={styles.label}>Email</Text>
+      <View style={styles.input}>
+        <Text>myemail</Text>
+      </View>
+      <TouchableOpacity onPress={() => navigation.navigate("Edit Account")}>
+        <Text style={Buttons.brownbutton}>Edit</Text>
+      </TouchableOpacity>
+    </View>
   );
 }
 
@@ -30,6 +63,22 @@ const styles = StyleSheet.create({
     width: 225,
     height: 225,
     marginTop: '-30%'
+  },
+  input: {
+    width: "80%",
+    borderWidth: 1,
+    height: 50,
+    marginVertical: 10,
+    padding: 10,
+    justifyContent: "center",
+    backgroundColor: '#D7EBF4',
+    borderColor: '#675a5a',
+    borderBottomWidth: 3 
+  },
+  label: {
+    alignSelf: 'flex-start',
+    marginLeft: '10%',
+    fontWeight: "500"
   }
 })
 
