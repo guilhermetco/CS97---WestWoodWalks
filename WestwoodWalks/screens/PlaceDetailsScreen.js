@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { FlatList, SafeAreaView, StyleSheet, Text, View, Image, KeyboardAvoidingView } from 'react-native';
+import { Component, FlatList, SafeAreaView, StyleSheet, Text, View, Image, KeyboardAvoidingView } from 'react-native';
 import {TouchableOpacity} from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -47,19 +47,52 @@ const place = {
             review: "lalalallalalalallallalallalalalla",
             rating: 4,
             user: "username",
+            date: "01/29/21"
+        },
+        { 
+            id: "5",
+            review: "lalalallalalalallallalallalalalla",
+            rating: 4,
+            user: "username",
             date: "01/30/21"
         }
+
     ]
 };
   
 
-const PlaceDetailsScreen = ({ navigation }) => {
-  return (
+class PlaceDetailsScreen extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLiked: true
+        };
+    }
+    like() {
+        this.setState({
+            isLiked: !(this.state.isLiked)
+        })
+    };
+
+    renderlike() {
+        if (this.state.isLiked)
+            return (
+                <AntDesign name="heart" size={30} color="black" /> 
+            )
+        else 
+            return (
+                <AntDesign name="hearto" size={30} color="black" />
+            )
+    };
+    render() {
+    return(
     <SafeAreaView style={styles.container}>
         <View style={InfoComponents.item}>
         <View style={{flexDirection: "row", alignItems:'flex-start', justifyContent: 'flex-start'}}>
             <Text style={styles.title}>{place.title}</Text>
-            <AntDesign name="heart" size={30} color="black" />
+            <TouchableOpacity onPress={() => this.like()}>
+                {this.renderlike()}
+            </TouchableOpacity>
          </View>
         <Text style={InfoComponents.detailsOne}>{place.address}</Text>
         <Text style={InfoComponents.detailsOne}>{place.type}</Text>
@@ -78,8 +111,8 @@ const PlaceDetailsScreen = ({ navigation }) => {
             <Text style={InfoComponents.detailsOne}>{place.numofreviews} Reviews</Text>
         </View>
         </View>
-        <View style={InfoComponents.item}>
-            <Text style={{fontSize: 25}}>Reviews</Text>
+        <View style={styles.item}>
+            <Text style={{fontSize: 22}}>Reviews</Text>
             <View
                 style={{
                     marginTop: 5,
@@ -113,6 +146,7 @@ const PlaceDetailsScreen = ({ navigation }) => {
     </SafeAreaView>
   );
 }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -122,7 +156,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
   },
   title: {
-    fontSize: 35,
+    fontSize: 30,
     fontWeight: '600',
     alignSelf: 'flex-start',
     width: '90%',
@@ -131,7 +165,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#f2fafc",
     marginBottom: 10,
     padding: 5
-  }
+  },
+  item: {
+    backgroundColor: '#f9c2ff',
+    padding: 10,
+    width: 400,
+    marginVertical: 8,
+    backgroundColor: '#D7EBF4',
+    justifyContent: 'flex-start',
+    height:"85%"
+},
 })
 
 export default PlaceDetailsScreen;
