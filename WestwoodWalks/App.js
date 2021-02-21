@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import {TouchableOpacity} from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -15,6 +15,7 @@ import MyWalksScreen from "./screens/MyWalksScreen.js"
 import FavoriteWalksScreen from "./screens/FavoriteWalksScreen.js"
 import FavoritePlacesScreen from "./screens/FavoritePlacesScreen.js"
 import AccountInfoScreen from "./screens/AccountInfoScreen.js"
+import PlaceDetailsScreen from "./screens/PlaceDetailsScreen.js"
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -40,6 +41,7 @@ function App() {
         <Stack.Screen name="My Walks" component={MyWalksScreen} />
         <Stack.Screen name="Favorites" component={Favorites} />
         <Stack.Screen name="Account Information" component={AccountInfoScreen} />
+        <Stack.Screen name="Place Details" component={PlaceDetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

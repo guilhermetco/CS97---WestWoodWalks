@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#C6E2E8',
     alignItems: 'center',
     justifyContent: 'center'
-  },
+  }
 })
 
 export default FavoriteWalksScreen;

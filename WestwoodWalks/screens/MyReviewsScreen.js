@@ -83,9 +83,7 @@ const MyReviewsScreen = ({ navigation }) => {
         data={reviews}
         renderItem={({item}) => (
             <TouchableOpacity style={InfoComponents.item} >
-                <View style={{flexDirection: "row"}} >
-                    <Text style={InfoComponents.title}>{item.title}</Text>
-                </View>
+                <Text style={InfoComponents.title}>{item.title}</Text>
                 <Text style={InfoComponents.detailsOne}>{item.address}</Text>
                 <View
                     style={{

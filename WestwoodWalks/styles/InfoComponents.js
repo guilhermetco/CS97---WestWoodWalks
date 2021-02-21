@@ -10,7 +10,7 @@ const InfoComponents = StyleSheet.create({
         justifyContent: 'flex-start'
     },
     title: {
-        fontSize: 30,
+        fontSize: 25,
         fontWeight: '600',
         alignSelf: 'flex-start'
     },

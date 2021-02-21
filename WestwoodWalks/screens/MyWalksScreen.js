@@ -12,23 +12,30 @@ import InfoComponents from '../styles/InfoComponents.js';
 const walks = [
     {
       id: '1',
-      title: 'Walk 1',
-      distance: '3 miles'
+      title: 'Grocery Run',
+      distance: '3 miles',
+      description: "Route to Trader Joes, Target, and Sprouts from dorms.",
+      likes: 3
     },
     {
       id: '2',
-      title: 'Walk 2',
-      distance: '4 miles'
+      title: 'Morning Run',
+      distance: '3 miles',
+      description: "Loop around UCLA campus.",
+      likes: 4
     },
     {
       id: '3',
-      title: 'Walk 3',
-      distance: '2 miles'
+      title: 'Scenic Evening Walk',
+      distance: '2 miles',
+      description: 'Walk around Sunset Blvd.',
+      likes: 5
     },
     {
       id: '4',
-      title: 'Walk 4',
-      distance: '5 miles'
+      title: 'To Powell',
+      distance: '5 miles',
+      description: ''
     },
     {
       id: '5',
@@ -65,7 +72,8 @@ const MyWalksScreen = ({ navigation }) => {
         renderItem={({item}) => (
         <TouchableOpacity style={InfoComponents.item} >
             <Text style={InfoComponents.title}>{item.title}</Text>
-            <Text style={InfoComponents.details}>Distance: {item.distance}</Text>
+            <Text style={InfoComponents.detailsOne}>Distance: {item.distance}</Text>
+            <Text style={InfoComponents.detailsTwo}>{item.description}</Text>
         </TouchableOpacity>   
         )}
         keyExtractor={item => item.id}
