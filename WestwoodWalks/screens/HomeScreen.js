@@ -26,9 +26,11 @@ const HomeScreen = ({ navigation }) => {
        >
         <Text style={Buttons.brownbutton}>Sign Up</Text>
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Profile')}
+      >
         <Text style={styles.anonymous}>Continue Anonymously</Text>
-       </TouchableOpacity>
+      </TouchableOpacity>
       </View>
     );
 };
