@@ -3,7 +3,7 @@
 ## Setting up the backend
 
 ```
-#Switch into the project folder then run thne following commands
+#Switch into the project folder then run the following commands
 python3 -m venv env
 source env/bin/activate
 pip install -r requirements.txt
