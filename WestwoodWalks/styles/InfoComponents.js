@@ -3,11 +3,10 @@ import { StyleSheet } from 'react-native';
 const InfoComponents = StyleSheet.create({
     item: {
         backgroundColor: '#f9c2ff',
-        padding: 10,
-        width: 400,
-        marginVertical: 8,
+        padding: '2%',
+        marginVertical: '2%',
         backgroundColor: '#D7EBF4',
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
     },
     title: {
         fontSize: 25,
@@ -20,8 +19,8 @@ const InfoComponents = StyleSheet.create({
     detailsTwo: {
         fontSize: 15,
         fontStyle: 'italic',
-        marginTop: 5,
-        marginBottom: 15
+        marginTop: '1%',
+        marginBottom: '5%'
     }
 })
 

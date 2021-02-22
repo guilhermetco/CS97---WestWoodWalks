@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#C6E2E8',
-    alignItems: 'center',
+    alignItems: 'stretch',
     justifyContent: 'center'
   },
   title: {

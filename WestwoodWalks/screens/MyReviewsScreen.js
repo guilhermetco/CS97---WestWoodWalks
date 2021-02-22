@@ -82,30 +82,30 @@ const MyReviewsScreen = ({ navigation }) => {
       <FlatList
         data={reviews}
         renderItem={({item}) => (
-            <TouchableOpacity style={InfoComponents.item} >
-                <Text style={InfoComponents.title}>{item.title}</Text>
-                <Text style={InfoComponents.detailsOne}>{item.address}</Text>
-                <View
-                    style={{
-                        marginTop: 5,
-                        borderBottomColor: 'black',
-                        borderBottomWidth: 1,
-                    }}
-                />
-                <View style={{alignItems:'center', justifyContent: 'flex-end', padding: 10}}>
-                        <Stars
-                            display={item.rating}
-                            spacing={8}
-                            count={5}
-                            starSize={50}
-                            fullStar={<Icon name={'star'} size={20} color={"gold"}/>}
-                            emptyStar={<Icon name={'star-outline'} size={20} color={"gold"}/>}
-                            halfStar={<Icon name={'star-half'} size={20} color={"gold"}/>}
-                        /> 
-                    </View>
-                <Text style={InfoComponents.detailsTwo}>"{item.summary}"</Text>
-                <Text style={InfoComponents.detailsOne}>Last Modified: {item.date}</Text>
-            </TouchableOpacity>   
+          <TouchableOpacity style={InfoComponents.item} >
+            <Text style={InfoComponents.title}>{item.title}</Text>
+            <Text style={InfoComponents.detailsOne}>{item.address}</Text>
+            <View
+              style={{
+              marginTop: 5,
+              borderBottomColor: 'black',
+              borderBottomWidth: 1,
+              }}
+            />
+            <View style={{alignItems:'center', justifyContent: 'flex-end', padding: 10}}>
+              <Stars
+                display={item.rating}
+                spacing={8}
+                count={5}
+                starSize={50}
+                fullStar={<Icon name={'star'} size={20} color={"gold"}/>}
+                emptyStar={<Icon name={'star-outline'} size={20} color={"gold"}/>}
+                halfStar={<Icon name={'star-half'} size={20} color={"gold"}/>}
+              /> 
+            </View>
+            <Text style={InfoComponents.detailsTwo}>"{item.summary}"</Text>
+            <Text style={InfoComponents.detailsOne}>Last Modified: {item.date}</Text>
+          </TouchableOpacity>   
         )}
         keyExtractor={item => item.id}
       />
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#C6E2E8',
-    alignItems: 'center',
+    alignItems: 'stretch',
     justifyContent: 'center'
   }
 })

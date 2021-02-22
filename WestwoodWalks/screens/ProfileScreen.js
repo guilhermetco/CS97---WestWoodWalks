@@ -12,6 +12,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 const ProfileScreen = ({ navigation }) => {
     return (
       <View style={styles.container}>
+        <View style={styles.container2}>
         <View style={{flexDirection: "row"}} >
             <TouchableOpacity
               style={Buttons.profilebutton}
@@ -47,6 +48,7 @@ const ProfileScreen = ({ navigation }) => {
         <TouchableOpacity>
           <Text style={Buttons.brownbutton}>Logout</Text>
         </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -56,6 +58,14 @@ const ProfileScreen = ({ navigation }) => {
       flex: 1,
       backgroundColor: '#C6E2E8',
       alignItems: 'center',
+      justifyContent: "center"
+    },
+    container2: {
+      flex: 1,
+      backgroundColor: '#C6E2E8',
+      alignItems: 'center',
+      marginTop: '30%',
+      marginBottom: '40%',
       justifyContent: "center"
     },
     label:{

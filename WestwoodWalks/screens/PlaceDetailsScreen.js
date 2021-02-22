@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#C6E2E8',
-    alignItems: 'center',
+    alignItems: 'stretch',
     justifyContent: 'flex-start'
   },
   title: {
@@ -164,16 +164,15 @@ const styles = StyleSheet.create({
   review: {
     backgroundColor: "#f2fafc",
     marginBottom: 10,
-    padding: 5
+    padding: '1%'
   },
   item: {
     backgroundColor: '#f9c2ff',
-    padding: 10,
-    width: 400,
+    padding: '2%',
     marginVertical: 8,
     backgroundColor: '#D7EBF4',
     justifyContent: 'flex-start',
-    height:"85%"
+    height:"85%",
 },
 })
 

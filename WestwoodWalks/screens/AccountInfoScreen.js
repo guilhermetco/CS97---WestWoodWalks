@@ -60,16 +60,16 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   logo :{
-    width: 225,
-    height: 225,
+    width: '50%',
+    height: '20%',
     marginTop: '-30%'
   },
   input: {
     width: "80%",
     borderWidth: 1,
-    height: 50,
-    marginVertical: 10,
-    padding: 10,
+    height: '7%',
+    marginVertical: '3%',
+    padding: '2%',
     justifyContent: "center",
     backgroundColor: '#D7EBF4',
     borderColor: '#675a5a',

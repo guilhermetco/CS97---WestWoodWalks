@@ -67,7 +67,7 @@ const walks = [
 const MyWalksScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
+      <FlatList 
         data={walks}
         renderItem={({item}) => (
         <TouchableOpacity style={InfoComponents.item} >
@@ -87,7 +87,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#C6E2E8',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'stretch'
   }
 })
 

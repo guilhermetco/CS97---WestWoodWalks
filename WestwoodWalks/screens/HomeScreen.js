@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     color: 'black',
     marginTop: '4%',
     fontWeight: 'bold',
-    width: 200,
+    width: '30%',
     borderRadius: 12,
     overflow: 'hidden',
     textAlign: 'center',
