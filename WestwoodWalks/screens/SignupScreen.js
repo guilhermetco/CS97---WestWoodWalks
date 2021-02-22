@@ -8,9 +8,16 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Buttons from '../styles/Buttons.js'
 
 
-const SignupScreen = ({ navigation }) => {
+class SignupScreen extends React.Component {
+  state = {
+    email: "",
+    username: "",
+    password: "",
+    repeatpassword: ""
+  }
+  render() {
     return (
-        <KeyboardAvoidingView behavior="padding" style={styles.container}>
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <Image
           style={styles.logo}
           source={require("../assets/logo.png")}
@@ -19,26 +26,31 @@ const SignupScreen = ({ navigation }) => {
           style={styles.input}
           placeholder="Email"
           keyboardType={'email-address'}
+          onChangeText={(email) => this.setState({email})}
         />
         <TextInput
           style={styles.input}
           placeholder="Username"
+          onChangeText={(username) => this.setState({username})}
         />
         <TextInput
           style={styles.input}
           placeholder="Password"
           secureTextEntry
+          onChangeText={(password) => this.setState({password})}
         />
         <TextInput
           style={styles.input}
           placeholder="Repeat Password"
           secureTextEntry
+          onChangeText={(repeatpassword) => this.setState({repeatpassword})}
         />
         <TouchableOpacity>
           <Text style={Buttons.brownbutton}>Sign Up</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
     );
+  }
 }
 
 const styles = StyleSheet.create({

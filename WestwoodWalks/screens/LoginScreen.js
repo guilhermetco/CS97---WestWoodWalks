@@ -8,7 +8,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { TextInput } from 'react-native';
 import Buttons from '../styles/Buttons.js'
 
-const LoginScreen = ({ navigation }) => {
+class LoginScreen extends React.Component {
+  state = {
+    username: "",
+    password: ""
+  }
+  render() {
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <Image
@@ -19,17 +24,20 @@ const LoginScreen = ({ navigation }) => {
         style={styles.input}
         placeholder="Username or Email"
         keyboardType={'email-address'}
+        onChangeText={(username) => this.setState({username})}
       />
       <TextInput
         style={styles.input}
         placeholder="Password"
         secureTextEntry
+        onChangeText={(password) => this.setState({password})}
       />
       <TouchableOpacity>
         <Text style={Buttons.brownbutton}>Login</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
   );
+  }
 }
 
 const styles = StyleSheet.create({
