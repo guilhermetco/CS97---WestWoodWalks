@@ -27,10 +27,10 @@ const HomeScreen = ({ navigation }) => {
         <Text style={Buttons.brownbutton}>Sign Up</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => navigation.navigate('Profile')}
+        onPress={() => navigation.navigate('TabBar')}
       >
         <Text style={styles.anonymous}>Continue Anonymously</Text>
-      </TouchableOpacity>
+       </TouchableOpacity>
       </View>
     );
 };
