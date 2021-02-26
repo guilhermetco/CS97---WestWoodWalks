@@ -27,7 +27,7 @@ const HomeScreen = ({ navigation }) => {
         <Text style={Buttons.brownbutton}>Sign Up</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => navigation.navigate('TabBar')}
+        onPress={() => navigation.navigate('Explore')}
       >
         <Text style={styles.anonymous}>Continue Anonymously</Text>
        </TouchableOpacity>

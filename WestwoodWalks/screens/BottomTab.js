@@ -6,6 +6,7 @@ import MapScreen from "./MapScreen.js"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { View } from 'react-native';
 import ReviewScreen from './ReviewScreen.js'
+import ProfileScreen from  './ProfileScreen.js'
 
 
 const Tab = createBottomTabNavigator();
@@ -15,6 +16,7 @@ export default function TabBar() {
       <Tab.Navigator>
         <Tab.Screen name="Review" component={ReviewScreen} />
         <Tab.Screen name="Map" component={MapScreen} />
+        <Tab.Screen name="Profile" component={ProfileScreen} />
       </Tab.Navigator>
   );
 }
