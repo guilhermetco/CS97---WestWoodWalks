@@ -2,10 +2,15 @@
 
 A simple social media application with users, logins, posts, likes and comments - developed using 
 React, Node, Express and MongoDB. This is not intended as a design template.  It's just a technology 
-demonstration.  The Mongo database is hosted on Atlas.  Database access works.  Login works.
+demonstration.  The Mongo database is hosted on mongodb.com.  Database access works.  Login works.
+posts work.  Photo uploads work.
 
 The next stage should be: adding better security, and then start building a database of locations
 to be reviewed, and a way to make and search for location "posts".  (reviews)
+
+Maps should be added.
+
+This demo has a simple front end, which can be replaced.
 
 This demo should work on Mac, Windows, or Linux.
 
