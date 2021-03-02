@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import Colors from './Colors.js'
 
 const Buttons = StyleSheet.create({
     brownbutton: {
@@ -30,6 +31,23 @@ const Buttons = StyleSheet.create({
         padding: '2%',
         borderWidth: 1,
         borderColor: '#675a5a'
+    },
+    categorybutton: {
+        backgroundColor: Colors.lightyellow,
+        justifyContent: 'center',
+        color: 'brown',
+        marginVertical: '1%',
+        marginHorizontal: '2%',
+        width: '21%',
+        height: '80%',
+        overflow: 'hidden',
+        borderRadius: 19,
+        textAlign: "center",
+        alignItems: "center",
+        fontSize: 12,
+        padding: "2%",
+        borderWidth: 1,
+        borderColor: Colors.brown
     }
 })
 

@@ -64,8 +64,8 @@ const ProfileScreen = ({ navigation }) => {
       flex: 1,
       backgroundColor: '#C6E2E8',
       alignItems: 'center',
-      marginTop: '30%',
-      marginBottom: '40%',
+      marginTop: '40%',
+      marginBottom: '30%',
       justifyContent: "center"
     },
     label:{

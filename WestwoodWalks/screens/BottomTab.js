@@ -14,8 +14,8 @@ const Tab = createBottomTabNavigator();
 export default function TabBar() {
   return (
       <Tab.Navigator>
-        <Tab.Screen name="Review" component={ReviewScreen} />
         <Tab.Screen name="Map" component={MapScreen} />
+        <Tab.Screen name="Reviews" component={ReviewScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
       </Tab.Navigator>
   );
