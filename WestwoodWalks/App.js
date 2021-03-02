@@ -6,6 +6,7 @@ import {TouchableOpacity} from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import TabBar from './screens/BottomTab.js'
 import HomeScreen from "./screens/HomeScreen.js"
 import LoginScreen from "./screens/LoginScreen.js"
 import SignupScreen from "./screens/SignupScreen.js"
@@ -44,6 +45,7 @@ function App() {
         <Stack.Screen name="Account Information" component={AccountInfoScreen} />
         <Stack.Screen name="Edit Account" component={EditAccountInfo} />
         <Stack.Screen name="Place Details" component={PlaceDetailsScreen} />
+        <Stack.Screen name= "TabBar" component={TabBar}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
