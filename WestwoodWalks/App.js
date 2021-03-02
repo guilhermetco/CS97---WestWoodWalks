@@ -37,7 +37,7 @@ function App() {
         <Stack.Screen options={{headerShown: false}} name="Home" component={HomeScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Signup" component={SignupScreen} />
-        <Stack.Screen name="Explore" component={TabBar} />
+        <Stack.Screen options={{headerShown: false}} name="Explore" component={TabBar} />
         <Stack.Screen name="My Reviews" component={MyReviewsScreen} />
         <Stack.Screen name="My Walks" component={MyWalksScreen} />
         <Stack.Screen name="Favorites" component={Favorites} />
