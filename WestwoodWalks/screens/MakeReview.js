@@ -42,9 +42,9 @@ export default class MakeReview extends Component {
             spacing={8}
             count={5}
             starSize={70}
-            fullStar={<Icon name={'star'} size={20} color={"gold"}/>}
-            emptyStar={<Icon name={'star-outline'} size={20} color={"gold"}/>}
-            halfStar={<Icon name={'star-half'} size={20} color={"gold"}/>}
+            fullStar={<Icon name={'star'} size={20} color={"yellow"}/>}
+            emptyStar={<Icon name={'star-outline'} size={20} color={"yellow"}/>}
+            halfStar={<Icon name={'star-half'} size={20} color={"yellow"}/>}
             /> 
           <TextInput
             style={styles.input}
