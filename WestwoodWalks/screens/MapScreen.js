@@ -5,6 +5,7 @@ import MapViewDirections from 'react-native-maps-directions';
 import { Marker } from "react-native-maps";
 import { Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import Buttons from '../styles/Buttons.js'
 import InfoComponents from '../styles/InfoComponents.js'
 
 const walks = [
@@ -61,7 +62,7 @@ const walks = [
     distance: '2 miles'
   },
 ];
-
+const {height, width} = Dimensions.get('window');
 const LATITUDE = 34.06279;
 const LONGITUDE = -118.44390;
 const LATITUDE_DELTA = 0.0922;
@@ -75,6 +76,11 @@ export default class MapScreen extends Component {
     super(props);
 
     this.state = {
+      startValue: 'Start',
+      initialCoords:[
+        {latitude:34.073026, longitude:-118.465619},
+        {latitude:34.067223, longitude:-118.410851}
+      ],
       coordinates: [
         {
           latitude: 34.06279,
@@ -90,12 +96,51 @@ export default class MapScreen extends Component {
         longitude:-118.44524,
       },
       dur: null,
-      dis: null
+      dis: null,
+      saveWalk:{
+        startingLocation: null,
+        destinationLocation: null,
+        forZoom: { distance: Number, duration: Number, coordinates: [] }
+      }
     };
 
     this.mapView = null;
   }
-
+  onSaveWalk = () =>{
+    this.setState({
+      saveWalk:{
+        startingLocation:this.state.coordinates[1],
+        destinationLocation: this.state.coordinates[0]},
+    })
+    if(this.state.startValue=='Start'){
+      this.setState({
+        startValue:'Stop'
+      });
+      this.mapView.fitToCoordinates(this.state.forZoom.coordinates,{
+        edgePadding: {
+          right: (width / 10),
+          bottom: (height / 20),
+          left: (width / 10),
+          top: (height / 20),
+        }
+        }
+      );
+    }
+    else{
+      this.setState({
+        startValue:'Start'
+      });
+      this.mapView.fitToCoordinates(this.state.initialCoords,{
+        edgePadding: {
+          right: width,
+          bottom: height,
+          left: width,
+          top: height
+        }
+        }
+      );
+    }
+  }
   onMapPress = (e) => {
     this.setState({
       coordinates: [
@@ -169,7 +214,8 @@ export default class MapScreen extends Component {
               //console.log(`Duration: ${result.duration} min.`)
               this.setState({
                 dis: result.distance,
-                dur: result.duration
+                dur: result.duration,
+                forZoom: result
               })
             }}
             onError={(errorMessage) => {
@@ -184,6 +230,11 @@ export default class MapScreen extends Component {
           <Text style={{marginLeft: '2%', marginBottom: '1%', fontSize: 12}}>Time: {this.state.dur} min.</Text>
         </View>
       </View>
+      <TouchableOpacity
+        onPress={ this.onSaveWalk }
+      >
+      <Text style={Buttons.brownbutton}>{this.state.startValue}</Text>
+      </TouchableOpacity>
       <View style={{width: '100%', height: '65%', alignSelf: 'center', flex: 1, backgroundColor: '#F4ECC6', padding: 3, borderWidth: 1,  borderColor: '#675a5a'}}>
       <SafeAreaView style={{marginBottom: '6%'}}>
         <Text style={styles.title}> Explore </Text>
