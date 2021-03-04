@@ -48,7 +48,20 @@ const Buttons = StyleSheet.create({
         padding: "2%",
         borderWidth: 1,
         borderColor: Colors.brown
-    }
+    },
+    brownbuttonSmall: {
+        backgroundColor: '#675a5a',
+        color: 'white',
+        width: 70,
+        borderRadius: 10,
+        overflow: 'hidden',
+        textAlign: 'center',
+        fontSize: 10,
+        padding: '2%',
+        borderWidth: 1,
+        borderColor: '#675a5a',
+    },
+    
 })
 
 export default Buttons;

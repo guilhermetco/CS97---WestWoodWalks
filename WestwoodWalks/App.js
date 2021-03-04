@@ -17,6 +17,7 @@ import FavoritePlacesScreen from "./screens/FavoritePlacesScreen.js"
 import AccountInfoScreen, {EditAccountInfo} from "./screens/AccountInfoScreen.js"
 import PlaceDetailsScreen from "./screens/PlaceDetailsScreen.js"
 import TabBar from "./screens/BottomTab.js"
+import CategoryResultsScreen from "./screens/CategoryResultsScreen"
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -44,6 +45,7 @@ function App() {
         <Stack.Screen name="Account Information" component={AccountInfoScreen} />
         <Stack.Screen name="Edit Account" component={EditAccountInfo} />
         <Stack.Screen name="Place Details" component={PlaceDetailsScreen} />
+        <Stack.Screen name="Results" component={CategoryResultsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
