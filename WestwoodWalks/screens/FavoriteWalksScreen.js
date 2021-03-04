@@ -65,7 +65,8 @@ const FavoriteWalksScreen = ({ navigation }) => {
       <FlatList
         data={favoritewalks}
         renderItem={({item}) => (
-          <TouchableOpacity style={InfoComponents.item} >
+          <TouchableOpacity style={InfoComponents.item} 
+              onPress={() => navigation.navigate('Map')}>
               <Text style={InfoComponents.title}>{item.title}</Text>
               <Text style={InfoComponents.details}>Made by: {item.creator}</Text>
           </TouchableOpacity>   

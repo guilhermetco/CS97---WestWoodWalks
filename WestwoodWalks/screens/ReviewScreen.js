@@ -86,42 +86,54 @@ class ReviewScreen extends React.Component {
                 }
               }
             />
-            <View style={{height: '30%', marginTop: '15%'}}>
+            <View style={{height: '30%', marginTop: '10%'}}>
               <Text style={styles.title}>Search by Category</Text>
                 <View style={{flexDirection: "row", height: '45%'}} >
-                  <TouchableOpacity style={Buttons.categorybutton}>
+                  <TouchableOpacity style={Buttons.categorybutton}
+                    onPress={() => this.props.navigation.navigate('Results')}>
                     <Ionicons name="restaurant" size={24} color={Colors.brown} />
                     <Text style={styles.categories}>Restaurants</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={Buttons.categorybutton}>
+                  <TouchableOpacity style={Buttons.categorybutton}
+                    onPress={() => this.props.navigation.navigate('Results')}>
                     <MaterialIcons name="local-grocery-store" size={24} color={Colors.brown} />
                     <Text style={styles.categories}>Groceries</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={Buttons.categorybutton}>
+                  <TouchableOpacity style={Buttons.categorybutton}
+                  onPress={() => this.props.navigation.navigate('Results')}>
                     <MaterialIcons name="park" size={24} color={Colors.brown} />
                     <Text style={styles.categories}>Parks</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={Buttons.categorybutton}>
+                  <TouchableOpacity style={Buttons.categorybutton}
+                  onPress={() => this.props.navigation.navigate('Results')}>
+                    <FontAwesome name="shopping-bag" size={24} color={Colors.brown} />
                     <Text style={styles.categories}>Shopping</Text>
                   </TouchableOpacity>
                 </View>
                 <View style={{flexDirection: "row", height: '45%'}} >
-                  <TouchableOpacity style={Buttons.categorybutton}>
+                  <TouchableOpacity style={Buttons.categorybutton}
+                  onPress={() => this.props.navigation.navigate('Results')}>
                     <FontAwesome name="coffee" size={24} color={Colors.brown} />
-                    <Text style={styles.categories}>Cafe</Text>
+                    <Text style={styles.categories}>Café</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={Buttons.categorybutton}>
-                    <Text style={styles.categories}>Shop</Text>
+                  <TouchableOpacity style={Buttons.categorybutton}
+                  onPress={() => this.props.navigation.navigate('Results')}>
+                    <MaterialIcons name="hotel" size={24} color={Colors.brown} />
+                    <Text style={styles.categories}>Hotels</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={Buttons.categorybutton}>
-                    <Text style={styles.categories}>Parks</Text>
+                  <TouchableOpacity style={Buttons.categorybutton}
+                  onPress={() => this.props.navigation.navigate('Results')}>
+                    <MaterialIcons name="nightlife" size={24} color={Colors.brown} />
+                    <Text style={styles.categories}>Nightlife</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={Buttons.categorybutton}>
-                    <Text style={styles.categories}>Food</Text>
+                  <TouchableOpacity style={Buttons.categorybutton}
+                  onPress={() => this.props.navigation.navigate('Results')}>
+                    <MaterialIcons name="event" size={24} color={Colors.brown} />
+                    <Text style={styles.categories}>Events</Text>
                   </TouchableOpacity>
                 </View>
             </View>
-            <View style={{height: '40%', marginTop: '5%'}}>
+            <View style={{height: '43%', marginTop: '5%'}}>
               <Text style={styles.title}>Discover</Text>
               <SafeAreaView>
                 <FlatList 
@@ -160,7 +172,7 @@ class ReviewScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F4ECC6',
+    backgroundColor: Colors.yellow,
     justifyContent: 'flex-start',
     alignItems: 'stretch'
   },
@@ -172,7 +184,7 @@ const styles = StyleSheet.create({
     padding: '2%'
   },
   categories: {
-    fontSize: 12,
+    fontSize: 9,
     color: Colors.brown
   },
   item: {
