@@ -7,7 +7,6 @@ import { Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Buttons from '../styles/Buttons.js'
 import InfoComponents from '../styles/InfoComponents.js'
-import Buttons from '../styles/Buttons.js'
 import Colors from '../styles/Colors.js';
 import { AntDesign } from '@expo/vector-icons';
 import currentLocationImage from '../assets/currentLocation.png'
