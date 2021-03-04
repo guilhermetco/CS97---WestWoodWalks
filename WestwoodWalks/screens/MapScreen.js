@@ -346,7 +346,7 @@ const styles = StyleSheet.create({
   },
   saveView: {
     backgroundColor: Colors.lightblue, 
-    width: "85%", 
+    width: "80%", 
     height: '68%', 
     alignSelf: "center",
     borderRadius: 10,
