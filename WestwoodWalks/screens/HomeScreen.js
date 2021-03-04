@@ -6,6 +6,7 @@ import {TouchableOpacity} from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Buttons from '../styles/Buttons.js'
+import Colors from '../styles/Colors.js'
 
 
 const HomeScreen = ({ navigation }) => {
@@ -38,7 +39,7 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F4ECC6',
+    backgroundColor: Colors.yellow,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
     marginTop: '-12%'
   },
   anonymous: {
-    backgroundColor: '#F4ECC6',
+    backgroundColor: Colors.yellow,
     color: 'black',
     marginTop: '4%',
     fontWeight: 'bold',

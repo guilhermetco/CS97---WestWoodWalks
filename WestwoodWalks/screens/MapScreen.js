@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, SafeAreaView, Dimensions, StyleSheet, View } from 'react-native';
+import { FlatList, SafeAreaView, Dimensions, StyleSheet, View, Image, TextInput, Modal } from 'react-native';
 import MapView from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { Marker } from "react-native-maps";
@@ -7,6 +7,10 @@ import { Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Buttons from '../styles/Buttons.js'
 import InfoComponents from '../styles/InfoComponents.js'
+import Buttons from '../styles/Buttons.js'
+import Colors from '../styles/Colors.js';
+import { AntDesign } from '@expo/vector-icons';
+import currentLocationImage from '../assets/currentLocation.png'
 
 const walks = [
   {
@@ -14,7 +18,17 @@ const walks = [
     title: 'Grocery Run',
     distance: '3 miles',
     description: "Route to Trader Joes, Target, and Sprouts from dorms.",
-    likes: 3
+    likes: 3,
+    start:
+      {
+        latitude: 34.06279,
+        longitude: -118.44390,
+      },
+    end:
+      {
+        latitude: 34.06241,
+        longitude: -118.44375,
+      },
   },
   {
     id: '2',
@@ -50,16 +64,6 @@ const walks = [
     id: '7',
     title: 'Walk 7',
     distance: '7 miles'
-  },
-  {
-    id: '8',
-    title: 'Walk 8',
-    distance: '3 miles'
-  },
-  {
-    id: '9',
-    title: 'Walk 9',
-    distance: '2 miles'
   },
 ];
 const {height, width} = Dimensions.get('window');
@@ -101,7 +105,11 @@ export default class MapScreen extends Component {
         startingLocation: null,
         destinationLocation: null,
         forZoom: { distance: Number, duration: Number, coordinates: [] }
-      }
+      },
+      modalVisible: false,
+      currentPath: "Current Path",
+      premadePath: false,
+      isLiked: false,
     };
 
     this.mapView = null;
@@ -141,12 +149,19 @@ export default class MapScreen extends Component {
       );
     }
   }
+
+  setModalVisible = (visible) => {
+    this.setState({modalVisible:visible});
+  }
+
   onMapPress = (e) => {
     this.setState({
       coordinates: [
         e.nativeEvent.coordinate,
         this.state.clocation
       ],
+      currentPath: "Current Path",
+      premadePath: false,
     });
   }
   onRoutePress = (long, lat ) => {
@@ -179,10 +194,53 @@ export default class MapScreen extends Component {
     );
   };
   
+  setPremadePath = () => {
+    this.setState({
+      coordinates: [
+        {
+          latitude: 34.06279,
+          longitude: -118.44390,
+        },
+        {
+          latitude: 34.06241,
+          longitude: -118.44375,
+        },
+      ],
+      currentPath: "Name of Path",
+      premadePath: true,
+    })
+  }
+
+  like() {
+    this.setState({
+        isLiked: !(this.state.isLiked)
+    })
+};
+
   render() {
+    const { modalVisible } = this.state;
+    let button;
+    if (this.state.premadePath) {
+      if (this.state.isLiked) 
+        button=
+          <TouchableOpacity onPress={() => this.like()}>
+            <AntDesign name="heart" size={30} color={Colors.brown} /> 
+          </TouchableOpacity>
+      else 
+        button=
+          <TouchableOpacity onPress={() => this.like()}>
+            <AntDesign name="hearto" size={30} color={Colors.brown} />
+          </TouchableOpacity>
+    } else {
+      button=
+        <TouchableOpacity style={Buttons.brownbuttonSmall}
+          onPress={() => this.setModalVisible(!modalVisible)}>
+          <Text style={{color:'white', alignSelf: "center"}}>Save</Text>
+        </TouchableOpacity>
+    }
     return (
       <View style={styles.container}>
-        <Text style={{marginTop: '10%', alignSelf: 'center', fontStyle: "italic", color: '#675a5a'}}> Click to where you want to go on the map</Text>
+         {/* Map and current route display */}
         <View style={{width: '100%', height: '65%', padding: '2%', alignSelf: 'center'}}>
           <MapView
             initialRegion={{
@@ -222,12 +280,24 @@ export default class MapScreen extends Component {
             }}
           />
         )}
-        <Marker coordinate={{latitude: this.state.clocation.latitude, longitude: this.state.clocation.longitude}} />
+        <Marker coordinate={{latitude: this.state.clocation.latitude, longitude: this.state.clocation.longitude}}>
+          <Image source={require('../assets/currentLocation.png')}></Image>
+        </Marker>
         </MapView>
+        <Text style={{marginTop: '10%', alignSelf: 'center', fontStyle: "italic", color: '#675a5a', backgroundColor: 'white'}}>
+           Click to where you want to go on the map </Text>
+        {/* Current Path window on map */}
         <View style={{ flex: 'stretch', backgroundColor: '#fffae3', padding: 3, borderRadius: 10, borderWidth: 2, borderColor: '#675a5a'}}>
-          <Text style={styles.title}>Current Path</Text>
-          <Text style={{marginLeft: '2%', marginBottom: '1%', fontSize: 12}}>Distance: {this.state.dis} miles</Text>
-          <Text style={{marginLeft: '2%', marginBottom: '1%', fontSize: 12}}>Time: {this.state.dur} min.</Text>
+          <Text style={styles.title}>{this.state.currentPath}</Text>
+          <View style={{flexDirection: "row"}}>
+            <View style={{width: '50%'}}>
+              <Text style={{marginLeft: '2%', marginBottom: '1%', fontSize: 12}}>Distance: {((this.state.dis)/1.609).toFixed(2)} miles</Text>
+              <Text style={{marginLeft: '2%', marginBottom: '1%', fontSize: 12}}>Time: {((this.state.dur)/1).toFixed(2)} min.</Text>
+            </View>
+            <View style={{flex: 1, width: '50%', alignItems: 'flex-end', marginRight: '2%'}}>
+              {button}
+            </View>
+          </View>
         </View>
       </View>
       <TouchableOpacity
@@ -235,13 +305,52 @@ export default class MapScreen extends Component {
       >
       <Text style={Buttons.brownbutton}>{this.state.startValue}</Text>
       </TouchableOpacity>
+      {/* Window for saving a route */}
+      <Modal style ={{marginTop: "50%"}}
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            this.setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={{marginTop: '50%'}}>
+            <View style={styles.saveView}>
+              <Text style={[styles.modalText, {marginTop: '5%'}]}>Title</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter a title"
+              />
+              <Text style={styles.modalText}>Description</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter a description"
+                returnKeyType="done"
+              />
+              <TouchableOpacity
+                style={[Buttons.brownbuttonSmall, {alignSelf: 'center', marginTop: '5%'}]}
+                onPress={() => this.setModalVisible(!modalVisible)}
+              >
+                <Text style={{alignSelf: 'center', color: 'white'}}>Save</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[Buttons.brownbuttonSmall, {alignSelf: 'center', marginTop: '5%'}]}
+                onPress={() => this.setModalVisible(!modalVisible)}
+              >
+                <Text style={{alignSelf: 'center', color: 'white'}}>Cancel</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+      </Modal>
+      {/* Explore other routes portion */}
       <View style={{width: '100%', height: '65%', alignSelf: 'center', flex: 1, backgroundColor: '#F4ECC6', padding: 3, borderWidth: 1,  borderColor: '#675a5a'}}>
       <SafeAreaView style={{marginBottom: '6%'}}>
         <Text style={styles.title}> Explore </Text>
         <FlatList 
           data={walks}
           renderItem={({item}) => (
-          <TouchableOpacity style={styles.item} >
+          <TouchableOpacity style={styles.item}
+            onPress={() => this.setPremadePath()}>
             <Text style={styles.pathTitle}>{item.title}</Text>
             <Text style={styles.detailsOne}>Distance: {item.distance}</Text>
             <Text style={styles.detailsTwo}>{item.description}</Text>
@@ -289,5 +398,33 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontStyle: 'italic',
     marginTop: '1%',
+  },
+  saveView: {
+    backgroundColor: Colors.lightblue, 
+    width: "80%", 
+    height: '68%', 
+    alignSelf: "center",
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: Colors.brown,
+  },
+  modalText: {
+    alignSelf: 'center',
+    fontSize: 15,
+    padding: 1,
+    color: Colors.brown,
+    fontWeight: "500"
+  },
+  input: {
+    width: "80%",
+    borderWidth: 1,
+    height: '15%',
+    marginVertical: '3%',
+    padding: '2%',
+    fontSize: 15,
+    backgroundColor: '#D7EBF4',
+    borderColor: '#675a5a',
+    borderBottomWidth: 3,
+    alignSelf: 'center'
   }
 });
