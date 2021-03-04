@@ -60,6 +60,7 @@ class ReviewScreen extends React.Component {
                 onItemSelect={(item) => {
                 this.setState({ selectedItems: items });
               }}
+              onItemSelect={() => this.props.navigation.navigate('MakeReview')}
               containerStyle={{ padding: '3%', marginTop: '15%', backgroundColor: Colors.lightyellow, borderWidth: '1', borderColor: Colors.brown}}
               itemStyle={{
                 padding: 10,
@@ -77,7 +78,6 @@ class ReviewScreen extends React.Component {
               textInputProps={
                 {
                   placeholder: "Search for a Place or Event",
-                  onTextChange: text => alert(text)
                 }
               }
               listProps={
