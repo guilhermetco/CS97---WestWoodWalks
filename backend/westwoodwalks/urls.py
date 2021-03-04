@@ -23,6 +23,8 @@ router = routers.DefaultRouter()
 router.register(r'users', api.views.UserViewSet)
 router.register(r'review', api.views.ReviewViewSet)
 router.register(r'business', api.views.BusinessViewSet)
+router.register(r'walks', api.views.WalksViewSet)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,15 +35,6 @@ urlpatterns = [
     path(r'rest-auth/registration', include('rest_auth.registration.urls'))
 ]
 
-
-# urlpatterns += [
-#     path('api-token-auth/', views.obtain_auth_token)
-# ]
-
-# urlpatterns += [
-#     path('', include(router.urls)),
-#     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
-# ]
 
 """
 When valid username and password is posted to this url will return valid token

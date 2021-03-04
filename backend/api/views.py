@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework import viewsets, permissions
-from .serializers import UserSerializer, ReviewSerializer, BusinessSerializer
-from .models import Review, Business
+from .serializers import UserSerializer, ReviewSerializer, BusinessSerializer, WalksSerializer
+from .models import Review, Business, Walks
 from django.contrib.auth.forms import UserCreationForm
 
 
@@ -23,3 +23,8 @@ class ReviewViewSet(viewsets.ModelViewSet):
 class BusinessViewSet(viewsets.ModelViewSet):
     queryset = Business.objects.all()
     serializer_class = BusinessSerializer
+
+class WalksViewSet(viewsets.ModelViewSet):
+    queryset = Walks.objects.all()
+    serializer_class = WalksSerializer
+    
