@@ -8,11 +8,17 @@ python3 -m venv env
 source env/bin/activate
 pip install -r requirements.txt
 
+#if you are using windows use these commands instead
+python3 -m venv env
+.\env\Scripts\activate
+pip install -r requirements.txt
+
 #Switch into the backend folder and start a local server for the backend
 cd backend
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
+
 ```
 
 ## Running app locally (frontend)
