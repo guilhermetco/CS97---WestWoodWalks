@@ -87,9 +87,9 @@ export default class MapScreen extends Component {
       });
       this.mapView.fitToCoordinates(this.state.forZoom.coordinates,{
         edgePadding: {
-          right: (width / 20),
+          right: (width / 10),
           bottom: (height / 20),
-          left: (width / 20),
+          left: (width / 10),
           top: (height / 20),
         }
         }
