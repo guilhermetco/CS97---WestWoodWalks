@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TextInput, Modal, FlatList, SafeAreaView, Dimensions, StyleSheet, View } from 'react-native';
+import { FlatList, SafeAreaView, Dimensions, StyleSheet, View, Image, TextInput, Modal } from 'react-native';
 import MapView from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { Marker } from "react-native-maps";
@@ -9,6 +9,7 @@ import InfoComponents from '../styles/InfoComponents.js'
 import Buttons from '../styles/Buttons.js'
 import Colors from '../styles/Colors.js';
 import { AntDesign } from '@expo/vector-icons';
+import currentLocationImage from '../assets/currentLocation.png'
 
 const walks = [
   {
@@ -232,7 +233,9 @@ export default class MapScreen extends Component {
             }}
           />
         )}
-        <Marker coordinate={{latitude: this.state.clocation.latitude, longitude: this.state.clocation.longitude}} />
+        <Marker coordinate={{latitude: this.state.clocation.latitude, longitude: this.state.clocation.longitude}}>
+          <Image source={require('../assets/currentLocation.png')}></Image>
+        </Marker>
         </MapView>
         <Text style={{marginTop: '10%', alignSelf: 'center', fontStyle: "italic", color: '#675a5a', backgroundColor: 'white'}}>
            Click to where you want to go on the map </Text>
