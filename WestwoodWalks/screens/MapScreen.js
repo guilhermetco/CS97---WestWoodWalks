@@ -279,7 +279,6 @@ export default class MapScreen extends Component {
           />
         )}
         <Marker coordinate={{latitude: this.state.clocation.latitude, longitude: this.state.clocation.longitude}}>
-          <Image source={require('../assets/currentLocation.png')}></Image>
         </Marker>
         </MapView>
         <Text style={{marginTop: '10%', alignSelf: 'center', fontStyle: "italic", color: '#675a5a', backgroundColor: 'white'}}>
