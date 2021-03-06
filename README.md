@@ -3,10 +3,10 @@
 ## Setting up the backend
 
 ```
-What you need to have installed to ensure a smooth run:
-MySQL
-	link: https://dev.mysql.com/downloads/windows/installer/8.0.html
-Python 3
+What you need to have pre-installed to ensure a smooth run:
+1) MySQL
+    link: https://dev.mysql.com/downloads/windows/installer/8.0.html
+2) Python 3
 
 #Switch into the project folder then run the following commands
 python3 -m venv env
