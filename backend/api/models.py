@@ -15,14 +15,19 @@ class Review(models.Model):
     author = models.CharField(max_length=30) #max length for username?
     description = models.TextField(max_length=250)
     date = models.DateField(auto_now_add=True)
+<<<<<<< Updated upstream
 
     #review_image = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100) #figure out what these do and what they should be set to
+=======
+    rating = models.DecimalField(max_digits=3, decimal_places=1, default = 0.0)
+>>>>>>> Stashed changes
     
     def __str__(self):
         return self.author
 
 
 class Business(models.Model):
+<<<<<<< Updated upstream
     name = models.CharField(max_length=100) #idk arbitrary number for now
     category = models.CharField(max_length=100, default='')
     #phone number, do I want to install a new package for this?
@@ -33,6 +38,18 @@ class Business(models.Model):
     longitude = models.DecimalField(max_digits=9, decimal_places=6, default = 0.0)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, default = 0.0)
 
+=======
+    name = models.CharField(max_length=100, unique=True) #add unique true later
+    category = models.CharField(max_length=100, default='', blank = True)
+    address = models.CharField(max_length=100, default='')
+    reviews = models.ManyToManyField('Review', related_name='business', blank=True)
+    website = models.CharField(max_length=100, default='', blank=True)
+    lng = models.DecimalField(max_digits=9, decimal_places=6, default = 0.0)
+    lat = models.DecimalField(max_digits=9, decimal_places=6, default = 0.0)
+    rating = models.DecimalField(max_digits=3, decimal_places=2, default=0.0)
+
+    
+>>>>>>> Stashed changes
 
 class Walks(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
@@ -46,6 +63,7 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
         Token.objects.create(user=instance)
 
 
+<<<<<<< Updated upstream
 # Create your models here.
 #phone number
 #opening hours
@@ -68,3 +86,5 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 #class walks
    #dict of coordinates with directions
     
+=======
+>>>>>>> Stashed changes

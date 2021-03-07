@@ -34,7 +34,13 @@ class BusinessSerializer(serializers.ModelSerializer):
     reviews = ReviewSerializer(many=True)
     class Meta:
         model = Business
+<<<<<<< Updated upstream
         fields = ['name', 'reviews', 'latitude', 'longitude', 'category', 'address', 'website']
+=======
+        fields = ['id','name', 'reviews', 'lat', 'lng', 'category', 'address', 'website','rating']
+        extra_kwargs = {'reviews': {'required': False}}
+
+>>>>>>> Stashed changes
 
     def get_reviews(self, instance):
         review_list = instance.reviews.all().order_by('date')
@@ -50,9 +56,4 @@ class WalksSerializer(serializers.ModelSerializer):
     def get_user(self, instance):
         return UserSerializer(instance.user, many=False, read_only=False, context=self.context).data
 
-
-    # user_name = models.CharField(max_length=30) #max lenght for username?
-    # user_review = models.TextField(max_length=250)
-    # review_date = models.DateField(auto_now_add==True)
-    # review_image = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100, **options) #figure out what these do and what they should be set to
 

@@ -18,7 +18,6 @@ class UserViewSet(viewsets.ModelViewSet):
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-    #permission_classes = [permissions.IsAuthenticated] #not sure if this is right
 
 class BusinessViewSet(viewsets.ModelViewSet):
     queryset = Business.objects.all()
