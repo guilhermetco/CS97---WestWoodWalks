@@ -76,7 +76,11 @@ const reviews = [
   ];
   
 
-const MyReviewsScreen = ({ navigation }) => {
+class MyReviewsScreen extends React.Component{
+  state = {
+
+  }
+  render() {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
@@ -111,6 +115,7 @@ const MyReviewsScreen = ({ navigation }) => {
       />
     </SafeAreaView>
   );
+  }
 }
 
 const styles = StyleSheet.create({

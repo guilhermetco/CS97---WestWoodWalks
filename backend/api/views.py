@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework import viewsets, permissions
-from .serializers import UserSerializer, ReviewSerializer, BusinessSerializer
-from .models import Review, Business
+from .serializers import UserSerializer, ReviewSerializer, BusinessSerializer, WalksSerializer
+from .models import Review, Business, Walks
 from django.contrib.auth.forms import UserCreationForm
 
 
@@ -18,8 +18,12 @@ class UserViewSet(viewsets.ModelViewSet):
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-    #permission_classes = [permissions.IsAuthenticated] #not sure if this is right
 
 class BusinessViewSet(viewsets.ModelViewSet):
     queryset = Business.objects.all()
     serializer_class = BusinessSerializer
+
+class WalksViewSet(viewsets.ModelViewSet):
+    queryset = Walks.objects.all()
+    serializer_class = WalksSerializer
+    

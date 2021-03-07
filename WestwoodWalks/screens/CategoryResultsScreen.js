@@ -84,7 +84,11 @@ const favoriteplaces = [
     },
   ];
 
-const CategoryResultsScreen = ({ navigation }) => {
+class CategoryResultsScreen extends React.Component{
+  state = {
+
+  }
+  render() {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
@@ -92,7 +96,7 @@ const CategoryResultsScreen = ({ navigation }) => {
         renderItem={({item}) => (
           <TouchableOpacity 
             style={InfoComponents.item}
-            onPress={() => navigation.navigate('Place Details')}
+            onPress={() => this.props.navigation.navigate('Place Details')}
           >
             <View style={{flexDirection: "row", alignItems:'flex-start', justifyContent: 'flex-start'}}>
                 <Text style={styles.title}>{item.title}</Text>
@@ -119,6 +123,7 @@ const CategoryResultsScreen = ({ navigation }) => {
       />
     </SafeAreaView>
   );
+  }
 }
 
 const styles = StyleSheet.create({

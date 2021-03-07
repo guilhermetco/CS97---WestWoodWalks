@@ -112,7 +112,13 @@ class PlaceDetailsScreen extends React.Component{
         </View>
         </View>
         <View style={styles.item}>
+        <View style={{flexDirection: "row"}}>
             <Text style={{fontSize: 22}}>Reviews</Text>
+            <TouchableOpacity style={[Buttons.brownbuttonSmall, {marginLeft: '60%'}]}
+                onPress={() => this.props.navigation.navigate('MakeReview')}>
+                <Text style={{fontSize: 8, color: 'white'}}>Write Review</Text>
+            </TouchableOpacity>
+        </View>
             <View
                 style={{
                     marginTop: 5,

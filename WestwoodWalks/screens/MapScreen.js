@@ -5,11 +5,10 @@ import MapViewDirections from 'react-native-maps-directions';
 import { Marker } from "react-native-maps";
 import { Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import InfoComponents from '../styles/InfoComponents.js'
 import Buttons from '../styles/Buttons.js'
+import InfoComponents from '../styles/InfoComponents.js'
 import Colors from '../styles/Colors.js';
 import { AntDesign } from '@expo/vector-icons';
-import currentLocationImage from '../assets/currentLocation.png'
 
 const walks = [
   {
@@ -65,7 +64,7 @@ const walks = [
     distance: '7 miles'
   },
 ];
-
+const {height, width} = Dimensions.get('window');
 const LATITUDE = 34.06279;
 const LONGITUDE = -118.44390;
 const LATITUDE_DELTA = 0.0922;
@@ -79,6 +78,11 @@ export default class MapScreen extends Component {
     super(props);
 
     this.state = {
+      startValue: 'Start',
+      initialCoords:[
+        {latitude:34.073026, longitude:-118.465619},
+        {latitude:34.067223, longitude:-118.410851}
+      ],
       coordinates: [
         {
           latitude: 34.06279,
@@ -95,6 +99,11 @@ export default class MapScreen extends Component {
       },
       dur: null,
       dis: null,
+      saveWalk:{
+        startingLocation: null,
+        destinationLocation: null,
+        forZoom: { distance: Number, duration: Number, coordinates: [] }
+      },
       modalVisible: false,
       currentPath: "Current Path",
       premadePath: false,
@@ -102,6 +111,41 @@ export default class MapScreen extends Component {
     };
 
     this.mapView = null;
+  }
+  onSaveWalk = () =>{
+    this.setState({
+      saveWalk:{
+        startingLocation:this.state.coordinates[1],
+        destinationLocation: this.state.coordinates[0]},
+    })
+    if(this.state.startValue=='Start'){
+      this.setState({
+        startValue:'Stop'
+      });
+      this.mapView.fitToCoordinates(this.state.forZoom.coordinates,{
+        edgePadding: {
+          right: (width / 10),
+          bottom: (height / 20),
+          left: (width / 10),
+          top: (height / 20),
+        }
+        }
+      );
+    }
+    else{
+      this.setState({
+        startValue:'Start'
+      });
+      this.mapView.fitToCoordinates(this.state.initialCoords,{
+        edgePadding: {
+          right: width,
+          bottom: height,
+          left: width,
+          top: height
+        }
+        }
+      );
+    }
   }
 
   setModalVisible = (visible) => {
@@ -226,7 +270,8 @@ export default class MapScreen extends Component {
               //console.log(`Duration: ${result.duration} min.`)
               this.setState({
                 dis: result.distance,
-                dur: result.duration
+                dur: result.duration,
+                forZoom: result
               })
             }}
             onError={(errorMessage) => {
@@ -234,7 +279,6 @@ export default class MapScreen extends Component {
           />
         )}
         <Marker coordinate={{latitude: this.state.clocation.latitude, longitude: this.state.clocation.longitude}}>
-          <Image source={require('../assets/currentLocation.png')}></Image>
         </Marker>
         </MapView>
         <Text style={{marginTop: '10%', alignSelf: 'center', fontStyle: "italic", color: '#675a5a', backgroundColor: 'white'}}>
@@ -253,6 +297,11 @@ export default class MapScreen extends Component {
           </View>
         </View>
       </View>
+      <TouchableOpacity
+        onPress={ this.onSaveWalk }
+      >
+      <Text style={Buttons.brownbutton}>{this.state.startValue}</Text>
+      </TouchableOpacity>
       {/* Window for saving a route */}
       <Modal style ={{marginTop: "50%"}}
           animationType="slide"
