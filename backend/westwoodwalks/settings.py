@@ -82,8 +82,7 @@ SITE_ID = 1
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-<<<<<<< Updated upstream
-=======
+
 """
 DATABASES = {
     'default': {
@@ -94,7 +93,6 @@ DATABASES = {
 
 """
 
->>>>>>> Stashed changes
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',

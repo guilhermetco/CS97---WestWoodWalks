@@ -34,13 +34,7 @@ class BusinessSerializer(serializers.ModelSerializer):
     reviews = ReviewSerializer(many=True)
     class Meta:
         model = Business
-<<<<<<< Updated upstream
-        fields = ['name', 'reviews', 'latitude', 'longitude', 'category', 'address', 'website']
-=======
-        fields = ['id','name', 'reviews', 'lat', 'lng', 'category', 'address', 'website','rating']
-        extra_kwargs = {'reviews': {'required': False}}
-
->>>>>>> Stashed changes
+        fields = ['name', 'reviews', 'lat', 'lng', 'category', 'address', 'website', 'rating']
 
     def get_reviews(self, instance):
         review_list = instance.reviews.all().order_by('date')
