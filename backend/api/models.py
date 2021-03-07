@@ -35,8 +35,8 @@ class Business(models.Model):
 
 class Walks(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6, default = 0.0)
-    latitude = models.DecimalField(max_digits=9, decimal_places=6, default = 0.0)
+    lng = models.DecimalField(max_digits=9, decimal_places=6, default = 0.0)
+    lat = models.DecimalField(max_digits=9, decimal_places=6, default = 0.0)
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)

@@ -25,7 +25,7 @@ class ReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Review
-        fields = ['author', 'description', 'date', 'user_id'] #review_image
+        fields = ['author', 'description', 'date', 'user_id', 'rating'] #review_image
     
     def get_user(self, instance):
         return UserSerializer(instance.user, many=False, read_only=False, context=self.context).data
@@ -45,7 +45,7 @@ class WalksSerializer(serializers.ModelSerializer):
     user_id = serializers.PrimaryKeyRelatedField(many = False, read_only = False, queryset=User.objects.all(), source='user')
     class Meta:
         model = Walks
-        fields = ['latitude','longitude','user_id']
+        fields = ['lat','lng','user_id']
 
     def get_user(self, instance):
         return UserSerializer(instance.user, many=False, read_only=False, context=self.context).data
