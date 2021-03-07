@@ -31,14 +31,16 @@ class ReviewSerializer(serializers.ModelSerializer):
         return UserSerializer(instance.user, many=False, read_only=False, context=self.context).data
 
 class BusinessSerializer(serializers.ModelSerializer):
-    reviews = ReviewSerializer(many=True)
+    reviews = ReviewSerializer(many=True, read_only=True)
     class Meta:
         model = Business
         fields = ['name', 'reviews', 'lat', 'lng', 'category', 'address', 'website', 'rating']
+        extra_kwargs = {'reviews': {'required': False}}
+
 
     def get_reviews(self, instance):
         review_list = instance.reviews.all().order_by('date')
-        return ReviewSerializer(review_list, many = True, read_only= True, context=self.context).data
+        return ReviewSerializer(review_list, many = True, read_only= False, context=self.context).data
 
 
 class WalksSerializer(serializers.ModelSerializer):
