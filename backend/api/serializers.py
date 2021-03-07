@@ -24,21 +24,26 @@ class ReviewSerializer(serializers.ModelSerializer):
     author = serializers.CharField(source='user.username', read_only=True)
 
     class Meta:
+        ordering =['-id']
         model = Review
-        fields = ['author', 'description', 'date', 'user_id'] #review_image
+        fields = ['id','author', 'description', 'date', 'user_id', 'rating', 'business'] #review_image
     
     def get_user(self, instance):
         return UserSerializer(instance.user, many=False, read_only=False, context=self.context).data
 
 class BusinessSerializer(serializers.ModelSerializer):
-    reviews = ReviewSerializer(many=True)
+    reviews = ReviewSerializer(many=True, read_only=True)
     class Meta:
+        ordering =['-id']
         model = Business
-        fields = ['name', 'reviews', 'latitude', 'longitude', 'category', 'address', 'website']
+        fields = ['id','name', 'reviews', 'latitude', 'longitude', 'category', 'address', 'website']
+        extra_kwargs = {'reviews': {'required': False}}
+
 
     def get_reviews(self, instance):
         review_list = instance.reviews.all().order_by('date')
         return ReviewSerializer(review_list, many = True, read_only= True, context=self.context).data
+        
 
 
 class WalksSerializer(serializers.ModelSerializer):
