@@ -34,7 +34,7 @@ class BusinessSerializer(serializers.ModelSerializer):
     reviews = ReviewSerializer(many=True, read_only=True)
     class Meta:
         model = Business
-        fields = ['name', 'reviews', 'lat', 'lng', 'category', 'address', 'website', 'rating']
+        fields = ['id','name', 'reviews', 'lat', 'lng', 'category', 'address', 'website', 'rating']
         extra_kwargs = {'reviews': {'required': False}}
 
 
