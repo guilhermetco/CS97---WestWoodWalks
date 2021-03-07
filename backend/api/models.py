@@ -22,6 +22,7 @@ class Review(models.Model):
 
 
 class Business(models.Model):
+    id = models.IntegerField(unique=True, blank = True)
     name = models.CharField(max_length=100, unique=True) #add unique true later
     category = models.CharField(max_length=100, default='', blank = True)
     address = models.CharField(max_length=100, default='')
