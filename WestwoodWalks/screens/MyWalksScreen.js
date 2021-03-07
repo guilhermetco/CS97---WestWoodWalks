@@ -154,14 +154,18 @@ const walks = [
     },
   ];
 
-const MyWalksScreen = ({ navigation }) => {
+class MyWalksScreen extends React.Component{
+  state = {
+
+  }
+  render() {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList 
         data={walks}
         renderItem={({item}) => (
         <TouchableOpacity style={InfoComponents.item} 
-            onPress={() => navigation.navigate('Map')}>
+            onPress={() => this.props.navigation.navigate('Map')}>
             <Text style={InfoComponents.title}>{item.title}</Text>
             <Text style={InfoComponents.detailsOne}>Distance: {item.distance}</Text>
             <Text style={InfoComponents.detailsTwo}>{item.description}</Text>
@@ -171,6 +175,7 @@ const MyWalksScreen = ({ navigation }) => {
       />
     </SafeAreaView>
   );
+  }
 }
 
 const styles = StyleSheet.create({

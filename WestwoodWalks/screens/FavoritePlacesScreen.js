@@ -83,7 +83,11 @@ const favoriteplaces = [
     },
   ];
 
-const FavoritePlacesScreen = ({ navigation }) => {
+class FavoritePlacesScreen extends React.Component{
+  state = {
+    
+  }
+  render() {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
@@ -91,7 +95,7 @@ const FavoritePlacesScreen = ({ navigation }) => {
         renderItem={({item}) => (
           <TouchableOpacity 
             style={InfoComponents.item}
-            onPress={() => navigation.navigate('Place Details')}
+            onPress={() => this.props.navigation.navigate('Place Details')}
           >
             <View style={{flexDirection: "row", alignItems:'flex-start', justifyContent: 'flex-start'}}>
                 <Text style={styles.title}>{item.title}</Text>
@@ -118,6 +122,7 @@ const FavoritePlacesScreen = ({ navigation }) => {
       />
     </SafeAreaView>
   );
+  }
 }
 
 const styles = StyleSheet.create({

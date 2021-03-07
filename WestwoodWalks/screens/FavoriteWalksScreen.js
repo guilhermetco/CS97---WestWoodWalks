@@ -59,14 +59,18 @@ const favoritewalks = [
   ];
   
 
-const FavoriteWalksScreen = ({ navigation }) => {
+class FavoriteWalksScreen extends React.Component {
+  state= {
+
+  }
+  render() {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
         data={favoritewalks}
         renderItem={({item}) => (
           <TouchableOpacity style={InfoComponents.item} 
-              onPress={() => navigation.navigate('Map')}>
+              onPress={() => this.props.navigation.navigate('Map')}>
               <Text style={InfoComponents.title}>{item.title}</Text>
               <Text style={InfoComponents.details}>Made by: {item.creator}</Text>
           </TouchableOpacity>   
@@ -75,6 +79,7 @@ const FavoriteWalksScreen = ({ navigation }) => {
       />
     </SafeAreaView>
   );
+  }
 }
 
 const styles = StyleSheet.create({

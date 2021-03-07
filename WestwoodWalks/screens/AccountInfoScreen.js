@@ -9,7 +9,12 @@ import { TextInput } from 'react-native';
 import Buttons from '../styles/Buttons.js'
 import { MaterialIcons } from '@expo/vector-icons';
 
-export const EditAccountInfo = ({ navigation }) => {
+export class EditAccountInfo extends React.Component {
+  state = {
+    username: "",
+    email: ""
+  }
+  render() {
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <MaterialIcons name="account-circle" size={150} color="#675a5a" style={{marginTop: '-30%', marginBottom: '5%'}} />
@@ -26,14 +31,20 @@ export const EditAccountInfo = ({ navigation }) => {
           defaultValue="myemail"
           keyboardType={'email-address'}
         />
-      <TouchableOpacity onPress={() => navigation.navigate("Account Information")}>
+      <TouchableOpacity onPress={() => this.props.navigation.navigate("Account Information")}>
         <Text style={Buttons.brownbutton}>Save</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
   );
+  }
 }
 
-const AccountInfoScreen = ({ navigation }) => {
+class AccountInfoScreen extends React.Component {
+  state = {
+    username: "",
+    email: ""
+  }
+  render() {
   return (
     <View style={styles.container}>
       <MaterialIcons name="account-circle" size={150} color="#675a5a" style={{marginTop: '-30%', marginBottom: '5%'}} />
@@ -45,11 +56,12 @@ const AccountInfoScreen = ({ navigation }) => {
       <View style={styles.input}>
         <Text>myemail</Text>
       </View>
-      <TouchableOpacity onPress={() => navigation.navigate("Edit Account")}>
+      <TouchableOpacity onPress={() => this.props.navigation.navigate("Edit Account")}>
         <Text style={Buttons.brownbutton}>Edit</Text>
       </TouchableOpacity>
     </View>
   );
+  }
 }
 
 const styles = StyleSheet.create({
