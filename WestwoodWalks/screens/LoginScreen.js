@@ -11,7 +11,7 @@ import Buttons from '../styles/Buttons.js'
 class LoginScreen extends React.Component {
   state = {
     username: "",
-    password: ""
+    password: "",
   }
   render() {
   return (

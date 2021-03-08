@@ -18,7 +18,9 @@ import { FontAwesome } from '@expo/vector-icons';
 import InfoComponents from '../styles/InfoComponents'
 import Stars from 'react-native-stars';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { SearchBar } from 'react-native-elements';
 
+/*
 var items = [
     {id:'1',
     name: 'In-N-Out',
@@ -45,13 +47,24 @@ var items = [
     rating: 3.5,
     numberofreviews: 15,},
 ]
+*/
 
 class ReviewScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state ={
+          items = []
         }
     }
+componentDidMount () {
+  axios
+    .get("http://127.0.0.1:8000/business")
+    .then(response => this.setState({items:response.data}))
+    .catch((err) => {
+      throw err;
+    });
+}
+
     render () {
         return (
             <View style={styles.container}>
@@ -137,7 +150,7 @@ class ReviewScreen extends React.Component {
               <Text style={styles.title}>Discover</Text>
               <SafeAreaView>
                 <FlatList 
-                  data={items }
+                  data={this.state.items }
                   renderItem={({item}) => (
                   <TouchableOpacity style={styles.item} 
                     onPress={() => this.props.navigation.navigate('Place Details')}>
@@ -156,7 +169,7 @@ class ReviewScreen extends React.Component {
                             halfStar={<Icon name={'star-half'} size={20} color={"gold"}/>}
                           /> 
                         </View>
-                        <Text style={InfoComponents.detailsOne}>{item.numberofreviews} Reviews</Text>
+                        <Text style={InfoComponents.detailsOne}>"num of reviews" Reviews</Text>
                       </View>
                   </TouchableOpacity>   
                   )}

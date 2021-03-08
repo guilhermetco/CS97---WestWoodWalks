@@ -6,6 +6,8 @@ import {TouchableOpacity} from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Buttons from '../styles/Buttons.js'
+import axios from 'axios';
+
 
 
 class SignupScreen extends React.Component {
