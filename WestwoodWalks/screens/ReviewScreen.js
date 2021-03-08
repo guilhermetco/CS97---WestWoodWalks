@@ -56,11 +56,8 @@ class ReviewScreen extends React.Component {
         return (
             <View style={styles.container}>
               <SearchableDropdown
-                multi={true}
-                onItemSelect={(item) => {
-                this.setState({ selectedItems: items });
-              }}
-              onItemSelect={() => this.props.navigation.navigate('MakeReview')}
+              multi={true}
+              onItemSelect={() => this.props.navigation.navigate('Place Details')}
               containerStyle={{ padding: '3%', marginTop: '15%', backgroundColor: Colors.lightyellow, borderWidth: '1', borderColor: Colors.brown}}
               itemStyle={{
                 padding: 10,
@@ -73,7 +70,6 @@ class ReviewScreen extends React.Component {
               itemTextStyle={{ color: '#222' }}
               itemsContainerStyle={{ maxHeight: 140 }}
               items={items}
-              defaultIndex={2}
               resetValue={false}
               textInputProps={
                 {

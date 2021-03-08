@@ -41,15 +41,19 @@ export default class MakeReview extends Component {
             display={this.state.rating}
             spacing={8}
             count={5}
-            starSize={70}
-            fullStar={<Icon name={'star'} size={20} color={"yellow"}/>}
-            emptyStar={<Icon name={'star-outline'} size={20} color={"yellow"}/>}
-            halfStar={<Icon name={'star-half'} size={20} color={"yellow"}/>}
+            starSize={45}
+            fullStar={<Icon name={'star'} size={45} color={"yellow"}/>}
+            emptyStar={<Icon name={'star-outline'} size={45} color={"yellow"}/>}
+            halfStar={<Icon name={'star-half'} size={45} color={"yellow"}/>}
             /> 
           <TextInput
             style={styles.input}
             placeholder="Write A Review"
             onChangeText={(review) => this.setState({review})}
+            multiline={true}
+            textAlignVertical="top"
+            blurOnSubmit={true}
+
           />
           <TouchableOpacity onPress={this.onSubmit}>
             <Text style={Buttons.brownbutton}>Submit Review</Text>
