@@ -28,8 +28,8 @@ class Business(models.Model):
     address = models.CharField(max_length=100, default='')
     reviews = models.ManyToManyField('Review', related_name='business', blank=True)
     website = models.CharField(max_length=100, default='', blank=True)
-    lng = models.DecimalField(max_digits=9, decimal_places=6, default = 0.0)
-    lat = models.DecimalField(max_digits=9, decimal_places=6, default = 0.0)
+    lng = models.DecimalField(max_digits=10, decimal_places=7, default = 0.0)
+    lat = models.DecimalField(max_digits=9, decimal_places=7, default = 0.0)
     rating = models.DecimalField(max_digits=3, decimal_places=2, default=0.0)
 
     
