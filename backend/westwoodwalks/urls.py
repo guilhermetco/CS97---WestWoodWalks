@@ -24,6 +24,8 @@ router.register(r'users', api.views.UserViewSet)
 router.register(r'review', api.views.ReviewViewSet)
 router.register(r'business', api.views.BusinessViewSet)
 router.register(r'walks', api.views.WalksViewSet)
+router.register(r'profiles', api.views.ProfileViewSet)
+
 
 
 urlpatterns = [

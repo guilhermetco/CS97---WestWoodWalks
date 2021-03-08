@@ -97,7 +97,7 @@ DATABASES = {
         'NAME': 'WWWdatabase',
         'USER': 'masteradmin',
         'PASSWORD': 'WWWAdminPass123',
-        'HOST': 'westwoodwalkdatabase.cv5l5oxko9q6.us-west-1.rds.amazonaws.com',
+        'HOST': 'westwoodwalks.cv5l5oxko9q6.us-west-1.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
