@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Review, Business, Walks, Profile
+from .models import Review, Business, Walks
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -22,17 +22,13 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     user_id = serializers.PrimaryKeyRelatedField(many = False, read_only = False, queryset=User.objects.all(), source='user')
     author = serializers.CharField(source='user.username', read_only=True)
-    profile = serializers.IntegerField(source='user.pk', read_only=True)
 
     class Meta:
         model = Review
-        fields = ['author', 'description', 'date', 'user_id', 'rating', 'business'] #profile
+        fields = ['author', 'description', 'date', 'user_id', 'rating'] #review_image
     
     def get_user(self, instance):
         return UserSerializer(instance.user, many=False, read_only=False, context=self.context).data
-
-
-
 
 class BusinessSerializer(serializers.ModelSerializer):
     reviews = ReviewSerializer(many=True, read_only=True)
@@ -51,26 +47,9 @@ class WalksSerializer(serializers.ModelSerializer):
     user_id = serializers.PrimaryKeyRelatedField(many = False, read_only = False, queryset=User.objects.all(), source='user')
     class Meta:
         model = Walks
-        fields = ['lat','lng', 'profile']
+        fields = ['lat','lng','user_id']
 
     def get_user(self, instance):
         return UserSerializer(instance.user, many=False, read_only=False, context=self.context).data
-
-class ProfileSerializer(serializers.ModelSerializer):
-    user_id = serializers.PrimaryKeyRelatedField(many = False, read_only = False, queryset=User.objects.all(), source='user')
-    reviews = ReviewSerializer(many=True, read_only=True)
-    walks = WalksSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = Profile
-        fields = ['user_id','reviews', 'walks']
-    
-    def get_reviews(self, instance):
-        review_list = instance.reviews.all().order_by('date')
-        return ReviewSerializer(review_list, many = True, read_only= False, context=self.context).data
-    
-    def get_walks(self, instance):
-        walks_list = instance.walks.all().order_by('date')
-        return ReviewSerializer(walks_list, many = True, read_only= False, context=self.context).data
 
 
