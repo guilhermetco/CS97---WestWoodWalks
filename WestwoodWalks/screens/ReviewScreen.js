@@ -1,7 +1,7 @@
 import React from 'react';
 import { Component, Fragment } from 'react';
 import { StatusBar } from 'expo-status-bar'
-import { FlatList, SafeAreaView, TouchableOpacity, View, Text, StyleSheet, Image, KeyboardAvoidingView, } from 'react-native';
+import { Integer, FlatList, SafeAreaView, TouchableOpacity, View, Text, StyleSheet, Image, KeyboardAvoidingView, } from 'react-native';
 import 'react-native-gesture-handler';
 import MapView from 'react-native-maps';
 import { Polyline } from 'react-native-maps';
@@ -18,40 +18,29 @@ import { FontAwesome } from '@expo/vector-icons';
 import InfoComponents from '../styles/InfoComponents'
 import Stars from 'react-native-stars';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { SearchBar } from 'react-native-elements';
+import axios from 'axios';
 
-var items = [
-    {id:'1',
-    name: 'In-N-Out',
-    address: '123 street ave, Los Angeles',
-    type: 'Restaurant',
-    rating: 4.5,
-    numberofreviews: 10,},
-    {id:'2',
-    name: 'Target',
-    address: '123 street ave, Los Angeles',
-    type: 'Lecture Hall',
-    rating: 3.2,
-    numberofreviews: 4,},
-    {id:'3',
-    name: "Trader Joe's",
-    address: '123 street ave, Los Angeles',
-    type: 'Library',
-    rating: 4.8,
-    numberofreviews: 30,},
-    {id:'4',
-    name: "Whole Foods",
-    address: '123 street ave, Los Angeles',
-    type: 'Park',
-    rating: 3.5,
-    numberofreviews: 15,},
-]
 
 class ReviewScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state ={
+          items: []
         }
-    }
+    };
+
+
+componentDidMount () {
+  axios
+    .get("http://127.0.0.1:8000/business")
+    .then(response => this.setState({items: response.data}))
+    //.then(response => console.log(response.data))
+    .then(response => console.log(this.state.items))
+    .catch(error => console.log(error)
+    );
+}
+
     render () {
         return (
             <View style={styles.container}>
@@ -69,7 +58,7 @@ class ReviewScreen extends React.Component {
               }}
               itemTextStyle={{ color: '#222' }}
               itemsContainerStyle={{ maxHeight: 140 }}
-              items={items}
+              items={this.state.items}
               resetValue={false}
               textInputProps={
                 {
@@ -133,17 +122,17 @@ class ReviewScreen extends React.Component {
               <Text style={styles.title}>Discover</Text>
               <SafeAreaView>
                 <FlatList 
-                  data={items }
+                  data={this.state.items }
                   renderItem={({item}) => (
                   <TouchableOpacity style={styles.item} 
                     onPress={() => this.props.navigation.navigate('Place Details')}>
                     <Text style={styles.name}>{item.name}</Text>
                       <Text style={InfoComponents.detailsOne}>{item.address}</Text>
-                      <Text style={{fontSize: 15, marginBottom: 15}}>{item.type}</Text>
+                      <Text style={{fontSize: 15, marginBottom: 15}}>{item.category}</Text>
                       <View style={{flexDirection: "row", backgroundColor: 'white', padding: 2}} >
                         <View style={{alignItems:'flex-start', justifyContent: 'flex-start'}}>
                           <Stars
-                            display={item.rating}
+                            display={parseInt(item.rating)}
                             spacing={0}
                             count={5}
                             starSize={50}
@@ -152,7 +141,7 @@ class ReviewScreen extends React.Component {
                             halfStar={<Icon name={'star-half'} size={20} color={"gold"}/>}
                           /> 
                         </View>
-                        <Text style={InfoComponents.detailsOne}>{item.numberofreviews} Reviews</Text>
+                        <Text style={InfoComponents.detailsOne}>{(item.reviews).length} Reviews</Text>
                       </View>
                   </TouchableOpacity>   
                   )}
