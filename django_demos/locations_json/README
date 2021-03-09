@@ -1,0 +1,56 @@
+This Django example shows how to create json files in web queries,
+how to link tables together, and how to populate a database from
+a fixture file.
+
+Installation:
+
+This demo should be ready to go.
+
+If you have Django installed you can run like this 
+
+python3 manage.py runserver
+
+Then view on http://localhost:8000
+
+This demo comes with a preconfigured sqlite server.  You should not need
+to run any migrations, but if you do, here's how:
+
+python3 manage.py migrate
+
+References:
+
+JSON INFO
+https://www.django-rest-framework.org/tutorial/1-serialization/
+
+You can get html responses like this
+http://127.0.0.1:8000/snippets.html
+
+You can get json responses like this
+http://127.0.0.1:8000/snippets.json
+
+LINKED OBJECTS/TABLES
+https://docs.djangoproject.com/en/3.1/topics/db/examples/one_to_one/
+
+FIXTURES (populating database)
+https://docs.djangoproject.com/en/3.1/howto/initial-data/
+
+To create fixtures from JSON images:
+In javascript: myJSON = JSON.stringify(myObj);
+In Python/Django you can get json for apps locations and snippets:
+
+python3 django-admin dumpdata locations
+python3 django-admin dumpdata snippets
+
+Save in fixtures folders as:
+
+locations/fixtures/load_locations.json 
+snippets/fixtures/load_snippets.json
+
+Load with:
+python3 manage.py loaddata load_locations.json
+python3 manage.py loaddata load_snippets.json
+
+The references are worth reading and explain everything.
+
+
+--Jim Pickrell
