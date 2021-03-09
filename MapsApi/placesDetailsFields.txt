@@ -1,0 +1,42 @@
+Useful Fields:
+
+business_status (OPERATIONAL, CLOSED_TEMPORARILY, CLOSED_PERMANENTLY)
+
+formatted_address ( 1340 Club View Dr, Los Angeles, CA 90024, USA )
+
+formatted_phone_number ( (310) 666-9232 )
+
+geometry[location][[lat/lng]
+
+icon (url; eg https://maps.google.com/?cid=6015038258253680631)
+
+name (Rozita Nazarian Interior + Architecture)
+
+opening_hours[weekday_text] (list of hours)
+	eg "Monday: 9:00 AM – 6:00 PM",
+            "Tuesday: 11:00 AM – 6:00 PM",
+            "Wednesday: 9:00 AM – 6:00 PM",
+            "Thursday: 9:00 AM – 6:00 PM",
+            "Friday: 9:00 AM – 6:00 PM",
+            "Saturday: 9:00 AM – 6:00 PM",
+            "Sunday: Closed"
+
+photos (list of objects with height/width, html link to photos, photo_reference)
+	photos[index][photo_reference] --> need to do photo request
+
+place_id (unique id for place for requests)
+
+url (url of Google page for place)
+
+website (website of place)
+
+----------------------------------------------
+? fields
+
+address_components[] (list of address components)
+
+types (list of Google types for place)
+
+
+
+
