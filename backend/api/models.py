@@ -10,7 +10,7 @@ from django.dispatch import receiver
 
 
 class Review(models.Model):
-    user = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'review')
+   # user = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'review'
     author = models.CharField(max_length=30) #max length for username?
     description = models.TextField(max_length=250)
     date = models.DateField(auto_now_add=True)
@@ -35,9 +35,7 @@ class Business(models.Model):
     
 
 class Walks(models.Model):
-    lng = models.DecimalField(max_digits=10, decimal_places=7, default = 0.0)
-    lat = models.DecimalField(max_digits=9, decimal_places=7, default = 0.0)
-
+    coordinates = models.JSONField(default=-1)
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
