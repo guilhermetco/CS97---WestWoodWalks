@@ -30,23 +30,23 @@ class ReviewScreen extends React.Component {
         }
     };
 
-
 componentDidMount () {
   axios
     .get("http://127.0.0.1:8000/business")
     .then(response => this.setState({items: response.data}))
     //.then(response => console.log(response.data))
-    .then(response => console.log(this.state.items))
+    .then(response => console.log(this.state.items[20]))
     .catch(error => console.log(error)
     );
 }
 
     render () {
+      console.log(React.version);
         return (
             <View style={styles.container}>
               <SearchableDropdown
               multi={true}
-              onItemSelect={() => this.props.navigation.navigate('Place Details')}
+              onItemSelect={(item) => this.props.navigation.navigate('Place Details', {place: item})}
               containerStyle={{ padding: '3%', marginTop: '15%', backgroundColor: Colors.lightyellow, borderWidth: '1', borderColor: Colors.brown}}
               itemStyle={{
                 padding: 10,
@@ -125,7 +125,7 @@ componentDidMount () {
                   data={this.state.items }
                   renderItem={({item}) => (
                   <TouchableOpacity style={styles.item} 
-                    onPress={() => this.props.navigation.navigate('Place Details')}>
+                    onPress={() => this.props.navigation.navigate('Place Details', {screen: 'Place Details', place: item, })}>
                     <Text style={styles.name}>{item.name}</Text>
                       <Text style={InfoComponents.detailsOne}>{item.address}</Text>
                       <Text style={{fontSize: 15, marginBottom: 15}}>{item.category}</Text>
@@ -145,7 +145,7 @@ componentDidMount () {
                       </View>
                   </TouchableOpacity>   
                   )}
-                  keyExtractor={item => item.id}
+                  keyExtractor={item => (item.id).toString()}
                 />
               </SafeAreaView>
             </View> 

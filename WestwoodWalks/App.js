@@ -23,6 +23,8 @@ import MakeReview from "./screens/MakeReview.js"
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+
+
 function Favorites() {
   return (
     <Tab.Navigator>
@@ -45,7 +47,6 @@ function App() {
         <Stack.Screen name="Favorites" component={Favorites} />
         <Stack.Screen name="Account Information" component={AccountInfoScreen} />
         <Stack.Screen name="Edit Account" component={EditAccountInfo} />
-        <Stack.Screen name="Place Details" component={PlaceDetailsScreen} />
         <Stack.Screen name="Results" component={CategoryResultsScreen} />
         <Stack.Screen name="MakeReview" component={MakeReview}/>
       </Stack.Navigator>
@@ -54,3 +55,4 @@ function App() {
 }
 
 export default App;
+

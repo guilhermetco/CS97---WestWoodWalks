@@ -18,54 +18,11 @@ import InfoComponents from '../styles/InfoComponents.js';
 class PlaceDetailsScreen extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {
-            isLiked: true,
-            place: {
-            id: '1',
-            title: 'Powell Library',
-            address: '123 street ave, Los Angeles',
-            type: "Library",
-            rating: 4.5,
-            numofreviews: 4,
-            reviews: [
-            { 
-            id: "1",
-            review: "nvwljrnvalke;vnsldnvw, vwlkmrflkwmclwmd vcwlkejflkwenflw.md w,dmfnlwejflkwdnc,mwd cwlnflwkejflk c,lwnvowijflwdkv ,wejnf;qoejfko;eahja;k fv lajrlja;klfnva/;kenv;akehr;vokejnv/alieorj;agioejr",
-            rating: 4.5,
-            user: "username",
-            date: "01/23/21 "
-        },
-        { 
-            id: "2",
-            review: "lalalallalalalallallalallalalalla lalalallalalalallallalallalalalla lalalallalalalallallalallalalalla lalalallalalalallallalallalalalla lalalallalalalallallalallalalalla lalalallalalalallallalallalalalla lalalallalalalallallalallalalalla",
-            rating: 3.5,
-            user: "username",
-            date: "01/28/21" 
-        },
-        { 
-            id: "3",
-            review: "lalalallalalalallallalallalalalla",
-            rating: 4,
-            user: "username",
-            date: "01/29/21"
-        },
-        { 
-            id: "4",
-            review: "lalalallalalalallallalallalalalla",
-            rating: 4,
-            user: "username",
-            date: "01/29/21"
-        },
-        { 
-            id: "5",
-            review: "lalalallalalalallallalallalalalla",
-            rating: 4,
-            user: "username",
-            date: "01/30/21"
+        this.state ={
+            place: props.route.params.place
         }
-    ]}
-        };
-    }
+    };
+
     like() {
         this.setState({
             isLiked: !(this.state.isLiked)
@@ -87,17 +44,17 @@ class PlaceDetailsScreen extends React.Component{
     <SafeAreaView style={styles.container}>
         <View style={InfoComponents.item}>
         <View style={{flexDirection: "row", alignItems:'flex-start', justifyContent: 'flex-start'}}>
-            <Text style={styles.title}>{this.state.place.title}</Text>
+            <Text style={styles.title}>{this.state.place.name}</Text>
             <TouchableOpacity onPress={() => this.like()}>
                 {this.renderlike()}
             </TouchableOpacity>
          </View>
         <Text style={InfoComponents.detailsOne}>{this.state.place.address}</Text>
-        <Text style={InfoComponents.detailsOne}>{this.state.place.type}</Text>
+        <Text style={InfoComponents.detailsOne}>{this.state.place.category}</Text>
         <View style={{flexDirection: "row", backgroundColor: 'white', marginTop: 10, padding: 2}} >
             <View style={{alignItems:'flex-start', justifyContent: 'flex-start'}}>
                 <Stars
-                  display={this.state.place.rating}
+                  display={parseFloat(this.state.place.rating)}
                   spacing={0}
                   count={5}
                   starSize={50}
@@ -106,10 +63,10 @@ class PlaceDetailsScreen extends React.Component{
                   halfStar={<Icon name={'star-half'} size={20} color={"gold"}/>}
                 /> 
             </View>
-            <Text style={InfoComponents.detailsOne}>{this.state.place.numofreviews} Reviews</Text>
+            <Text style={InfoComponents.detailsOne}>{(this.state.place.reviews).length} Reviews</Text>
         </View>
         <TouchableOpacity style={{padding: '2%', backgroundColor: Colors.brown, borderRadius: 8, alignSelf: "stretch", width: '100%'}}
-                onPress={() => this.props.navigation.navigate('Map')}>
+                onPress={() => this.props.navigation.navigate('Directions', {place: this.state.place})}>
                 <Text style={{color: "white", fontSize: 15, alignSelf:"center"}}>Go Here</Text>
             </TouchableOpacity>
         </View>
@@ -135,7 +92,7 @@ class PlaceDetailsScreen extends React.Component{
                         <Text style={InfoComponents.detailsOne}>{item.user} wrote:</Text>
                         <View style={{alignItems:'center', justifyContent: 'flex-end', padding: 10}}>
                         <Stars
-                            display={item.rating}
+                            display={parseFloat(item.rating)}
                             spacing={8}
                             count={5}
                             starSize={50}
