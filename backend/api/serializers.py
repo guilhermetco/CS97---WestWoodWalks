@@ -46,6 +46,7 @@ class BusinessSerializer(serializers.ModelSerializer):
 
 
 class WalksSerializer(serializers.ModelSerializer):
+    coordinates = serializers.JSONField()
     class Meta:
         model = Walks
         fields = ['profile', 'coordinates']
