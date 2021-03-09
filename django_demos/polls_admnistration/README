@@ -1,0 +1,36 @@
+Django administration site demonstration
+
+This example, mostly taken from the Django website, shows how to set up 
+user and administrator privileges.  The site allows you to set up single
+question polls, with users and administrators.  The site allows you to
+edit the questions and compile a vote for each poll.
+
+Reference:
+
+https://docs.djangoproject.com/en/3.1/intro/tutorial01/
+
+
+Installation
+
+This demo should be ready to go.
+
+If you have Django installed you can run like this 
+
+python3 manage.py runserver
+
+Then view on http://localhost:8000
+
+This demo comes with a preconfigured sqlite server.  You should not need
+to run any migrations, but if you do, here's how:
+
+python3 manage.py migrate
+
+If you need to generate new migration files, here's how:
+
+python manage.py makemigrations polls
+python manage.py sqlmigrate polls 0001
+python manage.py migrate
+
+Then restart the server:
+
+python manage.py runserver

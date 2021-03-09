@@ -10,6 +10,8 @@ import InfoComponents from '../styles/InfoComponents.js'
 import Colors from '../styles/Colors.js';
 import { AntDesign } from '@expo/vector-icons';
 
+// Note: change so that walks = [] a part of initial state, and then get data and set walks to that
+// should be similar process for most of the screens that need data
 const walks = [
   {
     id: '1',
@@ -297,10 +299,10 @@ export default class MapScreen extends Component {
           </View>
         </View>
       </View>
-      <TouchableOpacity
+      <TouchableOpacity style={{padding: '2%', margin: '1%', backgroundColor: Colors.brown, borderRadius: 13, width: 200}}
         onPress={ this.onSaveWalk }
       >
-      <Text style={Buttons.brownbutton}>{this.state.startValue}</Text>
+      <Text style={{color: "white", fontSize: 15, alignSelf: "center"}}>{this.state.startValue}</Text>
       </TouchableOpacity>
       {/* Window for saving a route */}
       <Modal style ={{marginTop: "50%"}}
@@ -365,8 +367,8 @@ export default class MapScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F4ECC6',
-    alignItems: 'flex-start',
+    backgroundColor: Colors.yellow,
+    alignItems: 'center',
     justifyContent: 'flex-start',
   },
   title :{

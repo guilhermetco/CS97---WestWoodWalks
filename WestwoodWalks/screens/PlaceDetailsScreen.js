@@ -10,18 +10,25 @@ import Buttons from '../styles/Buttons.js'
 import Stars from 'react-native-stars';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { AntDesign } from '@expo/vector-icons';
+import Colors from '../styles/Colors.js'
 
 import InfoComponents from '../styles/InfoComponents.js';
+  
 
-const place = {
-    id: '1',
-    title: 'Powell Library',
-    address: '123 street ave, Los Angeles',
-    type: "Library",
-    rating: 4.5,
-    numofreviews: 4,
-    reviews: [
-        { 
+class PlaceDetailsScreen extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLiked: true,
+            place: {
+            id: '1',
+            title: 'Powell Library',
+            address: '123 street ave, Los Angeles',
+            type: "Library",
+            rating: 4.5,
+            numofreviews: 4,
+            reviews: [
+            { 
             id: "1",
             review: "nvwljrnvalke;vnsldnvw, vwlkmrflkwmclwmd vcwlkejflkwenflw.md w,dmfnlwejflkwdnc,mwd cwlnflwkejflk c,lwnvowijflwdkv ,wejnf;qoejfko;eahja;k fv lajrlja;klfnva/;kenv;akehr;vokejnv/alieorj;agioejr",
             rating: 4.5,
@@ -56,16 +63,7 @@ const place = {
             user: "username",
             date: "01/30/21"
         }
-
-    ]
-};
-  
-
-class PlaceDetailsScreen extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            isLiked: true
+    ]}
         };
     }
     like() {
@@ -89,17 +87,17 @@ class PlaceDetailsScreen extends React.Component{
     <SafeAreaView style={styles.container}>
         <View style={InfoComponents.item}>
         <View style={{flexDirection: "row", alignItems:'flex-start', justifyContent: 'flex-start'}}>
-            <Text style={styles.title}>{place.title}</Text>
+            <Text style={styles.title}>{this.state.place.title}</Text>
             <TouchableOpacity onPress={() => this.like()}>
                 {this.renderlike()}
             </TouchableOpacity>
          </View>
-        <Text style={InfoComponents.detailsOne}>{place.address}</Text>
-        <Text style={InfoComponents.detailsOne}>{place.type}</Text>
+        <Text style={InfoComponents.detailsOne}>{this.state.place.address}</Text>
+        <Text style={InfoComponents.detailsOne}>{this.state.place.type}</Text>
         <View style={{flexDirection: "row", backgroundColor: 'white', marginTop: 10, padding: 2}} >
             <View style={{alignItems:'flex-start', justifyContent: 'flex-start'}}>
                 <Stars
-                  display={place.rating}
+                  display={this.state.place.rating}
                   spacing={0}
                   count={5}
                   starSize={50}
@@ -108,8 +106,12 @@ class PlaceDetailsScreen extends React.Component{
                   halfStar={<Icon name={'star-half'} size={20} color={"gold"}/>}
                 /> 
             </View>
-            <Text style={InfoComponents.detailsOne}>{place.numofreviews} Reviews</Text>
+            <Text style={InfoComponents.detailsOne}>{this.state.place.numofreviews} Reviews</Text>
         </View>
+        <TouchableOpacity style={{padding: '2%', backgroundColor: Colors.brown, borderRadius: 8, alignSelf: "stretch", width: '100%'}}
+                onPress={() => this.props.navigation.navigate('Map')}>
+                <Text style={{color: "white", fontSize: 15, alignSelf:"center"}}>Go Here</Text>
+            </TouchableOpacity>
         </View>
         <View style={styles.item}>
         <View style={{flexDirection: "row"}}>
@@ -127,7 +129,7 @@ class PlaceDetailsScreen extends React.Component{
                 }}
             />
             <FlatList
-                data={place.reviews}
+                data={this.state.place.reviews}
                 renderItem={({item}) => (
                     <View style={styles.review}>
                         <Text style={InfoComponents.detailsOne}>{item.user} wrote:</Text>
