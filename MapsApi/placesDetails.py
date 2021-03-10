@@ -5,6 +5,32 @@ import googlemaps
 import sqlite3
 import requests
 
+""" function to simplify categories down to 8 buckets """
+def convertCategories(oldCat):
+  newCat = ''
+  if (oldCat == 'transit_station' or oldCat == 'car_repair' or oldCat == 'bus_station' or oldCat == 'gas_station' or oldCat == 'car_wash' or oldCat == 'parking' or oldCat == 'car_rental' or oldCat == 'travel_agency' or oldCat == 'car_dealer'):
+    newCat = 'transportation'
+  elif (oldCat == 'doctor' or oldCat == 'health' or oldCat == 'gym' or oldCat == 'physiotherapist' or oldCat == 'veterinary_care' or oldCat == 'dentist' or oldCat == 'drugstore' or oldCat == 'pharmacy' or oldCat == 'hospital'):
+    newCat = 'health'
+  elif (oldCat == 'finance' or oldCat == 'accounting' or oldCat == 'real_estate_agency' or oldCat == 'bank' or oldCat == 'insurance_agency' or oldCat == 'atm'):
+    newCat = 'finance'
+  elif (oldCat == 'restaurant' or oldCat == 'cafe' or oldCat == 'bakery' or oldCat == 'food' or oldCat == 'meal_takeaway' or oldCat == 'bar' or oldCat == 'meal_delivery' or oldCat == 'liquor_store' or oldCat == 'grocery_or_supermarket'):
+    newCat = 'food'
+  elif (oldCat == 'school' or oldCat == 'secondary_school' or oldCat == 'university' or oldCat == 'primary_school'):
+    newCat = 'education'
+  elif (oldCat == 'lodging' or oldCat == 'electronics_store' or oldCat == 'home_goods_store' or oldCat == 'florist' or oldCat == 'clothing_store' or oldCat == 'furniture_store' or oldCat == 'book_store' or oldCat == 'jewelery_store' or oldCat == 'shoe_store' or oldCat == 'store' or oldCat == 'convenience_store' or oldCat == 'department_store'):
+    newCat = 'retail'
+  elif (oldCat == 'general_contractor' or oldCat == 'beauty_salon' or oldCat == 'spa' or oldCat == 'lawyer' or oldCat == 'electrician' or oldCat == 'laundry' or oldCat == 'plumber' or oldCat == 'painter' or oldCat == 'hair_care'):
+    newCat = 'service'
+  else:
+    newCat = 'miscellaneous'
+  
+  return newCat
+
+
+
+
+
 """
 experimenting with sqlite3
 """
@@ -31,25 +57,24 @@ experimenting with sqlite3
 
 """dictionary to match model format on server"""
 testPost = {
-  "name": "ohno",
+  "name": "",
   "category": "",
   "address": "",
   "website": "",
   "reviews": [],
   "lng": 0,
   "lat": 0,
+  "rating": 0,
+  "id": 0
 }
 
 #requests.delete('http://127.0.0.1:8000/business/1613')
 
-# i = 68
-# for num in range(1543):
-#   url = 'http://127.0.0.1:8000/business/' + str(i) + '/'
-#   i = i+1
-#   requests.delete(url)
+# url = 'http://127.0.0.1:8000/business/19'
+# requests.delete(url)
 
 # data = []
-# url = 'http://127.0.0.1:8000/business/'
+url = 'http://127.0.0.1:8000/business/'
 
 """
 populating database with business data
@@ -59,8 +84,8 @@ fixture = []
 i = 0
 with open('placesDetails.json') as f:
     for line in f:
-      # if (i==5):
-      #   break
+      # if (i==40):
+      #    break
       testPost["name"] = ""
       testPost["category"] = ""
       testPost["address"] = ""
@@ -68,6 +93,8 @@ with open('placesDetails.json') as f:
       testPost["reviews"] = []
       testPost["lng"] = 0
       testPost["lat"] = 0
+      testPost["rating"] = 0
+      testPost["id"] = i
 
       placeDict = json.loads(line)
       try:
@@ -76,7 +103,9 @@ with open('placesDetails.json') as f:
         print("no name")
 
       try:
-        testPost["category"] = placeDict["result"]["types"][0]
+        cat = placeDict["result"]["types"][0]
+        newCat = convertCategories(cat)
+        testPost["category"] = newCat
       except:
         print("no category")
 
@@ -105,19 +134,19 @@ with open('placesDetails.json') as f:
         testPost["lat"] = float_horiz
       except:
         print("no lat")
-      #pprint.pprint(testPost)
-      #requests.post(url, data = testPost)
-      fixture.append(testPost.copy())
-      # i= i + 1
+      # pprint.pprint(testPost['category'])
+      requests.post(url, data = testPost)
+      # fixture.append(testPost.copy())
+      i= i + 1
 
-fixtureFile = open('load_businesses.json', 'a')
+# fixtureFile = open('load_businesses.json', 'a')
 
-i=0
-for item in fixture:
-  fixtureFile.write(json.dumps(fixture[i]))
-  fixtureFile.write(',')
-  fixtureFile.write('\n')
-  i=i+1
+# i=0
+# for item in fixture:
+#   fixtureFile.write(json.dumps(fixture[i]))
+#   fixtureFile.write(',')
+#   fixtureFile.write('\n')
+#   i=i+1
 
 
 # i = 0
@@ -159,3 +188,4 @@ for item in fixture:
 
 
 
+ 

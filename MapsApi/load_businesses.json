@@ -1,4 +1,4 @@
-{"name": "Los Angeles", "category": "locality", "address": "Los Angeles, CA, USA", "website": "http://www.lacity.org/index.htm", "reviews": [], "lng": -118.2436849, "lat": 34.0522342},
+[{"name": "Los Angeles", "category": "locality", "address": "Los Angeles, CA, USA", "website": "http://www.lacity.org/index.htm", "reviews": [], "lng": -118.2436849, "lat": 34.0522342},
 {"name": "J.I.M Electric Inc", "category": "point_of_interest", "address": "Sunset, Los Angeles, CA 90024, USA", "website": "", "reviews": [], "lng": -118.461632, "lat": 34.072997},
 {"name": "Trical Construction", "category": "general_contractor", "address": "130 S Sepulveda Blvd, Los Angeles, CA 90049, USA", "website": "http://tricalconstruction.com/", "reviews": [], "lng": -118.4647257, "lat": 34.0718204},
 {"name": "Vascom", "category": "point_of_interest", "address": "140 Bronwood Ave, Los Angeles, CA 90049, USA", "website": "http://vascom.net/", "reviews": [], "lng": -118.4649542, "lat": 34.0721385},
@@ -1864,4 +1864,4 @@
 {"name": "Warner Brothers", "category": "transit_station", "address": "10599 Wilshire Blvd, Los Angeles, CA 90024, USA", "website": "", "reviews": [], "lng": -118.4336674, "lat": 34.0620739},
 {"name": "Psychic Love~Life Manifesting", "category": "health", "address": "10590 Wilshire Blvd #1802, Los Angeles, CA 90024, USA", "website": "https://psychic-love-life-manifesting.business.site/?utm_source=gmb&utm_medium=referral", "reviews": [], "lng": -118.4331929, "lat": 34.0612832},
 {"name": "Shaffer Asset Management Group", "category": "point_of_interest", "address": "10590 Wilshire Blvd, Los Angeles, CA 90024, USA", "website": "", "reviews": [], "lng": -118.433181, "lat": 34.061278},
-{"name": "Baumgarten Ronald N", "category": "lawyer", "address": "10590 Wilshire Blvd # 201, Los Angeles, CA 90024, USA", "website": "", "reviews": [], "lng": -118.433181, "lat": 34.061278},
+{"name": "Baumgarten Ronald N", "category": "lawyer", "address": "10590 Wilshire Blvd # 201, Los Angeles, CA 90024, USA", "website": "", "reviews": [], "lng": -118.433181, "lat": 34.061278}]
