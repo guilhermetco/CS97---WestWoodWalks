@@ -20,13 +20,11 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ReviewSerializer(serializers.ModelSerializer):
-    user_id = serializers.PrimaryKeyRelatedField(many = False, read_only = False, queryset=User.objects.all(), source='user')
     author = serializers.CharField(source='user.username', read_only=True)
-    profile = serializers.IntegerField(source='user.pk', read_only=True)
-
+    #user_id = serializers.IntegerField(source='user.pk', read_only=True,)
     class Meta:
         model = Review
-        fields = ['author', 'description', 'date', 'user_id', 'rating', 'business'] #profile
+        fields = ['author', 'description', 'date', 'profile', 'rating', 'business']
     
     def get_user(self, instance):
         return UserSerializer(instance.user, many=False, read_only=False, context=self.context).data
@@ -48,10 +46,10 @@ class BusinessSerializer(serializers.ModelSerializer):
 
 
 class WalksSerializer(serializers.ModelSerializer):
-    user_id = serializers.PrimaryKeyRelatedField(many = False, read_only = False, queryset=User.objects.all(), source='user')
+    coordinates = serializers.JSONField()
     class Meta:
         model = Walks
-        fields = ['lat','lng', 'profile']
+        fields = ['profile', 'coordinates']
 
     def get_user(self, instance):
         return UserSerializer(instance.user, many=False, read_only=False, context=self.context).data
