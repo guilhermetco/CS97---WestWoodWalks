@@ -38,7 +38,6 @@ urlpatterns = [
     path(r'rest-auth/', include('rest_auth.urls')),
     path(r'rest-auth/registration', include('rest_auth.registration.urls')),
     url(r'^authenticate/', api.views.CustomObtainAuthToken.as_view())
-
 ]
 
 
