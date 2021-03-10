@@ -18,6 +18,8 @@ from django.urls import path, include
 from rest_framework.authtoken import views
 from rest_framework import routers
 import api.views
+from django.conf.urls import url
+
 
 router = routers.DefaultRouter()
 router.register(r'users', api.views.UserViewSet)
@@ -34,7 +36,9 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path(r'rest-auth/', include('rest_auth.urls')),
-    path(r'rest-auth/registration', include('rest_auth.registration.urls'))
+    path(r'rest-auth/registration', include('rest_auth.registration.urls')),
+    url(r'^authenticate/', api.views.CustomObtainAuthToken.as_view())
+
 ]
 
 
