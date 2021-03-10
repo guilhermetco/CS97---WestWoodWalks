@@ -35,7 +35,7 @@ class Business(models.Model):
     
 
 class Walks(models.Model):
-    coordinates = models.JSONField(default=-1)
+    coordinates = models.JSONField(default=dict)
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
