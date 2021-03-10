@@ -19,20 +19,11 @@ import PlaceDetailsScreen from "./screens/PlaceDetailsScreen.js"
 import TabBar from "./screens/BottomTab.js"
 import CategoryResultsScreen from "./screens/CategoryResultsScreen"
 import MakeReview from "./screens/MakeReview.js"
+import SavedMapScreen from "./screens/SavedMapScreen.js"
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-
-
-function Favorites() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Walks" component={FavoriteWalksScreen} />
-      <Tab.Screen name="Places" component={FavoritePlacesScreen} />
-    </Tab.Navigator>
-  )
-}
 
 function App() {
   return (
@@ -44,11 +35,11 @@ function App() {
         <Stack.Screen options={{headerShown: false}} name="Explore" component={TabBar} />
         <Stack.Screen name="My Reviews" component={MyReviewsScreen} />
         <Stack.Screen name="My Walks" component={MyWalksScreen} />
-        <Stack.Screen name="Favorites" component={Favorites} />
         <Stack.Screen name="Account Information" component={AccountInfoScreen} />
         <Stack.Screen name="Edit Account" component={EditAccountInfo} />
         <Stack.Screen name="Results" component={CategoryResultsScreen} />
         <Stack.Screen name="MakeReview" component={MakeReview}/>
+        <Stack.Screen name="Your Walk" component={SavedMapScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

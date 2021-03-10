@@ -13,7 +13,6 @@ const ProfileScreen = ({ navigation }) => {
     return (
       <View style={styles.container}>
         <View style={styles.container2}>
-        <View style={{flexDirection: "row"}} >
             <TouchableOpacity
               style={Buttons.profilebutton}
               onPress={() => navigation.navigate('Account Information')}
@@ -21,15 +20,6 @@ const ProfileScreen = ({ navigation }) => {
               <MaterialIcons name="account-circle" size={70} color="#675a5a"  />
               <Text style={styles.label}>Account Information</Text> 
             </TouchableOpacity>
-            <TouchableOpacity
-              style={Buttons.profilebutton}
-              onPress={() => navigation.navigate('Favorites')}
-            >
-              <Ionicons name="heart" size={70} color="#675a5a"  />
-              <Text style={styles.label}>Favorites</Text> 
-            </TouchableOpacity>
-        </View>
-        <View style={{flexDirection: "row"}} >
           <TouchableOpacity
             style={Buttons.profilebutton}
             onPress={() => navigation.navigate('My Walks')}
@@ -44,7 +34,6 @@ const ProfileScreen = ({ navigation }) => {
             <MaterialIcons name="rate-review" size={70} color="#675a5a"  />
             <Text style={styles.label}>My Reviews</Text> 
           </TouchableOpacity>
-        </View>
         <TouchableOpacity>
           <Text style={Buttons.brownbutton}>Logout</Text>
         </TouchableOpacity>
