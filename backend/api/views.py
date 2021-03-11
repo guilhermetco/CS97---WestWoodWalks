@@ -27,6 +27,13 @@ class BusinessViewSet(viewsets.ModelViewSet):
     queryset = Business.objects.all()
     serializer_class = BusinessSerializer
 
+    def get_queryset(self):
+        queryset = Business.objects.all()
+        category = self.request.query_params.get('category', None)
+        if category is not None:
+            queryset = queryset.filter(category=category)
+        return queryset
+
 class WalksViewSet(viewsets.ModelViewSet):
     queryset = Walks.objects.all()
     serializer_class = WalksSerializer
@@ -34,10 +41,16 @@ class WalksViewSet(viewsets.ModelViewSet):
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
+    def get_queryset(self):
+        queryset = Profile.objects.all()
+        user_id = self.request.query_params.get('user_id', None)
+        if user_id is not None:
+            queryset = queryset.filter(user_id=user_id)
+        return queryset
+
 
 class CustomObtainAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
         response = super(CustomObtainAuthToken, self).post(request, *args, **kwargs)
         token = Token.objects.get(key=response.data['token'])
-        user = CustomUser.objects.get(id=token.user_id)
-        return Response({'token': token.key, 'user': CustomUserSerializer(user).data})
+        return Response({'token': token.key, 'id': token.user_id})

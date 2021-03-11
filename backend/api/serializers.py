@@ -61,7 +61,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ['user_id','reviews', 'walks']
+        fields = ['id','user_id','reviews', 'walks']
     
     def get_reviews(self, instance):
         review_list = instance.reviews.all().order_by('date')

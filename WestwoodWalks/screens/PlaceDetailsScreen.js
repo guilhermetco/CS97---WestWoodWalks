@@ -11,6 +11,7 @@ import Stars from 'react-native-stars';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { AntDesign } from '@expo/vector-icons';
 import Colors from '../styles/Colors.js'
+import axios from 'axios'
 
 import InfoComponents from '../styles/InfoComponents.js';
   
@@ -18,98 +19,75 @@ import InfoComponents from '../styles/InfoComponents.js';
 class PlaceDetailsScreen extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {
-            isLiked: true,
+        this.state ={
             place: {
-            id: '1',
-            title: 'Powell Library',
-            address: '123 street ave, Los Angeles',
-            type: "Library",
-            rating: 4.5,
-            numofreviews: 4,
-            reviews: [
-            { 
-            id: "1",
-            review: "nvwljrnvalke;vnsldnvw, vwlkmrflkwmclwmd vcwlkejflkwenflw.md w,dmfnlwejflkwdnc,mwd cwlnflwkejflk c,lwnvowijflwdkv ,wejnf;qoejfko;eahja;k fv lajrlja;klfnva/;kenv;akehr;vokejnv/alieorj;agioejr",
-            rating: 4.5,
-            user: "username",
-            date: "01/23/21 "
-        },
-        { 
-            id: "2",
-            review: "lalalallalalalallallalallalalalla lalalallalalalallallalallalalalla lalalallalalalallallalallalalalla lalalallalalalallallalallalalalla lalalallalalalallallalallalalalla lalalallalalalallallalallalalalla lalalallalalalallallalallalalalla",
-            rating: 3.5,
-            user: "username",
-            date: "01/28/21" 
-        },
-        { 
-            id: "3",
-            review: "lalalallalalalallallalallalalalla",
-            rating: 4,
-            user: "username",
-            date: "01/29/21"
-        },
-        { 
-            id: "4",
-            review: "lalalallalalalallallalallalalalla",
-            rating: 4,
-            user: "username",
-            date: "01/29/21"
-        },
-        { 
-            id: "5",
-            review: "lalalallalalalallallalallalalalla",
-            rating: 4,
-            user: "username",
-            date: "01/30/21"
+                address: "520 S Sepulveda Blvd #100, Los Angeles, CA 90049, USA",
+                category: "miscellaneous",
+                id: 33,
+                lat: "34.0658887",
+                lng: "-118.4595992",
+                name: "MSH Design, Inc.",
+                rating: "0.00",
+                reviews: [],
+                website: "http://www.mshdesigninc.com/",
+            },
+            place_id: props.route.params.place,
+            average_rating: 0,
         }
-    ]}
-        };
-    }
-    like() {
-        this.setState({
-            isLiked: !(this.state.isLiked)
-        })
     };
+    componentDidMount () {
+        axios
+          .get(`http://127.0.0.1:8000/business/${this.state.place_id}`)
+          .then(response => this.getPlaceInfo(response.data))
+          //.then(response => console.log(response.data))
+          //.then(response => console.log(this.state.items))
+          .catch(error => console.log(error)
+          );
+      }
 
-    renderlike() {
-        if (this.state.isLiked)
-            return (
-                <AntDesign name="heart" size={30} color="black" /> 
-            )
-        else 
-            return (
-                <AntDesign name="hearto" size={30} color="black" />
-            )
-    };
+    getPlaceInfo = (placedata) => {
+        this.setState({place: placedata})
+        var i = 0;
+          var average = 0;
+          for (i; i < this.state.place.reviews.length; i++) {
+              average += parseFloat(this.state.place.reviews[i].rating);
+              console.log(average)
+          }
+          average = average/this.state.place.reviews.length
+          this.setState({average_rating: Math.round(average*2)/2});
+          console.log(this.state.average_rating)
+    }
+
     render() {
+        var average = this.state.average_rating;
     return(
     <SafeAreaView style={styles.container}>
+        <Text>{this.state.average_rating}</Text>
         <View style={InfoComponents.item}>
         <View style={{flexDirection: "row", alignItems:'flex-start', justifyContent: 'flex-start'}}>
-            <Text style={styles.title}>{this.state.place.title}</Text>
-            <TouchableOpacity onPress={() => this.like()}>
-                {this.renderlike()}
-            </TouchableOpacity>
+            <Text style={styles.title}>{this.state.place.name}</Text>
          </View>
         <Text style={InfoComponents.detailsOne}>{this.state.place.address}</Text>
-        <Text style={InfoComponents.detailsOne}>{this.state.place.type}</Text>
+        <Text style={InfoComponents.detailsOne}>{this.state.place.category}</Text>
         <View style={{flexDirection: "row", backgroundColor: 'white', marginTop: 10, padding: 2}} >
             <View style={{alignItems:'flex-start', justifyContent: 'flex-start'}}>
                 <Stars
-                  display={this.state.place.rating}
+                  display={parseFloat(average)}
+                  default={parseFloat(average)}
                   spacing={0}
                   count={5}
+                  half={true}
+                  disabled={true}
                   starSize={50}
                   fullStar={<Icon name={'star'} size={20} color={"gold"}/>}
                   emptyStar={<Icon name={'star-outline'} size={20} color={"gold"}/>}
                   halfStar={<Icon name={'star-half'} size={20} color={"gold"}/>}
                 /> 
             </View>
-            <Text style={InfoComponents.detailsOne}>{this.state.place.numofreviews} Reviews</Text>
+            <Text style={InfoComponents.detailsOne}>{(this.state.place.reviews).length} Reviews</Text>
         </View>
         <TouchableOpacity style={{padding: '2%', backgroundColor: Colors.brown, borderRadius: 8, alignSelf: "stretch", width: '100%'}}
-                onPress={() => this.props.navigation.navigate('Map')}>
+                onPress={() => this.props.navigation.navigate('Directions', {place: this.state.place})}>
                 <Text style={{color: "white", fontSize: 15, alignSelf:"center"}}>Go Here</Text>
             </TouchableOpacity>
         </View>
@@ -117,7 +95,7 @@ class PlaceDetailsScreen extends React.Component{
         <View style={{flexDirection: "row"}}>
             <Text style={{fontSize: 22}}>Reviews</Text>
             <TouchableOpacity style={[Buttons.brownbuttonSmall, {marginLeft: '60%'}]}
-                onPress={() => this.props.navigation.navigate('MakeReview')}>
+                onPress={() => this.props.navigation.navigate('Write Review', {place: this.state.place.id})}>
                 <Text style={{fontSize: 8, color: 'white'}}>Write Review</Text>
             </TouchableOpacity>
         </View>
@@ -128,14 +106,14 @@ class PlaceDetailsScreen extends React.Component{
                     borderBottomWidth: 1,
                 }}
             />
-            <FlatList
+            <FlatList style={{marginBottom: '15%'}}
                 data={this.state.place.reviews}
                 renderItem={({item}) => (
                     <View style={styles.review}>
                         <Text style={InfoComponents.detailsOne}>{item.user} wrote:</Text>
                         <View style={{alignItems:'center', justifyContent: 'flex-end', padding: 10}}>
                         <Stars
-                            display={item.rating}
+                            display={parseFloat(item.rating)}
                             spacing={8}
                             count={5}
                             starSize={50}
@@ -144,7 +122,7 @@ class PlaceDetailsScreen extends React.Component{
                             halfStar={<Icon name={'star-half'} size={20} color={"gold"}/>}
                         /> 
                     </View>
-                <Text style={InfoComponents.detailsTwo}>"{item.review}"</Text>
+                <Text style={InfoComponents.detailsTwo}>"{item.description}"</Text>
                 <Text style={InfoComponents.detailsOne}>Last Modified: {item.date}</Text>
                     </View>
                 )}

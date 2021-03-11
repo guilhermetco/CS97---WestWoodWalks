@@ -6,6 +6,7 @@ import {TouchableOpacity} from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Buttons from '../styles/Buttons.js'
+import axios from 'axios'
 
 
 class SignupScreen extends React.Component {
@@ -15,6 +16,57 @@ class SignupScreen extends React.Component {
     password: "",
     repeatpassword: ""
   }
+
+
+  SignUp = () => {
+    var params = JSON.stringify({
+      'username': this.state.username,
+      'password1': this.state.password,
+      'password2': this.state.repeatpassword,
+      'email': this.state.email,
+    });
+    console.log(params)
+    axios
+      .post("http://127.0.0.1:8000/rest-auth/registration", params,
+      {"headers": {
+        'content-Type': 'application/json'
+      }})
+      .then(this.Authenticate)
+      .catch(error => console.log(error)
+      );
+  }
+
+  Authenticate = () => {
+    var params2 = JSON.stringify({
+      'username': this.state.username,
+      'password': this.state.password,
+    });
+    console.log("POST2")
+    axios
+      .post("http://127.0.0.1:8000/authenticate/", params2,
+      {"headers": {
+        'content-Type': 'application/json'
+      }})
+      .then(response => this.Get_ID(response.data.id))
+      .catch(error => console.log(error)
+      );
+  }
+
+  Get_ID = (userid) => {
+    var params3 = JSON.stringify({
+      'user_id': userid,
+    });
+    console.log("POST2")
+    axios
+      .post("http://127.0.0.1:8000/profiles/", params3,
+      {"headers": {
+        'content-Type': 'application/json'
+      }})
+      .then(response => console.log(response.data))
+      .catch(error => console.log(error)
+      );
+  }
+
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -45,7 +97,8 @@ class SignupScreen extends React.Component {
           secureTextEntry
           onChangeText={(repeatpassword) => this.setState({repeatpassword})}
         />
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={this.SignUp}>
           <Text style={Buttons.brownbutton}>Sign Up</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
