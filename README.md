@@ -27,8 +27,7 @@ Run the command: set-ExecutionPolicy restricted
 
 #Switch into the backend folder and start a local server for the backend
 cd backend
-python manage.py makemigrations
-python manage.py migrate
+
 python manage.py runserver
 
 ```
