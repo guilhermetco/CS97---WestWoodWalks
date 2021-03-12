@@ -8,7 +8,7 @@ What you need to have pre-installed to ensure a smooth run:
     link: https://dev.mysql.com/downloads/windows/installer/8.0.html
 2) Python 3
 
-#Linux users
+#Linux/Mac users
 #Switch into the project folder then run the following commands
 python3 -m venv env
 source env/bin/activate
