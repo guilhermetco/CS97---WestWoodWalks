@@ -8,12 +8,14 @@ What you need to have pre-installed to ensure a smooth run:
     link: https://dev.mysql.com/downloads/windows/installer/8.0.html
 2) Python 3
 
+#Linux users
 #Switch into the project folder then run the following commands
 python3 -m venv env
 source env/bin/activate
 pip install -r requirements.txt
 
-#if you are using windows use these commands instead
+
+#Windows users
 python3 -m venv env
 .\env\Scripts\activate
 pip install -r requirements.txt
@@ -27,8 +29,9 @@ Run the command: set-ExecutionPolicy restricted
 
 #Switch into the backend folder and start a local server for the backend
 cd backend
-
 python manage.py runserver
+
+#This will set up your local django server that will interact with the AWS SQL database in the cloud
 
 ```
 
