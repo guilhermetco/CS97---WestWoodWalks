@@ -11,6 +11,7 @@ import ProfileScreen from  './ProfileScreen.js'
 import PlaceDetailsScreen from "./PlaceDetailsScreen.js"
 import PlaceDirectionsScreen from "./PlaceDirectionsScreen.js"
 import MakeReview from "./MakeReview.js"
+import CategoryResultsScreen from "./CategoryResultsScreen"
 
 
 const Tab = createBottomTabNavigator();
@@ -20,6 +21,7 @@ function ReviewsRoute() {
   return(
     <Stack.Navigator>
       <Stack.Screen options={{headerShown: false}} name="Reviews" component={ReviewScreen} />
+      <Stack.Screen name="Results" component={CategoryResultsScreen} />
       <Stack.Screen name="Place Details" component={PlaceDetailsScreen} />
       <Stack.Screen name="Directions" component={PlaceDirectionsScreen} />
       <Stack.Screen name="Write Review" component={MakeReview}/>

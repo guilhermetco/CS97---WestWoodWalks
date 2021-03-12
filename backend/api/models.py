@@ -10,12 +10,10 @@ from django.dispatch import receiver
 
 
 class Review(models.Model):
-   # user = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'review'
     author = models.CharField(max_length=30) #max length for username?
     description = models.TextField(max_length=250)
     date = models.DateField(auto_now_add=True)
     rating = models.DecimalField(max_digits=3, decimal_places=1, default = 0.0)
-
     
     def __str__(self):
         return self.author
@@ -35,7 +33,11 @@ class Business(models.Model):
     
 
 class Walks(models.Model):
+    name        = models.CharField(max_length=100, default='')
     coordinates = models.JSONField(default=dict)
+    description = models.TextField(max_length=250, default='')
+
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

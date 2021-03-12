@@ -30,13 +30,22 @@ class BusinessViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = Business.objects.all()
         category = self.request.query_params.get('category', None)
+        name = self.request.query_params.get('name', None)
         if category is not None:
             queryset = queryset.filter(category=category)
+        if name is not None:
+            queryset = queryset.filter(name__icontains=name)       
         return queryset
 
 class WalksViewSet(viewsets.ModelViewSet):
     queryset = Walks.objects.all()
     serializer_class = WalksSerializer
+    def get_queryset(self):
+        queryset = Walks.objects.all()
+        profile_id = self.request.query_params.get('id', None)
+        if profile_id is not None:
+            queryset = queryset.filter(profile=profile_id)
+        return queryset
     
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()

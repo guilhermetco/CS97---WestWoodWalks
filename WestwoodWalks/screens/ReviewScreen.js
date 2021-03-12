@@ -20,100 +20,107 @@ import Stars from 'react-native-stars';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { SearchBar } from 'react-native-elements';
 import axios from 'axios';
+import { useIsFocused } from "@react-navigation/native"
 
 
 class ReviewScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state ={
+          inputvalue: "",
           items: []
         }
     };
 
+
+submitInput = (value) => {
+  axios
+    .get(`http://127.0.0.1:8000/business/?name=${value}`)
+    .then(response =>  this.props.navigation.navigate('Results', {places: response.data.results}))
+    .catch(error => console.log(error)
+    );
+}
+
+getCategory = (category) => {
+  axios
+    .get(`http://127.0.0.1:8000/business/?category=${category}`)
+    .then(response =>  this.props.navigation.navigate('Results', {places: response.data.results}))
+    .catch(error => console.log(error)
+    );
+}
+
+updateData() {
+  this.componentDidMount();
+}
+
 componentDidMount () {
-  console.log("here")
+  const {navigation} = this.props;
+  this.focusListener = navigation.addListener('focus', () => {
   axios
     .get("http://127.0.0.1:8000/business")
     .then(response => this.setState({items: response.data.results}))
-    //.then(response => console.log(response.data))
-    //.then(response => console.log(this.state.items))
     .catch(error => console.log(error)
     );
+  });
 }
 
     render () {
         return (
             <View style={styles.container}>
-              <SearchableDropdown
-              multi={true}
-              onItemSelect={(item) => this.props.navigation.navigate('Place Details', {place: item})}
-              containerStyle={{ padding: '3%', marginTop: '15%', backgroundColor: Colors.lightyellow, borderWidth: '1', borderColor: Colors.brown}}
-              itemStyle={{
-                padding: 10,
-                marginTop: 2,
-                backgroundColor: 'white',
-                borderColor: Colors.brown,
-                borderWidth: 1,
-                borderRadius: 5,
-              }}
-              itemTextStyle={{ color: '#222' }}
-              itemsContainerStyle={{ maxHeight: 140 }}
-              items={this.state.items}
-              resetValue={false}
-              textInputProps={
-                {
-                  placeholder: "Search for a Place or Event",
-                }
-              }
-              listProps={
-                {
-                  nestedScrollEnabled: true,
-                }
-              }
-            />
+            <View style={{flexDirection: "row", marginTop: '10%'}} >
+            <TextInput
+              style={styles.input}
+              placeholder="Search by business name..."
+              onChangeText={(inputvalue) => this.setState({inputvalue})}>
+            </TextInput>
+            </View>
+            <TouchableOpacity style={[Buttons.brownbuttonSmall, {width: '25%', alignSelf: "center"}]}
+            onPress={() => this.submitInput(this.state.inputvalue)}>
+            <Text style={{alignSelf: "center", color: "white"}}>Search</Text>
+            </TouchableOpacity>
             <View style={{height: '30%', marginTop: '10%'}}>
               <Text style={styles.title}>Search by Category</Text>
                 <View style={{flexDirection: "row", height: '45%'}} >
                   <TouchableOpacity style={Buttons.categorybutton}
-                    onPress={() => this.props.navigation.navigate('Results')}>
-                    <MaterialIcons name="emoji-transportation" size={24} color="black" />
+                    onPress={() => this.getCategory("transportation")}>
+                    <MaterialIcons name="emoji-transportation" size={24} color={Colors.brown} />
                     <Text style={styles.categories}>Transportation</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={Buttons.categorybutton}
-                    onPress={() => this.props.navigation.navigate('Results')}>
-                    <MaterialIcons name="local-grocery-store" size={24} color={Colors.brown} />
+                    onPress={() => this.getCategory("health")}>
+                    <MaterialIcons name="local-hospital" size={24} color={Colors.brown} />
                     <Text style={styles.categories}>Health</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={Buttons.categorybutton}
-                  onPress={() => this.props.navigation.navigate('Results')}>
-                    <MaterialIcons name="attach-money" size={24} color="black" />
+                    onPress={() => this.getCategory("finance")}>
+                    <MaterialIcons name="attach-money" size={24} color={Colors.brown} />
                     <Text style={styles.categories}>Finance</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={Buttons.categorybutton}
-                  onPress={() => this.props.navigation.navigate('Results')}>
+                    onPress={() => this.getCategory("food")}>
                     <Ionicons name="restaurant" size={24} color={Colors.brown} />
                     <Text style={styles.categories}>Food</Text>
                   </TouchableOpacity>
                 </View>
                 <View style={{flexDirection: "row", height: '45%'}} >
                   <TouchableOpacity style={Buttons.categorybutton}
-                  onPress={() => this.props.navigation.navigate('Results')}>
-                    <FontAwesome name="coffee" size={24} color={Colors.brown} />
+                    onPress={() => this.getCategory("education")}>
+                    <Ionicons name="school" size={24} color={Colors.brown} />
                     <Text style={styles.categories}>Education</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={Buttons.categorybutton}
-                  onPress={() => this.props.navigation.navigate('Results')}>
+                    onPress={() => this.getCategory("retail")}>
                     <FontAwesome name="shopping-bag" size={24} color={Colors.brown} />
                     <Text style={styles.categories}>Retail</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={Buttons.categorybutton}
-                  onPress={() => this.props.navigation.navigate('Results')}>
-                    <MaterialIcons name="nightlife" size={24} color={Colors.brown} />
+                    onPress={() => this.getCategory("service")}>
+                    <MaterialIcons name="miscellaneous-services" size={24} color={Colors.brown} />
                     <Text style={styles.categories}>Service</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={Buttons.categorybutton}
-                  onPress={() => this.props.navigation.navigate('Results')}>
-                    <MaterialIcons name="event" size={24} color={Colors.brown} />
+                    onPress={() => this.getCategory("miscellaneous")}>
+                    <MaterialIcons name="place" size={24} color={Colors.brown} />
                     <Text style={styles.categories}>Miscellaneous</Text>
                   </TouchableOpacity>
                 </View>
@@ -125,14 +132,15 @@ componentDidMount () {
                   data={this.state.items }
                   renderItem={({item}) => (
                   <TouchableOpacity style={styles.item} 
-                    onPress={() => this.props.navigation.navigate('Place Details', {screen: 'Place Details', place: item.id, })}>
+                    onPress={() => this.props.navigation.navigate('Place Details', {screen: 'Place Details', place: item })}>
                     <Text style={styles.name}>{item.name}</Text>
                       <Text style={InfoComponents.detailsOne}>{item.address}</Text>
                       <Text style={{fontSize: 15, marginBottom: 15}}>{item.category}</Text>
                       <View style={{flexDirection: "row", backgroundColor: 'white', padding: 2}} >
                         <View style={{alignItems:'flex-start', justifyContent: 'flex-start'}}>
                           <Stars
-                            display={parseInt(item.rating)}
+                            display={parseFloat(item.rating)}
+                            default={parseFloat(item.rating)}
                             spacing={0}
                             count={5}
                             starSize={50}
@@ -182,6 +190,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: Colors.brown,
     fontWeight: '500',
+  },
+  input: {
+    width: "100%",
+    borderWidth: 1,
+    height: "55%",
+    marginVertical: '3%',
+    marginVertical: '3%',
+    marginVertical: '3%',
+    padding: '2%',
+    justifyContent: "center",
+    backgroundColor: Colors.lightyellow,
+    borderColor: '#675a5a',
+    borderBottomWidth: 3 
   }
 })
 

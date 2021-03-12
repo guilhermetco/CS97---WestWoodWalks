@@ -10,95 +10,98 @@ import InfoComponents from '../styles/InfoComponents.js'
 import Colors from '../styles/Colors.js';
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
+import axios from 'axios'
 
 // Note: change so that walks = [] a part of initial state, and then get data and set walks to that
 // should be similar process for most of the screens that need data
 
 // Need to move these points into database for premade walks + add descriptions (don't store distance/duration?)
-const walks = [
-  {
-    id: '1',
-    title: 'Campus Loop',
-    distance: '3 miles',
-    description: "Loop around UCLA campus.",
-    likes: 3,
-    coordinates:[
-      {latitude:34.075685, longitude:-118.455622},
-      {latitude:34.073565, longitude:-118.446958},
-      {latitude:34.078231, longitude:-118.439402},
-      {latitude:34.071862, longitude:-118.437367},
-      {latitude:34.064088, longitude:-118.441082},
-      {latitude:34.063639, longitude:-118.448263},
-      {latitude:34.069555, longitude:-118.450823},
-      {latitude:34.070331, longitude:-118.455025},
-      {latitude:34.075646, longitude:-118.455577}
-    ],
-  },
-  {
-    id: '2',
-    title: 'Holmby Park',
-    distance: '3 miles',
-    description: "Loop around UCLA campus.",
-    likes: 4,
-    coordinates:[
-      {latitude:34.073549, longitude:-118.431499},
-      {latitude:34.073051, longitude:-118.429618},
-      {latitude:34.071118, longitude:-118.427810},
-      {latitude:34.071785, longitude:-118.429237},
-      {latitude:34.074007, longitude:-118.431055}
-    ]
-  },
-  {
-    id: '3',
-    title: 'Boba Crawl',
-    distance: '2 miles',
-    description: 'Walk around Sunset Blvd.',
-    likes: 5,
-    coordinates:[
-      {latitude:34.062340, longitude:-118.447686},
-      {latitude:34.060514, longitude:-118.446060},
-      {latitude:34.062585, longitude:-118.446838},
-      {latitude:34.061594, longitude:-118.446378},
-      {latitude:34.062584, longitude:-118.446277},
-      {latitude:34.063531, longitude:-118.445407},
-      {latitude:34.063651, longitude:-118.445797}
-    ]
-  },
-  {
-    id: '4',
-    title: 'UCLA tour',
-    distance: '0.5 miles',
-    coordinates:[
-      {latitude:34.075442, longitude:-118.439244},
-      {latitude:34.074572, longitude:-118.441342},
-      {latitude:34.073521, longitude:-118.441690},
-      {latitude:34.073379, longitude:-118.440795},
-      {latitude:34.069959, longitude:-118.440896},
-      {latitude:34.069875, longitude:-118.443729},
-      {latitude:34.070968, longitude:-118.443619},
-      {latitude:34.070959, longitude:-118.442353},
-      {latitude:34.070986, longitude:-118.441646},
-      {latitude:34.072399, longitude:-118.441633},
-      {latitude:34.072204, longitude:-118.442688},
-      {latitude:34.072186, longitude:-118.444913},
-      {latitude:34.070995, longitude:-118.444806},
-      {latitude:34.071057, longitude:-118.449462},
-      {latitude:34.072692, longitude:-118.449551},
-      {latitude:34.073251, longitude:-118.451823}
-    ]
-  },
-  {
-    id: '5',
-    title: "UCLA through Farmer's Market",
-    distance: '8 miles',
-    coordinates:[
-      {latitude:34.069699, longitude:-118.445014},
-      {latitude:34.063719, longitude:-118.444811},
-      {latitude:34.063696, longitude:-118.447126},
-      {latitude:34.060703, longitude:-118.445763}
-    ]
-  },
-];
+// const walks = [
+//   {
+//     id: '1',
+//     title: 'Campus Loop',
+//     distance: '3 miles',
+//     description: "Loop around UCLA campus.",
+//     likes: 3,
+//     coordinates:[
+//       {latitude:34.075685, longitude:-118.455622},
+//       {latitude:34.073565, longitude:-118.446958},
+//       {latitude:34.078231, longitude:-118.439402},
+//       {latitude:34.071862, longitude:-118.437367},
+//       {latitude:34.064088, longitude:-118.441082},
+//       {latitude:34.063639, longitude:-118.448263},
+//       {latitude:34.069555, longitude:-118.450823},
+//       {latitude:34.070331, longitude:-118.455025},
+//       {latitude:34.075646, longitude:-118.455577}
+//     ],
+//   },
+//   {
+//     id: '2',
+//     title: 'Holmby Park',
+//     distance: '3 miles',
+//     description: "Just a simple walk around the park :)",
+//     likes: 4,
+//     coordinates:[
+//       {latitude:34.073549, longitude:-118.431499},
+//       {latitude:34.073051, longitude:-118.429618},
+//       {latitude:34.071118, longitude:-118.427810},
+//       {latitude:34.071785, longitude:-118.429237},
+//       {latitude:34.074007, longitude:-118.431055}
+//     ]
+//   },
+//   {
+//     id: '3',
+//     title: 'Boba Crawl',
+//     distance: '2 miles',
+//     description: 'Craving boba....here are some of the best places.',
+//     likes: 5,
+//     coordinates:[
+//       {latitude:34.063531, longitude:-118.445407},
+//       {latitude:34.062340, longitude:-118.447686},
+//       {latitude:34.060514, longitude:-118.446060},
+//       {latitude:34.062585, longitude:-118.446838},
+//       {latitude:34.061594, longitude:-118.446378},
+//       {latitude:34.062584, longitude:-118.446277},
+//       {latitude:34.063651, longitude:-118.445797}
+//     ]
+//   },
+////   {
+////     id: '4',
+////     name: 'UCLA tour',
+////     description: 'All the best places on campus. No tour guides necessary!',
+////     coordinates:[
+////       {latitude:34.075442, longitude:-118.439244},
+////       {latitude:34.074572, longitude:-118.441342},
+////       {latitude:34.073521, longitude:-118.441690},
+////       {latitude:34.073379, longitude:-118.440795},
+////       {latitude:34.069959, longitude:-118.440896},
+////       {latitude:34.069875, longitude:-118.443729},
+////       {latitude:34.070968, longitude:-118.443619},
+////       {latitude:34.070959, longitude:-118.442353},
+////       {latitude:34.070986, longitude:-118.441646},
+////       {latitude:34.072399, longitude:-118.441633},
+////       {latitude:34.072204, longitude:-118.442688},
+////       {latitude:34.072186, longitude:-118.444913},
+////       {latitude:34.070995, longitude:-118.444806},
+////       {latitude:34.071057, longitude:-118.449462},
+////       {latitude:34.072692, longitude:-118.449551},
+////       {latitude:34.073251, longitude:-118.451823}
+////     ]
+////   },
+//   {
+//     id: '5',
+//     name: "UCLA through Farmer's Market",
+//     description: 'Get your fresh fruit and veggies here!',
+//     coordinates:[
+//       {latitude:34.069699, longitude:-118.445014},
+//       {latitude:34.063719, longitude:-118.444811},
+//       {latitude:34.063696, longitude:-118.447126},
+//       {latitude:34.060703, longitude:-118.445763}
+//     ]
+//   },
+// ];
+
+
 
 const {height, width} = Dimensions.get('window');
 const LATITUDE = 34.06279;
@@ -143,12 +146,13 @@ export default class MapScreen extends Component {
       modalVisible: false,
       currentPath: "Current Path",
       premadePath: false,
-      isLiked: false,
+      description: "",
+      name: "",
     };
 
     this.mapView = null;
   }
-  onSaveWalk = () =>{
+  onStartWalk = () =>{
     this.setState({
       saveWalk:{
         startingLocation:this.state.coordinates[1],
@@ -184,6 +188,29 @@ export default class MapScreen extends Component {
     }
   }
 
+  saveWalk = (visible) => {
+    // let coordinates;
+    // if (this.state.premadePath)
+    //   coordinates = [this.state.coordinates]
+    // else
+    //   profile = global.session_id
+    var params = JSON.stringify({
+      'name': this.state.name,
+      'description': this.state.description,
+      'coordinates': this.state.coordinates,
+      'profile': [global.session_id],
+    });
+    axios
+      .post("http://127.0.0.1:8000/walks/", params,
+      {"headers": {
+        'content-Type': 'application/json'
+      }})
+      .then(this.setModalVisible(visible))
+      .catch(error => console.log(error)
+      );
+      console.log(params)
+  }
+
   setModalVisible = (visible) => {
     this.setState({modalVisible:visible});
   }
@@ -210,6 +237,11 @@ export default class MapScreen extends Component {
   componentDidMount() {
     this.currentLocation();
     this.intervalID = setInterval(this.currentLocation.bind(this), 1000);
+    axios
+      .get("http://127.0.0.1:8000/walks")
+      .then(response => this.setState({walks: response.data.results}))
+      .catch(error => console.log(error)
+    );
   }
 
   componentWillUnmount() {
@@ -231,9 +263,10 @@ export default class MapScreen extends Component {
   setPremadePath = (item) => {
     this.setState({
       coordinates: item.coordinates,
-      currentPath: item.title,
+      currentPath: item.name,
       premadePath: true,
     })
+    console.log(item.coordinates)
   }
 
   render() {
@@ -258,6 +291,7 @@ export default class MapScreen extends Component {
             style={StyleSheet.absoluteFill}
             ref={c => this.mapView = c}
             onPress={this.onMapPress}
+            zoomEnabled={true}
           >
           {this.state.coordinates.map((coordinate, index) =>
             <Marker key={`coordinate_${index}`} coordinate={coordinate} />
@@ -267,6 +301,7 @@ export default class MapScreen extends Component {
             origin={this.state.coordinates[0]}
             destination={this.state.coordinates[this.state.coordinates.length-1]}
             waypoints={this.state.coordinates}
+            mode="WALKING"
             apikey={GOOGLE_MAPS_APIKEY}
             strokeWidth={3}
             strokeColor="blue"
@@ -308,7 +343,7 @@ export default class MapScreen extends Component {
         </View>
       </View>
       <TouchableOpacity style={{padding: '2%', margin: '1%', backgroundColor: Colors.brown, borderRadius: 13, width: 400}}
-        onPress={ this.onSaveWalk }
+        onPress={ this.onStartWalk }
       >
       <Text style={{color: "white", fontSize: 15, alignSelf: "center"}}>{this.state.startValue}</Text>
       </TouchableOpacity>
@@ -327,16 +362,18 @@ export default class MapScreen extends Component {
               <TextInput
                 style={styles.input}
                 placeholder="Enter a title"
+                onChangeText={(name) => this.setState({name})}
               />
               <Text style={styles.modalText}>Description</Text>
               <TextInput
                 style={styles.input}
                 placeholder="Enter a description"
                 returnKeyType="done"
+                onChangeText={(description) => this.setState({description})}
               />
               <TouchableOpacity
                 style={[Buttons.brownbuttonSmall, {alignSelf: 'center', marginTop: '5%'}]}
-                onPress={() => this.setModalVisible(!modalVisible)}
+                onPress={() => this.saveWalk(!modalVisible)}
               >
                 <Text style={{alignSelf: 'center', color: 'white'}}>Save</Text>
               </TouchableOpacity>
@@ -354,16 +391,15 @@ export default class MapScreen extends Component {
       <SafeAreaView style={{marginBottom: '6%'}}>
         <Text style={styles.title}> Explore </Text>
         <FlatList 
-          data={walks}
+          data={this.state.walks}
           renderItem={({item}) => (
           <TouchableOpacity style={styles.item}
             onPress={() => this.setPremadePath(item)}>
-            <Text style={styles.pathTitle}>{item.title}</Text>
-            <Text style={styles.detailsOne}>Distance: {item.distance}</Text>
+            <Text style={styles.pathTitle}>{item.name}</Text>
             <Text style={styles.detailsTwo}>{item.description}</Text>
           </TouchableOpacity>   
           )}
-        keyExtractor={item => item.id}
+        keyExtractor={item => (item.id).toString()}
         />
       </SafeAreaView>
       </View>

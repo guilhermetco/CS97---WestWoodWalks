@@ -20,49 +20,24 @@ class PlaceDetailsScreen extends React.Component{
     constructor(props) {
         super(props);
         this.state ={
-            place: {
-                address: "520 S Sepulveda Blvd #100, Los Angeles, CA 90049, USA",
-                category: "miscellaneous",
-                id: 33,
-                lat: "34.0658887",
-                lng: "-118.4595992",
-                name: "MSH Design, Inc.",
-                rating: "0.00",
-                reviews: [],
-                website: "http://www.mshdesigninc.com/",
-            },
-            place_id: props.route.params.place,
+            place: props.route.params.place,
             average_rating: 0,
         }
     };
     componentDidMount () {
+        const {navigation} = this.props;
+        this.focusListener = navigation.addListener('focus', () => {
         axios
-          .get(`http://127.0.0.1:8000/business/${this.state.place_id}`)
-          .then(response => this.getPlaceInfo(response.data))
-          //.then(response => console.log(response.data))
-          //.then(response => console.log(this.state.items))
+          .get(`http://127.0.0.1:8000/business/${this.state.place.id}`)
+          .then(response => this.setState({place: response.data}))
           .catch(error => console.log(error)
           );
+        });
       }
 
-    getPlaceInfo = (placedata) => {
-        this.setState({place: placedata})
-        var i = 0;
-          var average = 0;
-          for (i; i < this.state.place.reviews.length; i++) {
-              average += parseFloat(this.state.place.reviews[i].rating);
-              console.log(average)
-          }
-          average = average/this.state.place.reviews.length
-          this.setState({average_rating: Math.round(average*2)/2});
-          console.log(this.state.average_rating)
-    }
-
     render() {
-        var average = this.state.average_rating;
     return(
     <SafeAreaView style={styles.container}>
-        <Text>{this.state.average_rating}</Text>
         <View style={InfoComponents.item}>
         <View style={{flexDirection: "row", alignItems:'flex-start', justifyContent: 'flex-start'}}>
             <Text style={styles.title}>{this.state.place.name}</Text>
@@ -72,8 +47,8 @@ class PlaceDetailsScreen extends React.Component{
         <View style={{flexDirection: "row", backgroundColor: 'white', marginTop: 10, padding: 2}} >
             <View style={{alignItems:'flex-start', justifyContent: 'flex-start'}}>
                 <Stars
-                  display={parseFloat(average)}
-                  default={parseFloat(average)}
+                  display={parseFloat(this.state.place.rating)}
+                  default={parseFloat(this.state.place.rating)}
                   spacing={0}
                   count={5}
                   half={true}
@@ -95,7 +70,7 @@ class PlaceDetailsScreen extends React.Component{
         <View style={{flexDirection: "row"}}>
             <Text style={{fontSize: 22}}>Reviews</Text>
             <TouchableOpacity style={[Buttons.brownbuttonSmall, {marginLeft: '60%'}]}
-                onPress={() => this.props.navigation.navigate('Write Review', {place: this.state.place.id})}>
+                onPress={() => this.props.navigation.navigate('Write Review', {place: this.state.place})}>
                 <Text style={{fontSize: 8, color: 'white'}}>Write Review</Text>
             </TouchableOpacity>
         </View>
@@ -126,7 +101,7 @@ class PlaceDetailsScreen extends React.Component{
                 <Text style={InfoComponents.detailsOne}>Last Modified: {item.date}</Text>
                     </View>
                 )}
-                keyExtractor={item => item.id}
+                keyExtractor={item => (item.id)}
             />
         </View>
     </SafeAreaView>

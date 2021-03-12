@@ -151,6 +151,7 @@ export default class PlaceDirectionsScreen extends Component {
             origin={this.state.coordinates[1]}
             destination={this.state.coordinates[0]}
             apikey={GOOGLE_MAPS_APIKEY}
+            mode="WALKING"
             strokeWidth={3}
             strokeColor="blue"
             optimizeWaypoints={true}

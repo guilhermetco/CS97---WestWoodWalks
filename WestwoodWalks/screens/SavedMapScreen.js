@@ -26,10 +26,6 @@ export default class SavedMapScreen extends Component {
 
     this.state = {
       startValue: 'Start',
-      initialCoords:[
-        {latitude:34.073026, longitude:-118.465619},
-        {latitude:34.067223, longitude:-118.410851}
-      ],
       coordinates: props.route.params.walk.coordinates,
       clocation: {
         latitude: 34.06637,
@@ -42,9 +38,9 @@ export default class SavedMapScreen extends Component {
         destinationLocation: null,
         forZoom: { distance: Number, duration: Number, coordinates: [] }
       },
-      currentPath: props.route.params.walk.title,
+      currentPath: props.route.params.name,
     };
-
+    console.log(this.state.coordinates)
     this.mapView = null;
   }
   onSaveWalk = () =>{
@@ -104,13 +100,6 @@ export default class SavedMapScreen extends Component {
     );
   };
   
-  setPremadePath = (item) => {
-    this.setState({
-      coordinates: item.coordinates,
-      currentPath: item.title,
-      premadePath: true,
-    })
-  }
 
   render() {
     return (
@@ -136,6 +125,7 @@ export default class SavedMapScreen extends Component {
             origin={this.state.coordinates[0]}
             destination={this.state.coordinates[this.state.coordinates.length-1]}
             waypoints={this.state.coordinates}
+            mode="WALKING"
             apikey={GOOGLE_MAPS_APIKEY}
             strokeWidth={3}
             strokeColor="blue"
