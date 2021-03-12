@@ -8,6 +8,7 @@ import Buttons from '../styles/Buttons.js'
 import Stars from 'react-native-stars';
 import { Rating } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import axios from 'axios'
 
 export default class MakeReview extends Component {
     onSubmit = () =>
@@ -20,27 +21,64 @@ export default class MakeReview extends Component {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        { text: "Submit", onPress: () => this.props.navigation.navigate('Explore') }
+        { text: "Submit", onPress: this.PostReview }
       ],
       { cancelable: false }
     );
+    
+    PostReview = () => {
+      var params = JSON.stringify({
+        'description': this.state.review,
+        'profile': [global.session_id],
+        'rating': this.state.rating,
+        'business': [this.state.place.id],
+      });
+      axios
+        .post("http://127.0.0.1:8000/review/", params,
+        {"headers": {
+          'content-Type': 'application/json'
+        }})
+        .then(this.UpdateAverageRating)
+        .catch(error => console.log(error)
+        );
+    }
+
+    UpdateAverageRating = () => {
+      var average = ((this.state.rating * this.state.place.reviews.length) + this.state.rating)/(this.state.place.reviews.length + 1);
+      average = Math.round(average*2)/2;
+      console.log(average)
+      var param = JSON.stringify({
+        'rating': average,
+      });
+      axios
+        .patch(`http://127.0.0.1:8000/business/${this.state.place.id}`, param,
+        {"headers": {
+          'content-Type': 'application/json'
+        }})
+        .then(this.props.navigation.navigate('Place Details', {place: this.state.place}))
+        .catch(error => console.log(error)
+        );
+    }
 
     constructor(props) {
         super(props);
         this.state={
-            rating:0
+            rating:0,
+            place: props.route.params.place,
+            profile: 0,
+            review: ""
          }
+        console.log(global.session_id)
     }  
-    state = {
-        review: ""
-      }
       render() {
       return (
         <KeyboardAvoidingView behavior="padding" style={styles.container}>
             <Stars
-            display={this.state.rating}
+            update={(val)=>{this.setState({rating: val})}}
+            half={true}
             spacing={8}
             count={5}
+            default={1}
             starSize={45}
             fullStar={<Icon name={'star'} size={45} color={"yellow"}/>}
             emptyStar={<Icon name={'star-outline'} size={45} color={"yellow"}/>}

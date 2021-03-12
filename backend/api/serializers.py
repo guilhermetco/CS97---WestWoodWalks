@@ -3,6 +3,11 @@ from rest_framework import serializers
 from .models import Review, Business, Walks, Profile
 
 
+class BusinessShortSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Business
+        fields = ['name']
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     def create(self, validated_data):
         user = User(
@@ -21,10 +26,11 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 class ReviewSerializer(serializers.ModelSerializer):
     author = serializers.CharField(source='user.username', read_only=True)
-    #user_id = serializers.IntegerField(source='user.pk', read_only=True,)
+    business = BusinessShortSerializer(many = True,read_only=True)
+
     class Meta:
         model = Review
-        fields = ['author', 'description', 'date', 'profile', 'rating', 'business']
+        fields = ['id','author', 'description', 'date', 'profile', 'rating', 'business']
     
     def get_user(self, instance):
         return UserSerializer(instance.user, many=False, read_only=False, context=self.context).data
@@ -49,7 +55,7 @@ class WalksSerializer(serializers.ModelSerializer):
     coordinates = serializers.JSONField()
     class Meta:
         model = Walks
-        fields = ['profile', 'coordinates']
+        fields = ['id','description', 'coordinates', 'name','profile']
 
     def get_user(self, instance):
         return UserSerializer(instance.user, many=False, read_only=False, context=self.context).data
@@ -61,7 +67,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ['user_id','reviews', 'walks']
+        fields = ['id','user_id','reviews', 'walks']
     
     def get_reviews(self, instance):
         review_list = instance.reviews.all().order_by('date')

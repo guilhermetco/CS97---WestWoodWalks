@@ -9,86 +9,34 @@ import { TextInput } from 'react-native';
 import Buttons from '../styles/Buttons.js'
 import Stars from 'react-native-stars';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import axios from 'axios'
 
 import InfoComponents from '../styles/InfoComponents.js';
 
-const reviews = [
-    {
-      id: '1',
-      title: 'BJs Restaurant',
-      address: '123 street ave, Los Angeles',
-      date: '01/03/2021',
-      rating: 4.5,
-      summary: "I LOVED this place! The food was impeccable and the service was amazing. I highly recommend dining here if you get the chance."
-    },
-    {
-      id: '2',
-      title: 'Starbucks',
-      address: '123 street ave, Los Angeles',
-      date: '01/06/2021',
-      rating: 3,
-      summary: "Not the best coffee out there, but if you are in a rush this is an okay option."
-    },
-    {
-      id: '3',
-      title: 'Boelter Hall',
-      address: '123 street ave, Los Angeles',
-      date: '01/09/2021',
-      rating: 1,
-      summary: "most confusing building ever. avoid."
-    },
-    {
-      id: '4',
-      title: 'reallyyyyyyyyyy longgggggggggggggggg nameeeeeeeee',
-      date: '01/27/2021',
-      rating: 2
-    },
-    {
-      id: '5',
-      title: 'Review 5',
-      date: '02/03/2021',
-      rating: 4
-    },
-    {
-      id: '6',
-      title: 'Review 6',
-      date: '02/04/2021',
-      rating: 5
-    },
-    {
-      id: '7',
-      title: 'Review 7',
-      date: '02/06/2021',
-      rating: 2
-    },
-    {
-      id: '8',
-      title: 'Review 8',
-      date: '01/08/2021',
-      rating: 4
-    },
-    {
-      id: '9',
-      title: 'Review 9',
-      date: '02/10/2021',
-      rating: 4
-    },
-  ];
-  
 
 class MyReviewsScreen extends React.Component{
   state = {
-
+    reviews: [],
+    business: [],
+    address: []
   }
+
+  componentDidMount () {
+    axios
+      .get(`http://127.0.0.1:8000/profiles/${global.session_id}/`)
+      .then(response =>  this.setState({reviews: response.data.reviews}))
+      .catch(error => console.log(error)
+    );
+  }
+
   render() {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={reviews}
+        data={this.state.reviews}
         renderItem={({item}) => (
           <TouchableOpacity style={InfoComponents.item} >
-            <Text style={InfoComponents.title}>{item.title}</Text>
-            <Text style={InfoComponents.detailsOne}>{item.address}</Text>
+            <Text style={InfoComponents.title}>{item.business[0].name}</Text>
             <View
               style={{
               marginTop: 5,
@@ -107,7 +55,7 @@ class MyReviewsScreen extends React.Component{
                 halfStar={<Icon name={'star-half'} size={20} color={"gold"}/>}
               /> 
             </View>
-            <Text style={InfoComponents.detailsTwo}>"{item.summary}"</Text>
+            <Text style={InfoComponents.detailsTwo}>"{item.description}"</Text>
             <Text style={InfoComponents.detailsOne}>Last Modified: {item.date}</Text>
           </TouchableOpacity>   
         )}
