@@ -38,10 +38,8 @@ export default class SavedMapScreen extends Component {
         destinationLocation: null,
         forZoom: { distance: Number, duration: Number, coordinates: [] }
       },
-      currentPath: props.route.params.name,
+      currentPath: props.route.params.walk.name,
     };
-    console.log(this.state.coordinates)
-    this.mapView = null;
   }
   onSaveWalk = () =>{
     this.setState({

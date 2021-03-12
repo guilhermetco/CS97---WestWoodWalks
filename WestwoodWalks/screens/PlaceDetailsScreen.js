@@ -85,7 +85,6 @@ class PlaceDetailsScreen extends React.Component{
                 data={this.state.place.reviews}
                 renderItem={({item}) => (
                     <View style={styles.review}>
-                        <Text style={InfoComponents.detailsOne}>{item.user} wrote:</Text>
                         <View style={{alignItems:'center', justifyContent: 'flex-end', padding: 10}}>
                         <Stars
                             display={parseFloat(item.rating)}
@@ -101,7 +100,7 @@ class PlaceDetailsScreen extends React.Component{
                 <Text style={InfoComponents.detailsOne}>Last Modified: {item.date}</Text>
                     </View>
                 )}
-                keyExtractor={item => (item.id)}
+                keyExtractor={item => (item.id).toString()}
             />
         </View>
     </SafeAreaView>

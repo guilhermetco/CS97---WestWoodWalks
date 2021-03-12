@@ -9,36 +9,6 @@ import { TextInput } from 'react-native';
 import Buttons from '../styles/Buttons.js'
 import { MaterialIcons } from '@expo/vector-icons';
 
-export class EditAccountInfo extends React.Component {
-  state = {
-    username: "",
-    email: ""
-  }
-  render() {
-  return (
-    <KeyboardAvoidingView behavior="padding" style={styles.container}>
-      <MaterialIcons name="account-circle" size={150} color="#675a5a" style={{marginTop: '-30%', marginBottom: '5%'}} />
-      <Text style={styles.label}>Username</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Username"
-          defaultValue="myusername"
-        />
-        <Text style={styles.label}>Email</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          defaultValue="myemail"
-          keyboardType={'email-address'}
-        />
-      <TouchableOpacity onPress={() => this.props.navigation.navigate("Account Information")}>
-        <Text style={Buttons.brownbutton}>Save</Text>
-      </TouchableOpacity>
-    </KeyboardAvoidingView>
-  );
-  }
-}
-
 class AccountInfoScreen extends React.Component {
   state = {
     username: "",
@@ -56,9 +26,6 @@ class AccountInfoScreen extends React.Component {
       <View style={styles.input}>
         <Text>myemail</Text>
       </View>
-      <TouchableOpacity onPress={() => this.props.navigation.navigate("Edit Account")}>
-        <Text style={Buttons.brownbutton}>Edit</Text>
-      </TouchableOpacity>
     </View>
   );
   }

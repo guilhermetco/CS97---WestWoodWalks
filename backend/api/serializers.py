@@ -26,11 +26,11 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 class ReviewSerializer(serializers.ModelSerializer):
     author = serializers.CharField(source='user.username', read_only=True)
-    business = BusinessShortSerializer(many = True,read_only=True)
+    business_name = BusinessShortSerializer(many = True,read_only=True, source='business')
 
     class Meta:
         model = Review
-        fields = ['id','author', 'description', 'date', 'profile', 'rating', 'business']
+        fields = ['id','author', 'description', 'date', 'profile', 'rating', 'business', 'business_name']
     
     def get_user(self, instance):
         return UserSerializer(instance.user, many=False, read_only=False, context=self.context).data
