@@ -9,6 +9,7 @@ import Buttons from '../styles/Buttons.js'
 import InfoComponents from '../styles/InfoComponents.js'
 import Colors from '../styles/Colors.js';
 import { AntDesign } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
 // Note: change so that walks = [] a part of initial state, and then get data and set walks to that
 // should be similar process for most of the screens that need data
@@ -50,6 +51,7 @@ export default class PlaceDirectionsScreen extends Component {
       premadePath: false,
       isLiked: false,
     };
+    console.log(this.state.coordinates)
 
     this.mapView = null;
   }
@@ -168,6 +170,7 @@ export default class PlaceDirectionsScreen extends Component {
           />
         )}
         <Marker coordinate={{latitude: this.state.clocation.latitude, longitude: this.state.clocation.longitude}}>
+        <MaterialIcons name="my-location" size={24} color={Colors.brown} />
         </Marker>
         </MapView>
         {/* Current Path window on map */}

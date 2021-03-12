@@ -41,7 +41,6 @@ class SignupScreen extends React.Component {
       'username': this.state.username,
       'password': this.state.password,
     });
-    console.log("POST2")
     axios
       .post("http://127.0.0.1:8000/authenticate/", params2,
       {"headers": {
@@ -62,7 +61,7 @@ class SignupScreen extends React.Component {
       {"headers": {
         'content-Type': 'application/json'
       }})
-      .then(response => console.log(response.data))
+      .then(this.props.navigation.navigate('Login'))
       .catch(error => console.log(error)
       );
   }

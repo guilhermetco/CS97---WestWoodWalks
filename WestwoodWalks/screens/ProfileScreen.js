@@ -34,9 +34,6 @@ const ProfileScreen = ({ navigation }) => {
             <MaterialIcons name="rate-review" size={70} color="#675a5a"  />
             <Text style={styles.label}>My Reviews</Text> 
           </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={Buttons.brownbutton}>Logout</Text>
-        </TouchableOpacity>
         </View>
       </View>
     );

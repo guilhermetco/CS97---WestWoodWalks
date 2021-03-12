@@ -17,8 +17,6 @@ import InfoComponents from '../styles/InfoComponents.js';
 class MyReviewsScreen extends React.Component{
   state = {
     reviews: [],
-    business: [],
-    address: []
   }
 
   componentDidMount () {
@@ -30,13 +28,14 @@ class MyReviewsScreen extends React.Component{
   }
 
   render() {
+    console.log(this.state.reviews)
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
         data={this.state.reviews}
         renderItem={({item}) => (
           <TouchableOpacity style={InfoComponents.item} >
-            <Text style={InfoComponents.title}>{item.business[0].name}</Text>
+            <Text style={InfoComponents.title}>{item.business_name[0].name}</Text>
             <View
               style={{
               marginTop: 5,
@@ -46,7 +45,7 @@ class MyReviewsScreen extends React.Component{
             />
             <View style={{alignItems:'center', justifyContent: 'flex-end', padding: 10}}>
               <Stars
-                display={item.rating}
+                display={parseFloat(item.rating)}
                 spacing={8}
                 count={5}
                 starSize={50}
@@ -59,7 +58,7 @@ class MyReviewsScreen extends React.Component{
             <Text style={InfoComponents.detailsOne}>Last Modified: {item.date}</Text>
           </TouchableOpacity>   
         )}
-        keyExtractor={item => item.id}
+        keyExtractor={item => (item.id).toString()}
       />
     </SafeAreaView>
   );
