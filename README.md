@@ -1,5 +1,15 @@
 # CS97---WestWoodWalks
 
+## Features
+
+```
+Westwood Walks enables users to explore Westwood by finding and creating
+routes around the area.  The app also has a reviews feature where users can 
+leave reviews on places in Westwood, view others’ reviews, and then find 
+routes to these places.
+
+```
+
 ## Video Demo
 
 ```
