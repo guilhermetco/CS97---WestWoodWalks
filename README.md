@@ -1,5 +1,23 @@
 # CS97---WestWoodWalks
 
+## File Organization
+
+```
+Our main two directories are the "WestwoodWalks" and "backend" folders.  
+
+"WestwoodWalks" has all of the frontend (React Native) code; the screens 
+folder has the JavaScript code for each of the app's screens and is where 
+we used Axios calls to communicate between the frontend and backend. The 
+App.js file is the main driver for the app.
+
+"backend" is where all the Django code is.  The most important files here 
+are under the subdirector "api".  In models.py, the main objects that our 
+app stores in the database are defined: Walks, Businesss, Review and Profile. 
+The serializers.py file indicates how our objects should be displayed on 
+the backend.  Lastly, views.py determines what data should be returned for 
+each object, and how different query parameters should be accepted.
+```
+
 ## Setting up the backend
 
 ```
@@ -43,15 +61,15 @@ What you need to have installed before:
     link to installation: https://nodejs.org/en/download/
 2) Expo CLI
     command to install: "npm install -g expo-cli"
+3) Xcode Simulator
+    - Can be used on IOS devices on Expo Go app but need to change url used in axios requests (see note below)
 
 Once you have those installed:
 1) Go to your terminal and enter the WestwoodWalks directory.
 2) Run "npm install." This is needed because the node-modules are not uploaded
    to Github since there are so many. This will download all the modules needed.
 3) Run "expo start"
-4) This should run the app  
-    - I recommend downloading the Expo Go App so you can view the
-      app on your phone. You just need to scan the QR code.
+4) Once the local host opens, click on the option to run the app on an IOS simulator. This should run the app.
 ```
 
 ## About the problem fetching http requests and running the app on iOS
