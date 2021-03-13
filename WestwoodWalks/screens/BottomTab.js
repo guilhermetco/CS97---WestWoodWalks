@@ -1,11 +1,7 @@
 import React from 'react';
-import HomeScreen from "./HomeScreen.js"
-import LoginScreen from "./LoginScreen.js"
-import SignupScreen from "./SignupScreen.js"
 import MapScreen from "./MapScreen.js"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack';
-import { View } from 'react-native';
 import ReviewScreen from './ReviewScreen.js'
 import ProfileScreen from  './ProfileScreen.js'
 import PlaceDetailsScreen from "./PlaceDetailsScreen.js"
@@ -13,6 +9,7 @@ import PlaceDirectionsScreen from "./PlaceDirectionsScreen.js"
 import MakeReview from "./MakeReview.js"
 import CategoryResultsScreen from "./CategoryResultsScreen"
 
+// Navigation routes for app
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();

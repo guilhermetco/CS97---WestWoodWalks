@@ -3,8 +3,6 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import {TouchableOpacity} from 'react-native'
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import Buttons from '../styles/Buttons.js'
 import Colors from '../styles/Colors.js'
 

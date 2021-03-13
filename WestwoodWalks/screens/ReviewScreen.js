@@ -1,16 +1,8 @@
 import React from 'react';
-import { Component, Fragment } from 'react';
-import { StatusBar } from 'expo-status-bar'
-import { Integer, FlatList, SafeAreaView, TouchableOpacity, View, Text, StyleSheet, Image, KeyboardAvoidingView, } from 'react-native';
+import { FlatList, SafeAreaView, TouchableOpacity, View, Text, StyleSheet, } from 'react-native';
 import 'react-native-gesture-handler';
-import MapView from 'react-native-maps';
-import { Polyline } from 'react-native-maps';
-import MapViewDirections from 'react-native-maps-directions';
-import { or } from 'react-native-reanimated';
 import { TextInput } from 'react-native';
 import Colors from '../styles/Colors.js'
-import { useState } from 'react';
-import SearchableDropdown from 'react-native-searchable-dropdown';
 import Buttons from '../styles/Buttons.js'
 import { Ionicons } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons'; 
@@ -18,9 +10,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import InfoComponents from '../styles/InfoComponents'
 import Stars from 'react-native-stars';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { SearchBar } from 'react-native-elements';
 import axios from 'axios';
-import { useIsFocused } from "@react-navigation/native"
 
 
 class ReviewScreen extends React.Component {
@@ -32,7 +22,7 @@ class ReviewScreen extends React.Component {
         }
     };
 
-
+// getting data for business user searches for
 submitInput = (value) => {
   axios
     .get(`http://127.0.0.1:8000/business/?name=${value}`)
@@ -41,6 +31,7 @@ submitInput = (value) => {
     );
 }
 
+// getting data for category chosen by user
 getCategory = (category) => {
   axios
     .get(`http://127.0.0.1:8000/business/?category=${category}`)
@@ -53,6 +44,7 @@ updateData() {
   this.componentDidMount();
 }
 
+// Getting business data for discover
 componentDidMount () {
   const {navigation} = this.props;
   this.focusListener = navigation.addListener('focus', () => {
@@ -67,6 +59,7 @@ componentDidMount () {
     render () {
         return (
             <View style={styles.container}>
+            {/* Search bar and button */}
             <View style={{flexDirection: "row", marginTop: '10%'}} >
             <TextInput
               style={styles.input}
@@ -78,6 +71,7 @@ componentDidMount () {
             onPress={() => this.submitInput(this.state.inputvalue)}>
             <Text style={{alignSelf: "center", color: "white"}}>Search</Text>
             </TouchableOpacity>
+            {/* Search by category section and buttons */}
             <View style={{height: '30%', marginTop: '10%'}}>
               <Text style={styles.title}>Search by Category</Text>
                 <View style={{flexDirection: "row", height: '45%'}} >
@@ -125,6 +119,7 @@ componentDidMount () {
                   </TouchableOpacity>
                 </View>
             </View>
+            {/* Discover section and list */}
             <View style={{height: '43%', marginTop: '5%'}}>
               <Text style={styles.title}>Discover</Text>
               <SafeAreaView>

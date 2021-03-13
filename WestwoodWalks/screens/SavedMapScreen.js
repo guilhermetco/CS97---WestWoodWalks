@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import { FlatList, SafeAreaView, Dimensions, StyleSheet, View, Image, TextInput, Modal } from 'react-native';
+import { Dimensions, StyleSheet, View, Image, TextInput, Modal } from 'react-native';
 import MapView from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { Marker } from "react-native-maps";
 import { Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import Buttons from '../styles/Buttons.js'
-import InfoComponents from '../styles/InfoComponents.js'
 import Colors from '../styles/Colors.js';
-import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 
 const {height, width} = Dimensions.get('window');
@@ -20,6 +17,7 @@ const LONGITUDE_DELTA = .05;
 
 const GOOGLE_MAPS_APIKEY = 'AIzaSyBx4y6okTMakFLVwR5PKVN9kyqpbJFykrE';
 
+// Directions/map page used for user's saved walks
 export default class SavedMapScreen extends Component {
   constructor(props) {
     super(props);
@@ -129,11 +127,8 @@ export default class SavedMapScreen extends Component {
             strokeColor="blue"
             optimizeWaypoints={true}
             onStart={(params) => {
-              //console.log(`Started routing between "${params.origin}" and "${params.destination}"`);
             }}
             onReady={result => {
-              //console.log(`Distance: ${result.distance} km`)
-              //console.log(`Duration: ${result.duration} min.`)
               this.setState({
                 dis: result.distance,
                 dur: result.duration,

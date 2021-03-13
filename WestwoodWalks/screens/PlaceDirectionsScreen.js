@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
-import { FlatList, SafeAreaView, Dimensions, StyleSheet, View, Image, TextInput, Modal } from 'react-native';
+import { Dimensions, StyleSheet, View, TextInput, Modal } from 'react-native';
 import MapView from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { Marker } from "react-native-maps";
 import { Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Buttons from '../styles/Buttons.js'
-import InfoComponents from '../styles/InfoComponents.js'
 import Colors from '../styles/Colors.js';
-import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 
-// Note: change so that walks = [] a part of initial state, and then get data and set walks to that
-// should be similar process for most of the screens that need data
+
 const {height, width} = Dimensions.get('window');
 const LATITUDE = 34.06279;
 const LONGITUDE = -118.44390;
@@ -22,6 +19,7 @@ const LONGITUDE_DELTA = .05;
 
 const GOOGLE_MAPS_APIKEY = 'AIzaSyBx4y6okTMakFLVwR5PKVN9kyqpbJFykrE';
 
+// Directions screen used when getting direction for a specific place/business
 export default class PlaceDirectionsScreen extends Component {
   constructor(props) {
     super(props);

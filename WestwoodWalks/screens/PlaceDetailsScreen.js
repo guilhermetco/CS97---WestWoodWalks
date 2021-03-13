@@ -12,7 +12,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { AntDesign } from '@expo/vector-icons';
 import Colors from '../styles/Colors.js'
 import axios from 'axios'
-
 import InfoComponents from '../styles/InfoComponents.js';
   
 

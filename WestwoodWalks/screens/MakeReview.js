@@ -6,7 +6,6 @@ import {TouchableOpacity} from 'react-native'
 import { TextInput } from 'react-native';
 import Buttons from '../styles/Buttons.js'
 import Stars from 'react-native-stars';
-import { Rating } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import axios from 'axios'
 
@@ -43,6 +42,7 @@ export default class MakeReview extends Component {
         );
     }
 
+    // Updates average rating of business based on newest review
     UpdateAverageRating = () => {
       var average = ((this.state.rating * this.state.place.reviews.length) + this.state.rating)/(this.state.place.reviews.length + 1);
       average = Math.round(average*2)/2;

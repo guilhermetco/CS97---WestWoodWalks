@@ -1,10 +1,7 @@
 import 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, Image, KeyboardAvoidingView, TextInput} from 'react-native';
 import {TouchableOpacity} from 'react-native'
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import Buttons from '../styles/Buttons.js'
 import axios from 'axios'
 
@@ -25,7 +22,6 @@ class SignupScreen extends React.Component {
       'password2': this.state.repeatpassword,
       'email': this.state.email,
     });
-    console.log(params)
     axios
       .post("http://127.0.0.1:8000/rest-auth/registration", params,
       {"headers": {
@@ -55,7 +51,6 @@ class SignupScreen extends React.Component {
     var params3 = JSON.stringify({
       'user_id': userid,
     });
-    console.log("POST2")
     axios
       .post("http://127.0.0.1:8000/profiles/", params3,
       {"headers": {

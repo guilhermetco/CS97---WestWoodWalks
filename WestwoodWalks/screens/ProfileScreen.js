@@ -1,12 +1,9 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Image, KeyboardAvoidingView, TextInput} from 'react-native';
+import { StyleSheet, Text, View,} from 'react-native';
 import {TouchableOpacity} from 'react-native'
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import Buttons from '../styles/Buttons.js';
-import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 
 const ProfileScreen = ({ navigation }) => {

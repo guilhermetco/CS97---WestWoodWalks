@@ -6,100 +6,9 @@ import { Marker } from "react-native-maps";
 import { Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Buttons from '../styles/Buttons.js'
-import InfoComponents from '../styles/InfoComponents.js'
 import Colors from '../styles/Colors.js';
-import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import axios from 'axios'
-
-// Note: change so that walks = [] a part of initial state, and then get data and set walks to that
-// should be similar process for most of the screens that need data
-
-// Need to move these points into database for premade walks + add descriptions (don't store distance/duration?)
-// const walks = [
-//   {
-//     id: '1',
-//     title: 'Campus Loop',
-//     distance: '3 miles',
-//     description: "Loop around UCLA campus.",
-//     likes: 3,
-//     coordinates:[
-//       {latitude:34.075685, longitude:-118.455622},
-//       {latitude:34.073565, longitude:-118.446958},
-//       {latitude:34.078231, longitude:-118.439402},
-//       {latitude:34.071862, longitude:-118.437367},
-//       {latitude:34.064088, longitude:-118.441082},
-//       {latitude:34.063639, longitude:-118.448263},
-//       {latitude:34.069555, longitude:-118.450823},
-//       {latitude:34.070331, longitude:-118.455025},
-//       {latitude:34.075646, longitude:-118.455577}
-//     ],
-//   },
-//   {
-//     id: '2',
-//     title: 'Holmby Park',
-//     distance: '3 miles',
-//     description: "Just a simple walk around the park :)",
-//     likes: 4,
-//     coordinates:[
-//       {latitude:34.073549, longitude:-118.431499},
-//       {latitude:34.073051, longitude:-118.429618},
-//       {latitude:34.071118, longitude:-118.427810},
-//       {latitude:34.071785, longitude:-118.429237},
-//       {latitude:34.074007, longitude:-118.431055}
-//     ]
-//   },
-//   {
-//     id: '3',
-//     title: 'Boba Crawl',
-//     distance: '2 miles',
-//     description: 'Craving boba....here are some of the best places.',
-//     likes: 5,
-//     coordinates:[
-//       {latitude:34.063531, longitude:-118.445407},
-//       {latitude:34.062340, longitude:-118.447686},
-//       {latitude:34.060514, longitude:-118.446060},
-//       {latitude:34.062585, longitude:-118.446838},
-//       {latitude:34.061594, longitude:-118.446378},
-//       {latitude:34.062584, longitude:-118.446277},
-//       {latitude:34.063651, longitude:-118.445797}
-//     ]
-//   },
-////   {
-////     id: '4',
-////     name: 'UCLA tour',
-////     description: 'All the best places on campus. No tour guides necessary!',
-////     coordinates:[
-////       {latitude:34.075442, longitude:-118.439244},
-////       {latitude:34.074572, longitude:-118.441342},
-////       {latitude:34.073521, longitude:-118.441690},
-////       {latitude:34.073379, longitude:-118.440795},
-////       {latitude:34.069959, longitude:-118.440896},
-////       {latitude:34.069875, longitude:-118.443729},
-////       {latitude:34.070968, longitude:-118.443619},
-////       {latitude:34.070959, longitude:-118.442353},
-////       {latitude:34.070986, longitude:-118.441646},
-////       {latitude:34.072399, longitude:-118.441633},
-////       {latitude:34.072204, longitude:-118.442688},
-////       {latitude:34.072186, longitude:-118.444913},
-////       {latitude:34.070995, longitude:-118.444806},
-////       {latitude:34.071057, longitude:-118.449462},
-////       {latitude:34.072692, longitude:-118.449551},
-////       {latitude:34.073251, longitude:-118.451823}
-////     ]
-////   },
-//   {
-//     id: '5',
-//     name: "UCLA through Farmer's Market",
-//     description: 'Get your fresh fruit and veggies here!',
-//     coordinates:[
-//       {latitude:34.069699, longitude:-118.445014},
-//       {latitude:34.063719, longitude:-118.444811},
-//       {latitude:34.063696, longitude:-118.447126},
-//       {latitude:34.060703, longitude:-118.445763}
-//     ]
-//   },
-// ];
 
 
 
@@ -152,6 +61,7 @@ export default class MapScreen extends Component {
 
     this.mapView = null;
   }
+  // Start and Stop route button functionality
   onStartWalk = () =>{
     this.setState({
       saveWalk:{
@@ -188,12 +98,8 @@ export default class MapScreen extends Component {
     }
   }
 
+  // Saves user's walks to database
   saveWalk = (visible) => {
-    // let coordinates;
-    // if (this.state.premadePath)
-    //   coordinates = [this.state.coordinates]
-    // else
-    //   profile = global.session_id
     var params = JSON.stringify({
       'name': this.state.name,
       'description': this.state.description,
@@ -215,6 +121,7 @@ export default class MapScreen extends Component {
     this.setState({modalVisible:visible});
   }
 
+  // When map is pressed, route is created from current location
   onMapPress = (e) => {
     this.setState({
       coordinates: [
@@ -234,6 +141,7 @@ export default class MapScreen extends Component {
     });
   }
 
+  // Getting walks data for explore portion
   componentDidMount() {
     this.currentLocation();
     this.intervalID = setInterval(this.currentLocation.bind(this), 1000);
@@ -307,11 +215,8 @@ export default class MapScreen extends Component {
             strokeColor="blue"
             optimizeWaypoints={true}
             onStart={(params) => {
-              //console.log(`Started routing between "${params.origin}" and "${params.destination}"`);
             }}
             onReady={result => {
-              //console.log(`Distance: ${result.distance} km`)
-              //console.log(`Duration: ${result.duration} min.`)
               this.setState({
                 dis: result.distance,
                 dur: result.duration,

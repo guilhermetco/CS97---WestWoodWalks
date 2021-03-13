@@ -44,3 +44,6 @@ public/
 
 # virtual environment directory
 env
+
+#.expo file
+.expo/*
