@@ -1,12 +1,31 @@
 # CS97---WestWoodWalks
 
-## Features
+## OverView
 
 ```
 Westwood Walks enables users to explore Westwood by finding and creating
 routes around the area.  The app also has a reviews feature where users can 
 leave reviews on places in Westwood, view others’ reviews, and then find 
 routes to these places.
+
+```
+
+## Features
+```
+Maps
+    Click on routes and display the data 
+    Saving map that you create
+    Use current location of user to display a path from their location to a point of interest
+    
+Reviews
+    Show places and reviews of requested place
+    Saving reviews/ rating
+    Name/partial name of a place can be searched for through the list of westwood businesses
+    
+Sign Up and Login
+
+Personal profile displays saved routes and reviews that have been created
+
 
 ```
 
