@@ -1,11 +1,14 @@
 # CS97---WestWoodWalks
 
 ## File Organization
+
+'''
 Our main two directories are the "WestwoodWalks" and "backend" folders.  
 
 "WestwoodWalks" has all of the frontend (React Native) code; the screens folder has the JavaScript code for each of the app's screens and is where we used Axios calls to communicate between the frontend and backend. The App.js file is the main driver for the app.
 
 "backend" is where all the Django code is.  The most important files here are under the subdirector "api".  In models.py, the main objects that our app stores in the database are defined: Walks, Businesss, Review and Profile. The serializers.py file indicates how our objects should be displayed on the backend.  Lastly, views.py determines what data should be returned for each object, and how different query parameters should be accepted.
+'''
 
 ## Setting up the backend
 
